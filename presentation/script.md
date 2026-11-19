@@ -46,7 +46,7 @@ Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job 
 
 *[Deck open on slide 0 from about 2:45pm. Factory Floor open in a second window. App top-voted list open in a third. As people sit down, say this to small groups, not the room.]*
 
-Grab your phone and scan that code. It's a little app called Feedback Inbox. Play with it, then tap "Suggest a change" and tell us what you'd fix or add. And upvote the ones you like. The top one gets built during this session.
+Grab your phone and scan that code. It's a little app called Feedback Inbox, a suggestion box that builds its own suggestions. Play with it, then tap "Suggest a change" and tell us what you'd fix or add. And upvote the ones you like. The top one gets built during this session.
 
 ---
 
@@ -70,7 +70,7 @@ But here's the secret: this isn't really a talk about software. Software is just
 
 Here's your job for the next 45 minutes. Thirty seconds of instructions.
 
-One: scan the code. Two: play with the app. It's a feedback inbox. Ironically, it collects feature requests. Three: suggest a fix or a feature for that same app. Something small and specific works best. "Add a dark mode" is good. "Make it like Salesforce" is not going to make it today.
+One: scan the code. Two: play with the app. It's a suggestion box for itself: everything you suggest is a change to the app in your hand, and the factory makes the change. Look around it. What's annoying? What's missing? What would make it more fun? Three: suggest a fix or a feature for that same app. Something small and specific works best. "Add a dark mode" is good. "Make it like Salesforce" is not going to make it today.
 
 Four: upvote. You can vote on other people's ideas, and that's what decides the winner.
 

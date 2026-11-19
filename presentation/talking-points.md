@@ -10,7 +10,8 @@ The short version of `script.md`. Say it in your own words; the **bold line** is
 - **"This isn't really a talk about software. Software is just the example I can show you live."**
 
 **[2] 3:01 · Your job today**
-- Scan, play, suggest (small and specific: "dark mode" yes, "make it Salesforce" no), upvote.
+- **"It's a suggestion box for itself."** Everything you suggest is a change to the app in your hand.
+- Scan, play, suggest (small and visible: a button, a color, a label; "dark mode" yes, "make it Salesforce" no), upvote.
 - **"At 3:05 the factory takes the top-voted request. No one presses a button."**
 
 **LIVE A · 3:02–3:06 · the pick** (app's top-voted list)
