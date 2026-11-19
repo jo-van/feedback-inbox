@@ -44,3 +44,6 @@ textarea { min-height: 90px; resize: vertical; }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .error { color: var(--stop); font-weight: 700; }
 .ok { color: var(--go); font-weight: 700; }
+@keyframes vote-bounce { 0%,100% { transform: translateY(0) } 40% { transform: translateY(-8px) scale(1.12) } 70% { transform: translateY(0) scale(.96) } }
+.vote.bounce { animation: vote-bounce 500ms ease-out; }
+@media (prefers-reduced-motion: reduce) { .vote.bounce { animation: none; } }

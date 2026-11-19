@@ -25,6 +25,7 @@ export default function Board() {
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState<'newest' | 'votes'>('newest');
+  const [bouncing, setBouncing] = useState<number[]>([]);
   const [, setTick] = useState(0);
 
   const load = useCallback(async () => {
@@ -48,6 +49,8 @@ export default function Board() {
 
   async function upvote(id: number) {
     if (voted.includes(id)) return;
+    setBouncing((b) => [...b, id]);
+    setTimeout(() => setBouncing((b) => b.filter((x) => x !== id)), 800);
     const next = [...voted, id];
     setVoted(next);
     try { localStorage.setItem('ff_voted', JSON.stringify(next)); } catch {}
@@ -97,7 +100,8 @@ export default function Board() {
         return (
           <article className="card" key={r.id} data-testid="request-card">
             <button
-              className={'vote' + (mine ? ' voted' : '')}
+              className={'vote' + (mine ? ' voted' : '') + (bouncing.includes(r.id) ? ' bounce' : '')}
+              onAnimationEnd={() => setBouncing((b) => b.filter((x) => x !== r.id))}
               onClick={() => upvote(r.id)}
               aria-label={`Upvote request ${r.id}`}
               disabled={mine}
