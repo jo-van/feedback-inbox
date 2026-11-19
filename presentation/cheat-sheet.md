@@ -15,14 +15,14 @@ Deck keys: **→ / Space / PageDown** next · **← / PageUp** back · **N** not
 | 3:06 | [3] | Every process is a factory | Workers · contracts · routing. Hiring is a factory, and one worker in the CEO's factory. |
 | 3:09 | [4] | You already run a few of these | Lead · support ("Still stuck? Goes to you") · family trip. "Keep one process of your own in mind." |
 | 3:10:30 | [5] | The founder's road | Lovable/v0/Replit → off the rails → Claude Code/Codex → your own factory. **Kyndly line (spoken only):** "one or two people shipping at the pace that used to take a team of twenty", framed as my own experience. |
-| 3:13:30 | [6] | Today's factory (diagram) | Read each yellow contract. Point at "round 2." "In rehearsal: picked up → live in about 10–13 min." |
+| 3:13:30 | [6] | Today's factory (diagram) | Read each yellow contract. Point at "round 2." No time promise: "easy ones went live in minutes in rehearsal; tricky ones take rounds." |
 | **3:16–3:19** | [7] | **LIVE B** · Factory Floor | Crate, lights (blue/green/red), clock, queue, "Shipped today." May already be shipped: save the reveal for 3:35. |
 | 3:19 | [8] | Not a conveyor belt | Route · skip · side by side · loop back · to a person. "The demo line is simplified for 45 minutes." |
 | **3:21–3:25** | [9] | **LIVE B2** · n8n | Top level → today's run → one station's in/out → open **Builder** → mini factory. |
 | 3:25 | [10] | Second AI reviews | "Don't let the student grade their own exam." |
 | 3:26:30 | [11] | Agent in chat (Hermes) | Anyone can ask · connected to our tools · follows our process · scheduled standup updates · team of one plus agents. *(Optional TODO example.)* |
 | 3:30 | [12] | What humans own | Choose what matters · define done · design factory & guardrails · own outcomes. "Your first hires should build the line, not stand on it." |
-| 3:31:30 | [13] | Cost | Setup weeks · server ~$0.17/hr · Claude + ChatGPT subscriptions · no per-request $ measured. |
+| 3:31:30 | [13] | Cost | Setup weeks (the real cost) · $5/month server or a laptop (offline when asleep) · Claude + ChatGPT subscriptions · no per-request $. |
 | 3:32:30 | [14] | Your turn | 20-second pause. Workers → contracts → routing → hand one job to AI. |
 | 3:34 | [15] | Today's results | **Check the Floor before speaking.** |
 | **3:35–3:40** | [16] | **LIVE C** · production | Production app → find change → requester tries it on phone → Floor "Shipped today" + clock. |

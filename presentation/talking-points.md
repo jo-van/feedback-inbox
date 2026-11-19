@@ -43,7 +43,7 @@ The short version of `script.md`. Say it in your own words; the **bold line** is
 **[6] 3:13:30 · Today's factory (the diagram)**
 - Walk the boxes and read each yellow contract. Gatekeeper → Spec (a written definition of "done") → Build → Test → Review and Security side by side → Preview (private trial copy) → Release (with a "still alive?" check that undoes itself if needed).
 - Point at the dashed arrow: the reviewer can send it back for round 2.
-- "In rehearsal: about 5 to 13 minutes from pick-up to live. Let's go see."
+- No time promise. "In rehearsal the easy ones went live in minutes. Tricky ones take a few rounds, or stop for a human. Let's go see where yours is."
 
 **LIVE B · 3:16 · Factory Floor**
 - The crate is your request. Lights: blue = working, green = done, red = the line stopped itself.
@@ -83,7 +83,8 @@ The short version of `script.md`. Say it in your own words; the **bold line** is
 - Banner: same for your first hires. Hire someone to answer every support email: one worker. Hire them to set up how support gets answered and keep improving it: a factory. **"Hire people to build the line, not stand on it."**
 
 **[13] 3:31:30 · Cost** (honest numbers)
-- Setup takes weeks. The server is about 17¢ an hour. The AI runs on a Claude subscription and a ChatGPT subscription we already had.
+- Setup takes weeks: guardrails and practice runs. That's the real cost.
+- Running it is cheap: a $5-a-month server, or a spare laptop (but it stops when the laptop sleeps or goes offline). AI runs on Claude and ChatGPT subscriptions.
 - No per-request dollar figure: "I'm not going to make one up."
 
 **[14] 3:32:30 · Your turn**

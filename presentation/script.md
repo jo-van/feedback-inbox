@@ -203,7 +203,7 @@ See the dashed arrow? If the reviewer doesn't like it, the work goes back to Bui
 
 Then **Preview**, a private trial copy. And **Release**: it goes live, gets a quick "is the app still alive?" check, and if anything's wrong, it undoes itself.
 
-One more thing. In rehearsal, a request went from picked up to live in about five to thirteen minutes, with no human doing anything. So it's possible your request is already further along than you'd think. Let's go see.
+One more thing. In rehearsal, the easy requests went live in a matter of minutes. Trickier ones took a few rounds, and some stopped and waited for a human. So yours could be anywhere on the line right now. Let's go see.
 
 *[~220 words. Press Right to the LIVE card, then switch windows.]*
 
@@ -378,9 +378,9 @@ Everybody wants to know what it costs. Honest numbers.
 
 Setup is weeks, not an afternoon. You have to build the guardrails and run a lot of practice requests before you trust it.
 
-Running it: the server the factory runs on costs about seventeen cents an hour. That's the AWS on-demand price for its size. The AI work runs on a Claude subscription and a ChatGPT subscription we already had. I didn't measure a dollar cost per request, so I'm not going to make one up.
+Running it is the cheap part. The factory needs a small computer that stays on. Today it happens to run on a cloud server, but a five-dollar-a-month server from any hosting company would do the job. So would a spare laptop, with one catch: when the laptop sleeps or drops off the Wi-Fi, the factory stops. The AI work runs on a Claude subscription and a ChatGPT subscription, the same kind a lot of you already pay for. I didn't measure a dollar cost per request, so I'm not going to make one up.
 
-And speed. In rehearsal, a request went from picked up to live in about five to thirteen minutes, with no human action. That includes one run where the reviewer was slow, and one where the first attempt failed its tests and the builder fixed it on round two.
+The real cost is the setup time. That's where the weeks go.
 
 *[~130 words]*
 
