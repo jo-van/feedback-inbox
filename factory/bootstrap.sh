@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # One-time VM setup (idempotent). Run as root via SSM.
 set -euxo pipefail
+export HOME=/root
 export DEBIAN_FRONTEND=noninteractive
 if ! command -v docker >/dev/null; then
   apt-get update -q
