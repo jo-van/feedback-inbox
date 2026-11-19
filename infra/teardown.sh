@@ -60,6 +60,11 @@ for s in $(aws scheduler list-schedules --region "$REGION" --name-prefix "$PREFI
   aws scheduler delete-schedule --region "$REGION" --name "$s" && log "deleted schedule $s"
 done
 
+# GitHub deploy key used by the VM (not AWS, but it should not outlive the VM)
+if [[ $PREFIX == feedback-factory && -f "$HOME/projects/feedback-inbox/infra/.deploy-key-id" ]]; then
+  gh api -X DELETE "repos/jo-van/feedback-inbox/keys/$(cat "$HOME/projects/feedback-inbox/infra/.deploy-key-id")" >/dev/null 2>&1 && log "removed GitHub deploy key"
+fi
+
 # 4. receipt: what remains (expected: nothing)
 {
   echo "# Teardown receipt: $PREFIX"

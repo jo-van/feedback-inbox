@@ -57,7 +57,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
   // Set the app URL here, or pass ?url=https://... on the address bar.
-  const DEFAULT_URL = '';
+  const DEFAULT_URL = 'https://ideas-built-live.vercel.app';
   const url = new URLSearchParams(location.search).get('url') || DEFAULT_URL;
   if (url) {
     document.getElementById('url').textContent = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
