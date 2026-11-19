@@ -106,9 +106,9 @@ async function gemini(prompt, schema) {
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': E.GEMINI_API_KEY },
       body: JSON.stringify({
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { responseMimeType: 'application/json', responseSchema: schema, temperature: 0.2 },
+        generationConfig: { responseMimeType: 'application/json', responseSchema: schema, temperature: 0.2, thinkingConfig: { thinkingBudget: 1024 } },
       }),
-      signal: AbortSignal.timeout(240_000),
+      signal: AbortSignal.timeout(Number(E.FF_GEMINI_TIMEOUT_MS || 75_000)),
     }).catch((e) => ({ ok: false, status: 0, text: async () => String(e) }));
     if (r.ok) {
       const data = await r.json();

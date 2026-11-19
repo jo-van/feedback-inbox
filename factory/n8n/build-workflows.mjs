@@ -144,8 +144,8 @@ n = 9000;
     iff('Built?', '$json.built === true', [1320, -20]),
     sub('4 · Tester', 'ffStationTest001', [1540, -40]),
     iff('Tests pass?', '$json.pass === true', [1760, -40]),
-    sub('5a · Adversarial review (Gemini)', 'ffStationRevw001', [1980, -160]),
-    sub('5b · Security scan', 'ffStationSecu001', [1980, 80]),
+    sub('5a · Adversarial review (Gemini)', 'ffStationRevw001', [1980, 80]),
+    sub('5b · Security scan', 'ffStationSecu001', [1980, -160]),
     { id: uid(), name: 'Both checks back', type: 'n8n-nodes-base.merge', typeVersion: 3, position: [2200, -40], parameters: { mode: 'combine', combineBy: 'combineByPosition', options: {} } },
     code('Decide', `const j = $input.first().json;
 const approved = j.review?.verdict === 'approve' && j.security?.pass === true;
