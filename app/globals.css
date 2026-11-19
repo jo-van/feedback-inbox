@@ -44,3 +44,17 @@ textarea { min-height: 90px; resize: vertical; }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .error { color: var(--stop); font-weight: 700; }
 .ok { color: var(--go); font-weight: 700; }
+html[data-theme="light"] {
+  --bg: #f5f6fa; --panel: #ffffff; --panel2: #e8ebf2; --line: #b8bfce;
+  --text: #14161c; --muted: #4a5365; --hazard: #8a5f00; --go: #12733f; --stop: #c0262c; --busy: #1c5fa8;
+}
+html[data-theme="light"] .btn { color: #ffffff; }
+html[data-theme="light"] .btn.secondary { color: var(--text); }
+html[data-theme="light"] .chip.Building, html[data-theme="light"] .chip.Testing, html[data-theme="light"] .chip.In.review { background: #dcebfa; color: var(--busy); }
+html[data-theme="light"] .chip.Preview { background: #fff1c9; color: var(--hazard); }
+html[data-theme="light"] .chip.Shipped { background: #d7f2e3; color: var(--go); }
+html[data-theme="light"] .chip.Not, html[data-theme="light"] .chip.Needs { background: #fbdcde; color: var(--stop); }
+.theme-toggle { display: block; margin: 8px 16px 0 auto; padding: 6px 12px; font-size: 14px; }
+.theme-toggle .label-to-dark{display:none}
+html[data-theme="light"] .theme-toggle .label-to-light{display:none}
+html[data-theme="light"] .theme-toggle .label-to-dark{display:inline}
