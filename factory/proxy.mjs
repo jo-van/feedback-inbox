@@ -3,8 +3,8 @@ import http from 'node:http';
 import net from 'node:net';
 
 const ALLOW = (process.env.ALLOW || 'api.anthropic.com,statsig.anthropic.com,mcp-proxy.anthropic.com').split(',');
-// Entries starting with '.' match any host ending with them.
-const ok = (host) => ALLOW.some((a) => (a.startsWith('.') ? host.endsWith(a) && host.length > a.length : host === a));
+// Entries starting with '*' match any host ending with the rest (e.g. *-team.vercel.app).
+const ok = (host) => ALLOW.some((a) => (a.startsWith('*') ? host.endsWith(a.slice(1)) && host.length > a.length : host === a));
 const server = http.createServer((req, res) => { res.writeHead(403); res.end('only CONNECT allowed'); });
 server.on('connect', (req, client, head) => {
   const [host, port] = String(req.url).split(':');

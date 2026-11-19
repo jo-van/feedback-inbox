@@ -34,4 +34,6 @@ C
 ssh-keyscan -t ed25519 github.com > /root/.ssh/known_hosts 2>/dev/null
 git config --global user.name "Feedback Factory"
 git config --global user.email "factory@users.noreply.github.com"
+docker network inspect ff-internal >/dev/null 2>&1 || docker network create --internal ff-internal
+docker network inspect ff-web >/dev/null 2>&1 || docker network create --internal ff-web
 echo "PUBKEY $(cat /root/.ssh/ff_deploy.pub)"
