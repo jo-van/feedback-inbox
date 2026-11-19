@@ -34,13 +34,13 @@ Every rehearsal ran with **no human action**: request submitted in the app → G
 - **Forbidden file:** a change that also touched `next.config.mjs` was blocked before anything was pushed.
 - **Rollback:** a production-only failure injected into #17 went live, failed the production smoke test, and the factory reverted it by itself; production stayed up.
 - **Kill switch:** stopped a running build and parked it within a minute.
-- **3:02 auto-arm:** tested with a near-term time; nothing was picked before the time, then exactly one request (the most-voted), and a cap of 1 held.
+- **Auto-arm at a set time:** tested with a near-term time; nothing was picked before the time, then exactly one request (the most-voted), and a cap of 1 held.
 - **Cap of 3 (the talk setting):** with the factory armed, 3 builds already used and an eligible request waiting, nothing was admitted across four ticks. Caps of 1 and 2 also held in rehearsals.
 - **Recovery:** the watchdog restarted a killed service and a stopped n8n; after a full VM reboot everything came back, including the teardown timer.
 - **Privacy:** the guard test (a submitted email must never appear on any public page or API) ran and passed on every build.
 - **Security review:** an independent adversarial review found one critical issue (git hooks → root on the VM) and three high ones; all fixed (see `docs/security-review.md`).
 - **Talk materials:** deck revised around your framing: every process is a factory of single-job workers with contracts; any factory can be a worker in a bigger one; real factories aren't a conveyor belt; Hermes in Discord for small teams and solo founders. Checked visually at 1080p. The walk-in QR points at the live app.
-- **Reset done:** production is back on the plain baseline app with only your five seed ideas. The factory is armed for **3:02pm ET**, up to **3 builds, one at a time** (so something is always moving during the talk).
+- **Reset done:** production is back on the plain baseline app with only your five seed ideas. The factory is armed for **3:05pm ET**, up to **3 builds, one at a time** (so something is always moving during the talk).
 
 Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security-review.md`.
 
@@ -63,10 +63,10 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 |---|---|
 | Morning | Read this. Click through the deck once at the projector size. Watch 1 minute of `previous-run.mp4`. |
 | By noon | Leave the factory alone. Avoid heavy Claude use before 3pm so the subscription has headroom. |
-| 2:30pm | `~/projects/feedback-inbox/infra/ff.sh status` should show `mode: live`, `armAt: 2026-11-19T20:02:00Z`, `killed: False`, a recent heartbeat. Open the Floor: badge says **LIVE** and **Arms at 3:02 PM**. |
+| 2:30pm | `~/projects/feedback-inbox/infra/ff.sh status` should show `mode: live`, `armAt: 2026-11-19T20:05:00Z`, `killed: False`, a recent heartbeat. Open the Floor: badge says **LIVE** and **Arms at 3:05 PM**. |
 | 2:35pm | In a terminal: `infra/ff.sh n8n` and log in (keep the tab open). Open the app on your phone. |
 | 2:45pm | Put up the walk-in slide (deck slide 0). People scan and submit. |
-| 3:02pm | The factory picks the most-upvoted eligible request by itself. One build at a time, up to 3. |
+| 3:05pm | The factory picks the most-upvoted eligible request by itself. One build at a time, up to 3. |
 | During | Do not touch anything. If something goes wrong: see below. |
 | 4:45pm | AWS deletes itself automatically. Nothing to do. |
 
@@ -104,5 +104,5 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 2. **Hermes slide:** add one real example of your own (marked TODO in the slide notes and script).
 3. **Contact line:** replace `{{CONTACT}}` on the TempoBlueprint slide.
 4. **Gemini billing:** add billing to the Gemini key so reviews use Gemini Pro? Optional.
-5. **Pace:** keep one build at a time (3 total), or allow two at once (`ff.sh live 2026-11-19T20:02:00Z 3 2`)?
-6. **Timing risk:** the first request may be live by about 3:08, before the 3:16 Floor beat. The script has an "already shipped" branch. Tell me if you'd rather show the first ship at 3:16.
+5. **Pace:** keep one build at a time (3 total), or allow two at once (`ff.sh live 2026-11-19T20:05:00Z 3 2`)?
+6. **Timing risk:** the first request may be live by about 3:11, before the 3:16 Floor beat. The script has an "already shipped" branch. Tell me if you'd rather show the first ship at 3:16.

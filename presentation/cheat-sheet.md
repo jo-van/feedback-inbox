@@ -10,10 +10,10 @@ Deck keys: **→ / Space / PageDown** next · **← / PageUp** back · **N** not
 | --- | --- | --- | --- |
 | 2:45 | [0] | Walk-in QR | "Scan it, play, suggest, upvote." |
 | **3:00** | [1] | Title + promise | "Something you asked for goes live before we finish. This isn't really a talk about software." |
-| 3:01 | [2] | Your job today | "Scan, play, suggest, upvote. At 3:02 the factory takes the top one." |
-| **3:02–3:05** | [2] | **LIVE A** · admission | Read the top 3 aloud. Read the Gatekeeper's decision and reason. Quick flip to the Floor. |
-| 3:05 | [3] | Every process is a factory | Workers · contracts · routing. Hiring is a factory, and one worker in the CEO's factory. |
-| 3:08 | [4] | This isn't just code | Lead · support (last worker is a person) · a trip. "Keep one process of your own in mind." |
+| 3:01 | [2] | Your job today | "Scan, play, suggest, upvote. At 3:05 the factory takes the top one." |
+| **3:02–3:06** | [2] | **LIVE A** · admission | Read the top 3 aloud. "Voting closes at 3:05." At 3:05 read the Gatekeeper's decision and reason. Quick flip to the Floor. |
+| 3:06 | [3] | Every process is a factory | Workers · contracts · routing. Hiring is a factory, and one worker in the CEO's factory. |
+| 3:09 | [4] | This isn't just code | Lead · support (last worker is a person) · a trip. "Keep one process of your own in mind." |
 | 3:10:30 | [5] | The founder's road | Lovable/v0/Replit → off the rails → Claude Code/Codex → your own factory. **Kyndly line (spoken only):** "one or two people shipping at the pace that used to take a team of twenty", framed as my own experience. |
 | 3:13:30 | [6] | Today's factory (diagram) | Read each yellow contract. Point at "round 2." "In rehearsal: picked up → live in about 10–13 min." |
 | **3:16–3:19** | [7] | **LIVE B** · Factory Floor | Crate, lights (blue/green/red), clock, queue, "Shipped today." May already be shipped: save the reveal for 3:35. |
@@ -35,13 +35,13 @@ Deck keys: **→ / Space / PageDown** next · **← / PageUp** back · **N** not
 2. **n8n** (3:21, from [9]): n8n canvas (local tunnel). Top-level stations → today's execution → click a finished station to show its input and output → double-click **Builder**: read code → plan → edit → run tests → fix. Point at the Reviewer's send-back path.
 3. **Production + Floor** (3:35, from [16]): `APP_URL`. Refresh, find the change, hand it to the requester, then Floor "Shipped today" and the elapsed time.
 
-Plus the **3:02 admission beat** (from [2]): app top-voted list → Gatekeeper decision → Floor shows the crate.
+Plus the **3:05 admission beat** (from [2]): app top-voted list → Gatekeeper decision → Floor shows the crate.
 
 ## Fallback triggers
 
 | Beat | Trigger | Do this |
 | --- | --- | --- |
-| LIVE A | No Gatekeeper decision by **3:04** | "It's taking its time. Keep voting." Move on; re-check before [6]. |
+| LIVE A | No Gatekeeper decision by **3:07** | "It's taking its time. Keep voting." Move on; re-check before [6]. |
 | LIVE A | Nothing eligible | Read the reason. Ask for small, specific requests about this app. Move on. |
 | LIVE B | Already in "Shipped today" | Read the clock. "We'll try it on your phones at 3:35." Follow the next crate if there is one. |
 | LIVE B | Crate red / stopped | "The line stopped itself. That's the guardrail working." |
@@ -66,5 +66,5 @@ Plus the **3:02 admission beat** (from [2]): app top-voted list → Gatekeeper d
 | Status in a terminal | `~/projects/feedback-inbox/infra/ff.sh status` |
 | **KILL SWITCH** | `~/projects/feedback-inbox/infra/ff.sh kill` (stops new builds now; running builds stopped and parked within a minute). Undo: `ff.sh resume` |
 | PREVIOUS RUN video | `~/projects/feedback-inbox/presentation/previous-run.mp4` |
-| Auto-admission | Arms itself at **3:02pm**, top-voted eligible request, up to **3** builds, one at a time |
+| Auto-admission | Arms itself at **3:05pm**, top-voted eligible request, up to **3** builds, one at a time |
 | AWS teardown | Automatic at **4:45pm** (nothing to do). Receipt: `~/projects/feedback-inbox/TEARDOWN-RECEIPT.md` after 5pm |

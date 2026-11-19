@@ -3,7 +3,7 @@
 #  - app code (app/, components/, lib/, tests/e2e/) back to the pre-factory baseline commit
 #  - factory/* branches deleted on GitHub
 #  - production and preview data wiped and reseeded
-#  - factory armed for the talk (3:02pm ET, cap 3, one build at a time)
+#  - factory armed for the talk (3:05pm ET, cap 3, one build at a time)
 # usage: reset-baseline.sh [baseline-commit]
 set -euo pipefail
 BASE=${1:-e7036d1}
@@ -24,4 +24,4 @@ for b in $(gh api repos/jo-van/feedback-inbox/branches --paginate --jq '.[].name
   gh api -X DELETE "repos/jo-van/feedback-inbox/git/refs/heads/$b" >/dev/null && echo "deleted branch $b"
 done
 infra/vm.sh -t 300 'export HOME=/root; cd /srv/ff/src && git -c safe.directory=/srv/ff/src pull -q; rm -rf /srv/ff/work/*; cd factory && node seed.mjs feedback-factory-prod --reset && node seed.mjs feedback-factory-preview --reset; git -C /srv/ff/mirror.git -c safe.directory="*" fetch -q --prune origin "+refs/heads/*:refs/heads/*"' | tail -4
-infra/ff.sh live 2026-11-19T20:02:00Z 3 1
+infra/ff.sh live 2026-11-19T20:05:00Z 3 1

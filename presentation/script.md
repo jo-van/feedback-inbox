@@ -18,9 +18,9 @@ Format notes:
 | before 3:00 | — | 0 · Walk-in (QR) | — |
 | 3:00 | 0:00–1:00 | 1 · Title + the promise | 1 |
 | 3:01 | 1:00–2:00 | 2 · Your job today | 1 |
-| **3:02** | **2:00–5:00** | **LIVE A · admission and Gatekeeper** (from slide 2) | 3 |
-| 3:05 | 5:00–8:00 | 3 · Every process is a factory | 3 |
-| 3:08 | 8:00–10:30 | 4 · This isn't just code | 2.5 |
+| **3:02** | **2:00–6:00** | **LIVE A · last votes, 3:05 pick, Gatekeeper** (from slide 2) | 4 |
+| 3:06 | 6:00–9:00 | 3 · Every process is a factory | 3 |
+| 3:09 | 9:00–10:30 | 4 · This isn't just code (tightened to 1.5 min) | 1.5 |
 | 3:10:30 | 10:30–13:30 | 5 · The founder's road | 3 |
 | 3:13:30 | 13:30–16:00 | 6 · Today's factory (linear diagram) | 2.5 |
 | **3:16** | **16:00–19:00** | **LIVE B · Factory Floor** (counter 7) | 3 |
@@ -39,7 +39,7 @@ Format notes:
 
 Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job · 3 every process is a factory · 4 this isn't just code · 5 founder's road · 6 today's factory diagram · 7 LIVE Floor card · 8 not a conveyor belt · 9 LIVE n8n card · 10 second AI · 11 agent in chat (Hermes) · 12 humans own · 13 cost · 14 your turn · 15 today's results · 16 LIVE production card · 17 TempoBlueprint · 18 Q&A.
 
-**Heads-up on timing:** in rehearsal, a request went from picked up to live in about 5–13 minutes. If the 3:02 pick-up goes that smoothly, request one may already be live by the 3:16 Floor beat. That's fine: the Floor beat has an "already shipped" branch, and the 3:35 beat is where the requester tries it on their phone (plus any later request that's still moving).
+**Heads-up on timing:** in rehearsal, a request went from picked up to live in about 5–13 minutes. If the 3:05 pick-up goes that smoothly, request one may already be live by the 3:16 Floor beat. That's fine: the Floor beat has an "already shipped" branch, and the 3:35 beat is where the requester tries it on their phone (plus any later request that's still moving).
 
 ---
 
@@ -75,13 +75,13 @@ One: scan the code. Two: play with the app. It's a feedback inbox. Ironically, i
 
 Four: upvote. You can vote on other people's ideas, and that's what decides the winner.
 
-At 3:02, which is right about now, the factory automatically takes the top-voted request off the board and starts building it. No one presses a button. Let's go look.
+At 3:05, three minutes from now, the factory automatically takes the top-voted request off the board and starts building it. No one presses a button. Let's look at what's winning.
 
 *[~130 words. Glance at the clock. Switch to the app's top-voted list on the big screen.]*
 
 ---
 
-## 2:00–5:00 · 3:02pm · LIVE A · Admission and the Gatekeeper
+## 2:00–6:00 · 3:02pm · LIVE A · Last votes, the 3:05 pick, and the Gatekeeper
 
 *[Big screen: the Feedback Inbox top-voted list (APP_URL). Read the top three requests aloud, with their vote counts.]*
 
@@ -89,7 +89,9 @@ Okay, here's what you're asking for. Number one, with [N] votes: "[read title]."
 
 *[Pause. Let the room react.]*
 
-Right now the first worker in the factory is looking at number one. We call it the Gatekeeper. It's an AI with one job: decide whether a request is something the factory should take on right now.
+Voting closes at 3:05. If you want to change the order, now's your moment. *[Refresh the list once or twice as votes come in.]*
+
+*[At 3:05:]* Time. Right now the first worker in the factory is looking at number one. We call it the Gatekeeper. It's an AI with one job: decide whether a request is something the factory should take on right now.
 
 It asks a few plain questions. Is this about this app? Is it clear enough to build? Is it small enough to finish today? And is it safe? Meaning it doesn't touch things like logins or deleting other people's data, and it isn't a joke request designed to break things.
 
@@ -107,7 +109,7 @@ That box is your request. We'll check on it. Meanwhile, let me give you the one 
 
 *[~310 words plus reading and pauses. Return to the deck and press Right to slide 3.]*
 
-**IF SLOW** (no decision by about 3:04):
+**IF SLOW** (no decision by about 3:07):
 The Gatekeeper is still thinking. It's taking its time, which honestly I'd rather it did. We'll come back to it in about ten minutes. Keep voting, it's not too late to change the order.
 *[Move on to slide 3. Check the Floor before slide 6.]*
 
@@ -142,7 +144,7 @@ Why does this matter? Because once you see your work this way, you can swap a wo
 
 ---
 
-## 8:00–10:30 · 3:08pm · Slide 4 · This isn't just code
+## 9:00–10:30 · 3:09pm · Slide 4 · This isn't just code
 
 This is not a software idea. It's a shape. Here are three.
 
