@@ -66,6 +66,15 @@ for t in sorted(d["tickets"], key=lambda t: t["id"]):
       --expression-attribute-values "{\":s\":{\"S\":\"rejected\"},\":t\":{\"BOOL\":true},\":f\":{\"BOOL\":false},\":why\":{\"S\":\"${3:-Not a fit for today.}\"}}"
     echo "rejected #$2"
     ;;
+  inject)  # rehearsal only: inject <id> xss|path|smoke|none
+    if [[ ${3:-none} == none ]]; then
+      upd --update-expression "REMOVE inject.#i" --expression-attribute-names "{\"#i\":\"$2\"}"
+    else
+      upd --update-expression "SET inject = if_not_exists(inject, :m)" --expression-attribute-values '{":m":{"M":{}}}'
+      upd --update-expression "SET inject.#i = :k" --expression-attribute-names "{\"#i\":\"$2\"}" --expression-attribute-values "{\":k\":{\"S\":\"$3\"}}"
+    fi
+    echo "inject #$2 = ${3:-none}"
+    ;;
   n8n)
     INST=$(aws cloudformation describe-stacks $R --stack-name feedback-factory --query "Stacks[0].Outputs[?OutputKey=='InstanceId'].OutputValue" --output text)
     echo "n8n editor: http://localhost:5678  (login in ~/.config/feedback-factory/n8n.env). Ctrl-C to close."

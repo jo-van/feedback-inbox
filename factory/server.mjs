@@ -167,6 +167,16 @@ async function assertNotKilled() {
   if ((await factory()).killed) { const e = new Error('factory is stopped (kill switch)'); e.status = 409; throw e; }
 }
 
+// ---------------------------------------------------------------- rehearsal fault injection
+// FACTORY.inject = { "<id>": "xss" | "path" | "smoke" } plants a known fault (rehearsals only)
+// so we can prove the reviewer, the allowlist and the rollback really work.
+async function injection(id, round) {
+  const f = await factory();
+  if (f.mode === 'live') return null;
+  const kind = f.inject?.[String(id)];
+  return kind && round === 0 ? kind : null;
+}
+
 // ---------------------------------------------------------------- allowlist
 async function allowlist() {
   const txt = await fs.readFile(path.join(CFG.root, 'allowlist.txt'), 'utf8');
@@ -306,6 +316,18 @@ STATIONS['build.ship'] = async (inp) => {
     await run('git', [...GIT_SAFE, 'clean', '-fdq', '--', f], { cwd: ws(inp.id) });
   }
   const req = await getReq(inp.id);
+  const inj = await injection(inp.id, inp.round);
+  if (inj === 'xss') {
+    const f = path.join(ws(inp.id), 'components', 'Board.tsx');
+    const src = await fs.readFile(f, 'utf8');
+    await fs.writeFile(f, src.replace('<h2>{r.title}</h2>', '<h2 dangerouslySetInnerHTML={{ __html: r.title }} />'));
+    log('INJECTED xss defect for rehearsal', inp.id);
+  }
+  if (inj === 'path') {
+    const f = path.join(ws(inp.id), 'next.config.mjs');
+    await fs.appendFile(f, '\n// injected by rehearsal: config change the factory must never ship\n');
+    log('INJECTED forbidden path change for rehearsal', inp.id);
+  }
   await git(inp.id, 'add', '-A');
   await git(inp.id, 'reset', '--soft', 'origin/main');
   const left = (await git(inp.id, 'diff', '--cached', '--name-only')).split('\n').filter(Boolean);
@@ -456,6 +478,13 @@ async function doRelease(inp) {
       await run('git', [...GIT_SAFE, 'rebase', '--abort'], { cwd: ws(id) });
       return { id, round: inp.round, released: false, productionSha: '', rolledBack: false, failures: ['Another change shipped first and this one conflicts with it; rebuild on top of the new code.'] };
     }
+  }
+  if ((await injection(id, 0)) === 'smoke') {
+    const f = path.join(ws(id), 'components', 'Board.tsx');
+    const src = await fs.readFile(f, 'utf8');
+    await fs.writeFile(f, src.replace("if (requests === null)", "if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') throw new Error('rehearsal: injected production-only failure');\n  if (requests === null)"));
+    await must('git', [...GIT_SAFE, 'commit', '-qam', `#${id}: rehearsal-injected production-only failure`], { cwd: ws(id) });
+    log('INJECTED production-only failure for rehearsal', id);
   }
   const sha = (await git(id, 'rev-parse', 'HEAD')).trim();
   await serial(() => git(id, 'push', '-q', 'origin', 'HEAD:refs/heads/main'));
