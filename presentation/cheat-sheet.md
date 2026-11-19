@@ -21,7 +21,7 @@ Deck keys: **→ / Space / PageDown** next · **← / PageUp** back · **N** not
 | **3:21–3:25** | [9] | **LIVE B2** · n8n | Top level → today's run → one station's in/out → open **Builder** → mini factory. |
 | 3:25 | [10] | Second AI reviews | "Don't let the student grade their own exam." |
 | 3:26:30 | [11] | Agent in chat (Hermes) | Anyone can ask · connected to our tools · follows our process · scheduled standup updates · team of one plus agents. *(Optional TODO example.)* |
-| 3:30 | [12] | What humans own | Choose what matters · define done · design factory & guardrails · own outcomes. |
+| 3:30 | [12] | What humans own | Choose what matters · define done · design factory & guardrails · own outcomes. "Your first hires should build the line, not stand on it." |
 | 3:31:30 | [13] | Cost | Setup weeks · server ~$0.17/hr · Claude subscription + Gemini key · no per-request $ measured. |
 | 3:32:30 | [14] | Your turn | 20-second pause. Workers → contracts → routing → hand one job to AI. |
 | 3:34 | [15] | Today's results | **Check the Floor before speaking.** |

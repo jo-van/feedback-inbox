@@ -128,7 +128,7 @@ Here's the one idea I want you to walk out with.
 
 Every single process can be viewed as a factory. And every factory is made of three things.
 
-**Workers.** Each worker has one job. Not "handle sales." One job: "decide if this lead is a good fit." A worker can be a person, a piece of software, a contractor, or an AI agent. An AI agent is just a worker that happens to be software.
+**Workers.** Each worker has one job. Not "handle sales." One job: "decide if this lead is a good fit." A worker can be a person, a piece of software, or an AI agent. An AI agent is just a worker that happens to be software.
 
 **Contracts.** For every worker, write down what goes in and what comes out. "In: a filled-out contact form. Out: fit, or not a fit, with one sentence why." That's it. That's a contract. It's the most underrated tool in business.
 
@@ -366,6 +366,8 @@ So if a factory can do all of that, what's left for people? Four things.
 **And owning the outcome.** If it breaks for your customers, "the AI did it" is not an answer they'll accept.
 
 The job changes. You stop being the person who does every step, and you become the person who designs the factory.
+
+*[Point at the banner.]* And the same goes for your first hires. As a founder, every hire is expensive. If you hire someone, employee or contractor, to answer every support email, you've bought one worker. If you hire them to set up how support emails get answered, and to keep making it better, you've bought a factory. Only one of those scales. Hire people to build the line, not stand on it.
 
 *[~130 words]*
 

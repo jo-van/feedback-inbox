@@ -79,6 +79,7 @@ The short version of `script.md`. Say it in your own words; the **bold line** is
 **[12] 3:30 · What humans still own**
 - Four things: choosing what matters (you did, by voting), defining "done," designing the factory and its guardrails (me), owning the outcome.
 - **"You stop doing every step and become the person who designs the factory."**
+- Banner: same for your first hires. Hire someone to answer every support email: one worker. Hire them to set up how support gets answered and keep improving it: a factory. **"Hire people to build the line, not stand on it."**
 
 **[13] 3:31:30 · Cost** (honest numbers)
 - Setup takes weeks. The server is about 17¢ an hour. The AI runs on a Claude subscription plus a Gemini key.
