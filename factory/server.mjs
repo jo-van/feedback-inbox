@@ -408,11 +408,21 @@ STATIONS.review = async (inp) => {
   await setCheck(inp.id, 'review', 'pending');
   const req = await getReq(inp.id);
   const diff = (await git(inp.id, 'diff', 'origin/main...HEAD')).slice(0, 120_000);
+  const testsLine = req.tests ? `${req.tests.passed} passed, ${req.tests.failed} failed` : 'results unavailable';
+  const prior = req.review?.findings?.length && inp.round > 0
+    ? `This is repair round ${inp.round + 1}. Your previous blocking findings were:\n${req.review.findings.filter((f) => f.startsWith('blocking')).map((f) => '- ' + f).join('\n')}\nIf they are fixed, do not invent new blocking issues unless they are security problems or clear bugs.\n`
+    : '';
   const prompt = `You are an adversarial code reviewer. A different AI wrote this change to a small public Next.js app ("Feedback Inbox") and it will ship to production automatically if you approve. Your job is to find real problems, not to be polite.
 ${UNTRUSTED}
 
-Block ("changes") ONLY for real issues: the change does not meet an acceptance criterion; a bug or crash; security problems (XSS, dangerouslySetInnerHTML, leaking email addresses or other private data, new network calls to other domains, secrets); edits outside the request's scope; a missing or meaningless test for the acceptance criteria; anything that breaks existing features. Style nitpicks are never blocking. If it is good, approve.
-
+Block ("changes") ONLY for real, user-visible or security issues, and only when you can quote the exact offending code from the diff (copy it into the "quote" field):
+- security problems: XSS, dangerouslySetInnerHTML, leaking email addresses or other private data, new network calls to other domains, secrets;
+- a bug that makes the change NOT do what the requester asked ("How we'll know it works");
+- a clear violation of a MUST in the spec below (wording like "not required" or "unchanged" is not a prohibition);
+- edits outside the request's scope, or changes that break existing features;
+- a missing test for the requested behavior.
+Everything else (style, structure, naming, hypothetical edge cases, alternative designs) is "minor" and never blocks. The automated browser tests already ran against a live preview of this exact change: ${testsLine}. If the requested behavior works and nothing above applies, approve.
+${prior}
 <request>
 Title: ${req.title}
 How we'll know it works: ${req.doneWhen}
@@ -422,8 +432,12 @@ ${(req.spec?.acceptance || []).map((a) => '- ' + a).join('\n')}
 
 Diff:
 ${diff}`;
-  const schema = { type: 'OBJECT', properties: { verdict: { type: 'STRING', enum: ['approve', 'changes'] }, findings: { type: 'ARRAY', items: { type: 'OBJECT', properties: { severity: { type: 'STRING', enum: ['blocking', 'minor'] }, file: { type: 'STRING' }, issue: { type: 'STRING' }, fix: { type: 'STRING' } }, required: ['severity', 'issue'] } } }, required: ['verdict', 'findings'] };
+  const schema = { type: 'OBJECT', properties: { verdict: { type: 'STRING', enum: ['approve', 'changes'] }, findings: { type: 'ARRAY', items: { type: 'OBJECT', properties: { severity: { type: 'STRING', enum: ['blocking', 'minor'] }, file: { type: 'STRING' }, quote: { type: 'STRING' }, issue: { type: 'STRING' }, fix: { type: 'STRING' } }, required: ['severity', 'issue'] } } }, required: ['verdict', 'findings'] };
   const { model, value } = await gemini(prompt, schema);
+  // A blocking finding must quote code that actually appears in the diff; otherwise it is downgraded.
+  for (const f of value.findings || []) {
+    if (f.severity === 'blocking' && !(f.quote && f.quote.trim().length > 3 && diff.includes(f.quote.trim().slice(0, 60)))) f.severity = 'minor';
+  }
   const blocking = (value.findings || []).filter((f) => f.severity === 'blocking');
   const verdict = value.verdict === 'approve' && blocking.length === 0 ? 'approve' : 'changes';
   const findings = (value.findings || []).map((f) => `${f.severity}: ${f.file ? f.file + ': ' : ''}${f.issue}${f.fix ? ' Fix: ' + f.fix : ''}`.slice(0, 700));
