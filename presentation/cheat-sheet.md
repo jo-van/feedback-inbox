@@ -66,5 +66,5 @@ Plus the **3:02 admission beat** (from [2]): app top-voted list → Gatekeeper d
 | Status in a terminal | `~/projects/feedback-inbox/infra/ff.sh status` |
 | **KILL SWITCH** | `~/projects/feedback-inbox/infra/ff.sh kill` (stops new builds now; running builds stopped and parked within a minute). Undo: `ff.sh resume` |
 | PREVIOUS RUN video | `~/projects/feedback-inbox/presentation/previous-run.mp4` |
-| Auto-admission | Arms itself at **3:02pm**, top-voted eligible request, up to **3** builds, max 2 at once |
+| Auto-admission | Arms itself at **3:02pm**, top-voted eligible request, up to **3** builds, one at a time |
 | AWS teardown | Automatic at **4:45pm** (nothing to do). Receipt: `~/projects/feedback-inbox/TEARDOWN-RECEIPT.md` after 5pm |
