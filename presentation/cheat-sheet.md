@@ -54,4 +54,14 @@ Plus the **3:02 admission beat** (from [2]): app top-voted list → Gatekeeper d
 
 ## Kill switch & URLs
 
-> **TODO:** filled in by the kill-switch workstream (factory stop control, production URL, Floor URL with `?repo=`, n8n tunnel URL, PREVIOUS RUN video location, operator contact).
+| What | Where |
+| --- | --- |
+| App (QR target) | https://ideas-built-live.vercel.app |
+| Factory Floor | https://ideas-built-live.vercel.app/floor |
+| Floor rehearsal mode (fake data, badged) | https://ideas-built-live.vercel.app/floor?sim=1 |
+| n8n canvas | In a terminal: `~/projects/feedback-inbox/infra/ff.sh n8n`, then http://localhost:5678. Login in `~/.config/feedback-factory/n8n.env` |
+| Status in a terminal | `~/projects/feedback-inbox/infra/ff.sh status` |
+| **KILL SWITCH** | `~/projects/feedback-inbox/infra/ff.sh kill` (stops new builds now; running builds stopped and parked within a minute). Undo: `ff.sh resume` |
+| PREVIOUS RUN video | `~/projects/feedback-inbox/presentation/previous-run.webm` |
+| Auto-admission | Arms itself at **3:02pm**, top-voted eligible request, up to **3** builds, max 2 at once |
+| AWS teardown | Automatic at **4:45pm** (nothing to do). Receipt: `~/projects/feedback-inbox/TEARDOWN-RECEIPT.md` after 5pm |

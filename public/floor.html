@@ -564,14 +564,17 @@ function renderBadges() {
   if (!factory) return;
   const f = factory, now = serverNow(), hb = ts(f.heartbeat);
   h.className = 'badge';
+  h.hidden = SIM;
   if (f.killed === true) { h.textContent = 'Stopped'; h.classList.add('bad'); }
   else if (!hb || now - hb > FRESH_MS) { h.textContent = 'Factory offline'; h.classList.add('bad'); }
   else { h.textContent = 'Live'; h.classList.add('live'); }
   const armAt = ts(f.armAt);
-  if (f.armed !== true && armAt > now) {
+  // In live mode the factory arms itself at armAt; in rehearsals "armed" is set directly.
+  const armed = f.mode === 'live' ? (armAt > 0 && now >= armAt) : f.armed === true;
+  if (!armed && armAt > now) {
     arm.hidden = false;
     arm.textContent = 'Arms at ' + new Date(armAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) + ' · ' + fmt(armAt - now);
-  } else if (f.armed !== true && !f.killed) { arm.hidden = false; arm.textContent = 'Not armed'; }
+  } else if (!armed && !f.killed) { arm.hidden = false; arm.textContent = 'Not armed'; }
   else arm.hidden = true;
   const cap = +f.cap, adm = +f.admitted;
   b.hidden = !Number.isFinite(cap) || !Number.isFinite(adm);
