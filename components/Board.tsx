@@ -7,11 +7,24 @@ function readVoted(): number[] {
   try { return JSON.parse(localStorage.getItem('ff_voted') || '[]'); } catch { return []; }
 }
 
+export function relativeAge(createdAt: string, now = Date.now()): string {
+  const t = Date.parse(createdAt);
+  const diff = now - t;
+  if (Number.isNaN(t) || diff < 60000) return 'just now';
+  const m = Math.floor(diff / 60000);
+  if (m < 60) return `${m} minute${m === 1 ? '' : 's'} ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h} hour${h === 1 ? '' : 's'} ago`;
+  const d = Math.floor(h / 24);
+  return `${d} day${d === 1 ? '' : 's'} ago`;
+}
+
 export default function Board() {
   const [requests, setRequests] = useState<PublicRequest[] | null>(null);
   const [voted, setVoted] = useState<number[]>([]);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
+  const [, setTick] = useState(0);
 
   const load = useCallback(async () => {
     try {
@@ -28,7 +41,7 @@ export default function Board() {
   useEffect(() => {
     setVoted(readVoted());
     load();
-    const t = setInterval(load, 5000);
+    const t = setInterval(() => { setTick((n) => n + 1); load(); }, 5000);
     return () => clearInterval(t);
   }, [load]);
 
@@ -80,6 +93,7 @@ export default function Board() {
               <div className="meta">
                 <span className={'chip ' + label} data-testid="status">{label}</span>
                 #{r.id} · {r.name}{r.seeded ? ' (seeded by presenter)' : ''}
+                <span data-testid="age" title={Number.isNaN(Date.parse(r.createdAt)) ? '' : new Date(r.createdAt).toISOString()}> · {relativeAge(r.createdAt)}</span>
                 {r.publicReason && (r.stage === 'rejected' || r.stage === 'needs_human') ? ` · ${r.publicReason}` : ''}
               </div>
             </div>
