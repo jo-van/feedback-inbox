@@ -34,7 +34,8 @@ Every rehearsal ran with **no human action**: request submitted in the app → G
 - **Forbidden file:** a change that also touched `next.config.mjs` was blocked before anything was pushed.
 - **Rollback:** a production-only failure injected into #17 went live, failed the production smoke test, and the factory reverted it by itself; production stayed up.
 - **Kill switch:** stopped a running build and parked it within a minute.
-- **3:02 auto-arm:** tested with a near-term time; nothing was picked before the time, then exactly one request (the most-voted), and the cap held.
+- **3:02 auto-arm:** tested with a near-term time; nothing was picked before the time, then exactly one request (the most-voted), and a cap of 1 held.
+- **Cap of 3 (the talk setting):** with the factory armed, 3 builds already used and an eligible request waiting, nothing was admitted across four ticks. Caps of 1 and 2 also held in rehearsals.
 - **Recovery:** the watchdog restarted a killed service and a stopped n8n; after a full VM reboot everything came back, including the teardown timer.
 - **Privacy:** the guard test (a submitted email must never appear on any public page or API) ran and passed on every build.
 - **Security review:** an independent adversarial review found one critical issue (git hooks → root on the VM) and three high ones; all fixed (see `docs/security-review.md`).
@@ -51,7 +52,7 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 - **The preview site is public.** The Tester needs it; someone could post junk there and make tests flaky. Accepted for one day.
 - **Rejected text stays visible.** A rejected prompt-injection title shows on the board and Floor under "Not today", which makes a good teaching moment. Only offensive or personal content is hidden.
 - **n8n canvas:** the top-level line looks busy because every station has an error route to "Needs a human". It reads well as "not a conveyor belt". First time you open it, dismiss n8n's "Production Checklist" popup ("Ignore for all workflows").
-- **Floor repair animation:** the PREVIOUS RUN recording shows two real requests moving at once, but no repair loop. Real repairs happened overnight (#14, #13, #18), but I never captured the return-belt animation on screen during one. The animation is exercised in `/floor?sim=1`.
+- **NOT DONE: Floor repair loop shown during a real run.** The PREVIOUS RUN recording shows two real requests moving at once, but no repair loop. Real repairs happened overnight (#14, #13, #18), but I never captured the return belt on screen during one. **Fallback:** `/floor?sim=1` (clearly badged SIMULATION) plays a repair loop. If one happens live during the talk, the Floor will show it.
 - **Not tested:** a real room's worth of phones at once, venue Wi-Fi, and the deck on the actual projector.
 - **Teardown order:** AWS deletes everything at 4:45pm, but CloudFormation marks the empty stack "DELETE_FAILED". It used the teardown role it had just deleted, so no resources remain. The laptop job at 5:00pm finishes it off. If the laptop is asleep, it runs when you wake it.
 
@@ -87,7 +88,13 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 - 4:44pm ET: AWS Scheduler deletes the secrets. 4:45pm: it deletes the whole AWS stack (server, database tables, roles).
 - 4:50pm: if the server still exists, it switches itself off, and that deletes it.
 - 5:00pm (and 5:30, 6:00 if the laptop was asleep): this laptop runs `infra/teardown.sh`, removes anything left plus the GitHub deploy key, and writes `TEARDOWN-RECEIPT.md`. Expected: every row empty.
-- All three were proven tonight on throwaway copies. The Vercel site and GitHub repo stay (not AWS); after teardown the app has no data.
+- **What was actually proven tonight, on throwaway copies:**
+  - The AWS scheduled delete removed every resource, including its own role. CloudFormation then marked the empty stack DELETE_FAILED.
+  - The VM's own power-off timer terminated its server on time.
+  - `teardown.sh`, run by hand, finished off the leftover stack record and its receipt showed nothing remaining.
+- **Not proven:** the laptop's scheduled launchd job itself. It is installed and loaded, but it has never fired (its first run is 5:00pm today). The real stack's scheduled delete also hasn't fired yet (4:45pm).
+- **If you want certainty:** after 5:00pm, check `TEARDOWN-RECEIPT.md`. If it's missing, run `~/projects/feedback-inbox/infra/teardown.sh` by hand.
+- The Vercel site and GitHub repo stay (not AWS); after teardown the app has no data.
 - To tear down early by hand: `~/projects/feedback-inbox/infra/teardown.sh`.
 
 ## Feedback I need from you
