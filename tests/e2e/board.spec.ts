@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('board loads and shows the suggest button', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /Feedback Inbox/ })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Suggest an idea' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Suggest a change' })).toBeVisible();
   await expect(page.getByTestId('request-card').first()).toBeVisible();
 });
 

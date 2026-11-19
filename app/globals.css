@@ -15,8 +15,6 @@ header.top p { margin: 0; color: var(--muted); flex-basis: 100%; }
   display: inline-block; background: var(--hazard); color: #1a1500; font-weight: 800; border: 0; border-radius: 12px;
   padding: 12px 18px; font-size: 17px; text-decoration: none; cursor: pointer;
 }
-.btn.pinned { position: fixed; top: 8px; right: 16px; z-index: 10; }
-header.top { padding-top: 52px; }
 .btn.secondary { background: var(--panel2); color: var(--text); }
 .btn:disabled { opacity: .5; cursor: default; }
 .card { background: var(--panel); border-radius: 14px; padding: 14px 16px; margin: 10px 0; display: flex; gap: 14px; }
@@ -46,7 +44,3 @@ textarea { min-height: 90px; resize: vertical; }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .error { color: var(--stop); font-weight: 700; }
 .ok { color: var(--go); font-weight: 700; }
-@keyframes vote-bounce { 0%,100% { transform: translateY(0) } 40% { transform: translateY(-8px) scale(1.12) } 70% { transform: translateY(0) scale(.96) } }
-.vote.bounce { animation: vote-bounce 500ms ease-out; }
-@media (prefers-reduced-motion: reduce) { .vote.bounce { animation: none; } }
-.site-footer { text-align: center; font-size: 13px; color: var(--muted); max-width: 760px; margin: 32px auto 0; padding: 16px; }

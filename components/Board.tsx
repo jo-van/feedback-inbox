@@ -7,26 +7,10 @@ function readVoted(): number[] {
   try { return JSON.parse(localStorage.getItem('ff_voted') || '[]'); } catch { return []; }
 }
 
-export function relativeAge(createdAt: string, now = Date.now()): string {
-  const t = Date.parse(createdAt);
-  const diff = now - t;
-  if (Number.isNaN(t) || diff < 60000) return 'just now';
-  const m = Math.floor(diff / 60000);
-  if (m < 60) return `${m} minute${m === 1 ? '' : 's'} ago`;
-  const h = Math.floor(m / 60);
-  if (h < 24) return `${h} hour${h === 1 ? '' : 's'} ago`;
-  const d = Math.floor(h / 24);
-  return `${d} day${d === 1 ? '' : 's'} ago`;
-}
-
 export default function Board() {
   const [requests, setRequests] = useState<PublicRequest[] | null>(null);
   const [voted, setVoted] = useState<number[]>([]);
   const [error, setError] = useState('');
-  const [query, setQuery] = useState('');
-  const [sort, setSort] = useState<'newest' | 'votes'>('newest');
-  const [bouncing, setBouncing] = useState<number[]>([]);
-  const [, setTick] = useState(0);
 
   const load = useCallback(async () => {
     try {
@@ -43,14 +27,12 @@ export default function Board() {
   useEffect(() => {
     setVoted(readVoted());
     load();
-    const t = setInterval(() => { setTick((n) => n + 1); load(); }, 5000);
+    const t = setInterval(load, 5000);
     return () => clearInterval(t);
   }, [load]);
 
   async function upvote(id: number) {
     if (voted.includes(id)) return;
-    setBouncing((b) => [...b, id]);
-    setTimeout(() => setBouncing((b) => b.filter((x) => x !== id)), 800);
     const next = [...voted, id];
     setVoted(next);
     try { localStorage.setItem('ff_voted', JSON.stringify(next)); } catch {}
@@ -59,52 +41,19 @@ export default function Board() {
   }
 
   if (requests === null) return <p className="empty">{error || 'Loading…'}</p>;
-  const list = [...requests].sort((a, b) =>
-    sort === 'votes' ? (b.votes - a.votes) || (b.id - a.id) : b.id - a.id);
+  const list = [...requests].sort((a, b) => b.id - a.id);
   if (list.length === 0) return <p className="empty">No requests.</p>;
-  const q = query.trim().toLowerCase();
-  const visible = q ? list.filter((r) => r.title.toLowerCase().includes(q)) : list;
 
   return (
     <div>
-      {requests.length > 0 && (
-        <p data-testid="request-count" style={{ marginBottom: 12 }}>{requests.length} {requests.length === 1 ? 'request' : 'requests'} so far</p>
-      )}
-      <input
-        type="text"
-        data-testid="search"
-        aria-label="Search requests by title"
-        placeholder="Search by title"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        style={{ width: '100%', marginBottom: 12 }}
-      />
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
-        <button
-          type="button"
-          data-testid="sort-newest"
-          aria-pressed={sort === 'newest'}
-          onClick={() => setSort('newest')}
-          style={{ fontWeight: sort === 'newest' ? 700 : 400, border: sort === 'newest' ? '2px solid currentColor' : undefined }}
-        >Newest</button>
-        <button
-          type="button"
-          data-testid="sort-votes"
-          aria-pressed={sort === 'votes'}
-          onClick={() => setSort('votes')}
-          style={{ fontWeight: sort === 'votes' ? 700 : 400, border: sort === 'votes' ? '2px solid currentColor' : undefined }}
-        >Most votes</button>
-      </div>
       {error && <p className="error">{error}</p>}
-      {q && visible.length === 0 && <p className="empty" data-testid="no-matches">No requests match your search</p>}
-      {visible.map((r) => {
+      {list.map((r) => {
         const label = statusLabel(r.stage);
         const mine = voted.includes(r.id);
         return (
           <article className="card" key={r.id} data-testid="request-card">
             <button
-              className={'vote' + (mine ? ' voted' : '') + (bouncing.includes(r.id) ? ' bounce' : '')}
-              onAnimationEnd={() => setBouncing((b) => b.filter((x) => x !== r.id))}
+              className={'vote' + (mine ? ' voted' : '')}
               onClick={() => upvote(r.id)}
               aria-label={`Upvote request ${r.id}`}
               disabled={mine}
@@ -118,21 +67,12 @@ export default function Board() {
               <div className="meta">
                 <span className={'chip ' + label} data-testid="status">{label}</span>
                 #{r.id} · {r.name}{r.seeded ? ' (seeded by presenter)' : ''}
-                <span data-testid="age" title={Number.isNaN(Date.parse(r.createdAt)) ? '' : new Date(r.createdAt).toISOString()}> · {relativeAge(r.createdAt)}</span>
                 {r.publicReason && (r.stage === 'rejected' || r.stage === 'needs_human') ? ` · ${r.publicReason}` : ''}
               </div>
             </div>
           </article>
         );
       })}
-      {visible.length > 0 && (
-        <button
-          type="button"
-          data-testid="back-to-top"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          style={{ marginTop: 12, display: 'block' }}
-        >Back to top</button>
-      )}
     </div>
   );
 }
