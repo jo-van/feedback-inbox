@@ -4,9 +4,8 @@ After=docker.service network-online.target
 Wants=network-online.target
 [Service]
 ExecStartPre=/srv/ff/src/factory/env-refresh.sh
-EnvironmentFile=/etc/ff/ff.env
 WorkingDirectory=/srv/ff/src/factory
-ExecStart=/usr/bin/node /srv/ff/src/factory/server.mjs
+ExecStart=/bin/bash -c 'set -a; . /etc/ff/ff.env; exec /usr/bin/node /srv/ff/src/factory/server.mjs'
 Restart=always
 RestartSec=3
 [Install]
