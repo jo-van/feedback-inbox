@@ -100,7 +100,12 @@ async function claude(id, prompt, { tools = [], maxTurns = 1, model = CFG.builde
 
 async function gemini(prompt, schema) {
   let lastErr;
+  const dead = new Set(); // models that answered 429 (quota): not worth retrying today
+  const passes = Number(E.FF_GEMINI_PASSES || 2);
+  for (let pass = 0; pass < passes; pass++) {
+  if (pass) { log('gemini retry pass', pass + 1, 'after overload'); await new Promise((r) => setTimeout(r, 20_000 * pass)); }
   for (const model of CFG.geminiModels) {
+    if (dead.has(model)) continue;
     const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': E.GEMINI_API_KEY },
@@ -116,7 +121,9 @@ async function gemini(prompt, schema) {
       return { model, value: extractJson(text) };
     }
     lastErr = `${model}: HTTP ${r.status} ${(await r.text()).slice(0, 300)}`;
+    if (r.status === 429) dead.add(model);
     log('gemini fallback', lastErr);
+  }
   }
   throw new Error('gemini failed: ' + lastErr);
 }
@@ -433,7 +440,18 @@ ${(req.spec?.acceptance || []).map((a) => '- ' + a).join('\n')}
 Diff:
 ${diff}`;
   const schema = { type: 'OBJECT', properties: { verdict: { type: 'STRING', enum: ['approve', 'changes'] }, findings: { type: 'ARRAY', items: { type: 'OBJECT', properties: { severity: { type: 'STRING', enum: ['blocking', 'minor'] }, file: { type: 'STRING' }, quote: { type: 'STRING' }, issue: { type: 'STRING' }, fix: { type: 'STRING' } }, required: ['severity', 'issue'] } } }, required: ['verdict', 'findings'] };
-  const { model, value } = await gemini(prompt, schema);
+  let model, value;
+  try {
+    ({ model, value } = await gemini(prompt, schema));
+  } catch (e) {
+    // Gemini is down or overloaded: a different Claude model reviews instead of parking good work.
+    log('review fallback to claude', inp.id, e.message.slice(0, 200));
+    model = (E.FF_REVIEW_FALLBACK_MODEL || 'claude-opus-5-5') + ' (Gemini unavailable)';
+    value = extractJson(await claude(inp.id, prompt + `
+
+Respond with ONLY a JSON object, no prose: {"verdict":"approve"|"changes","findings":[{"severity":"blocking"|"minor","file":"...","quote":"exact code from the diff","issue":"...","fix":"..."}]}`,
+      { model: E.FF_REVIEW_FALLBACK_MODEL || 'claude-opus-5-5', mountRepo: false, timeoutMs: 300_000 }));
+  }
   // A blocking finding must quote code that actually appears in the diff; otherwise it is downgraded.
   for (const f of value.findings || []) {
     if (f.severity === 'blocking' && !(f.quote && f.quote.trim().length > 3 && diff.includes(f.quote.trim().slice(0, 60)))) f.severity = 'minor';
@@ -536,8 +554,21 @@ async function doRelease(inp) {
   return { id, round: inp.round, released: false, productionSha: back, rolledBack: true, failures };
 }
 
+const STATION_NAMES = { spec: 'Spec writer', build: 'Builder', fix: 'Builder', test: 'Tester', review: 'Reviewer', security: 'Security scan', preview: 'Preview', release: 'Release' };
 STATIONS.park = async (inp) => {
-  await setStage(inp.id, 'needs_human', { publicReason: inp.reason.slice(0, 160) }, ['checks']);
+  let reason = inp.reason;
+  if (/hit an error/.test(reason)) {
+    const le = (await getReq(inp.id))?.lastError;
+    if (le) {
+      const who = STATION_NAMES[le.station] || le.station;
+      const why = /HTTP (503|429)|overloaded|high demand|quota/i.test(le.message) ? 'an AI service it depends on was overloaded'
+        : /timed? ?out|TimeoutError/i.test(le.message) ? 'it timed out'
+        : /usage limit|rate limit/i.test(le.message) ? 'the AI subscription hit a usage limit'
+        : 'it hit an unexpected error';
+      reason = `The ${who} stopped because ${why}; it parked the work instead of guessing.`;
+    }
+  }
+  await setStage(inp.id, 'needs_human', { publicReason: reason.slice(0, 160) }, ['checks']);
   return { id: inp.id, round: inp.round, stage: 'needs_human' };
 };
 
@@ -619,6 +650,7 @@ const server = http.createServer(async (req, res) => {
     return send(404, { error: 'no such route' });
   } catch (e) {
     log('error', req.url, input.id, e.message);
+    if (input?.id) await setFields(input.id, { lastError: { station: req.url.replace('/station/', ''), message: String(e.message).slice(0, 600), at: new Date().toISOString() } }).catch(() => {});
     return send(e instanceof ContractError ? 422 : e.status || 500, { error: e.message });
   }
 });

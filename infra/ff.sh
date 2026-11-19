@@ -4,6 +4,7 @@
 #   ff.sh kill                   KILL SWITCH: stop admissions and stop running builds now
 #   ff.sh resume                 undo kill
 #   ff.sh rehearse <cap>         arm a rehearsal now with a build cap (resets the admitted count)
+#   ff.sh why <id>               why a request stopped (last error, review findings, tests)
 #   ff.sh live [armAtISO] [cap] [parallel]  arm for the talk (default 2026-11-19T20:05:00Z = 3:05pm ET, cap 3, one build at a time)
 #   ff.sh submit "<title>" "<done when>" [name]   submit a request through the real app
 #   ff.sh vote <id> [n]          add n upvotes through the real app
@@ -75,11 +76,29 @@ for t in sorted(d["tickets"], key=lambda t: t["id"]):
     fi
     echo "inject #$2 = ${3:-none}"
     ;;
+  why)
+    sk=$(printf 'REQ#%06d' "$2")
+    aws dynamodb get-item $R --table-name feedback-factory-prod --key "{\"pk\":{\"S\":\"REQ\"},\"sk\":{\"S\":\"$sk\"}}" --output json \
+      | python3 -I -c 'import json,sys
+i=json.load(sys.stdin).get("Item",{})
+g=lambda k:i.get(k,{}).get("S","")
+print("#"+sys.argv[1], g("stage"), "-", g("title"))
+print("public reason:", g("publicReason") or "-")
+le=i.get("lastError",{}).get("M",{})
+if le: print("last error  :", le.get("station",{}).get("S"), "at", le.get("at",{}).get("S"), "\n ", le.get("message",{}).get("S","")[:600])
+rv=i.get("review",{}).get("M",{})
+if rv:
+  print("review      :", rv.get("verdict",{}).get("S"), "by", rv.get("model",{}).get("S"))
+  for f in rv.get("findings",{}).get("L",[])[:5]: print("  -", f.get("S","")[:300])
+t=i.get("tests",{}).get("M",{})
+if t: print("tests       :", t.get("passed",{}).get("N"), "passed,", t.get("failed",{}).get("N"), "failed")
+print("preview     :", g("previewUrl") or "-")' "$2"
+    ;;
   n8n)
     INST=$(aws cloudformation describe-stacks $R --stack-name feedback-factory --query "Stacks[0].Outputs[?OutputKey=='InstanceId'].OutputValue" --output text)
     echo "n8n editor: http://localhost:5678  (login in ~/.config/feedback-factory/n8n.env). Ctrl-C to close."
     (sleep 4; open http://localhost:5678) &
     aws ssm start-session $R --target "$INST" --document-name AWS-StartPortForwardingSession --parameters '{"portNumber":["5678"],"localPortNumber":["5678"]}'
     ;;
-  *) sed -n 2,13p "$0"; exit 1 ;;
+  *) sed -n 2,14p "$0"; exit 1 ;;
 esac
