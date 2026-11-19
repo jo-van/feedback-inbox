@@ -58,7 +58,6 @@ export default function Board() {
     await fetch(`/api/requests/${id}/vote`, { method: 'POST' }).catch(() => {});
   }
 
-  if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') throw new Error('rehearsal: injected production-only failure');
   if (requests === null) return <p className="empty">{error || 'Loading…'}</p>;
   const list = [...requests].sort((a, b) =>
     sort === 'votes' ? (b.votes - a.votes) || (b.id - a.id) : b.id - a.id);
