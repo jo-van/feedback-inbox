@@ -24,6 +24,7 @@ export default function Board() {
   const [voted, setVoted] = useState<number[]>([]);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
+  const [sort, setSort] = useState<'newest' | 'votes'>('newest');
   const [, setTick] = useState(0);
 
   const load = useCallback(async () => {
@@ -55,7 +56,8 @@ export default function Board() {
   }
 
   if (requests === null) return <p className="empty">{error || 'Loading…'}</p>;
-  const list = [...requests].sort((a, b) => b.id - a.id);
+  const list = [...requests].sort((a, b) =>
+    sort === 'votes' ? (b.votes - a.votes) || (b.id - a.id) : b.id - a.id);
   if (list.length === 0) return <p className="empty">No requests.</p>;
   const q = query.trim().toLowerCase();
   const visible = q ? list.filter((r) => r.title.toLowerCase().includes(q)) : list;
@@ -71,6 +73,22 @@ export default function Board() {
         onChange={(e) => setQuery(e.target.value)}
         style={{ width: '100%', marginBottom: 12 }}
       />
+      <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+        <button
+          type="button"
+          data-testid="sort-newest"
+          aria-pressed={sort === 'newest'}
+          onClick={() => setSort('newest')}
+          style={{ fontWeight: sort === 'newest' ? 700 : 400, border: sort === 'newest' ? '2px solid currentColor' : undefined }}
+        >Newest</button>
+        <button
+          type="button"
+          data-testid="sort-votes"
+          aria-pressed={sort === 'votes'}
+          onClick={() => setSort('votes')}
+          style={{ fontWeight: sort === 'votes' ? 700 : 400, border: sort === 'votes' ? '2px solid currentColor' : undefined }}
+        >Most votes</button>
+      </div>
       {error && <p className="error">{error}</p>}
       {q && visible.length === 0 && <p className="empty" data-testid="no-matches">No requests match your search</p>}
       {visible.map((r) => {
