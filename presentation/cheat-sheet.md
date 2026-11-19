@@ -13,7 +13,7 @@ Deck keys: **→ / Space / PageDown** next · **← / PageUp** back · **N** not
 | 3:01 | [2] | Your job today | "Scan, play, suggest, upvote. At 3:05 the factory takes the top one." |
 | **3:02–3:06** | [2] | **LIVE A** · admission | Read the top 3 aloud. "Voting closes at 3:05." At 3:05 read the Gatekeeper's decision and reason. Quick flip to the Floor. |
 | 3:06 | [3] | Every process is a factory | Workers · contracts · routing. Hiring is a factory, and one worker in the CEO's factory. |
-| 3:09 | [4] | This isn't just code | Lead · support (last worker is a person) · a trip. "Keep one process of your own in mind." |
+| 3:09 | [4] | You already run a few of these | Lead · support ("Still stuck? Goes to you") · family trip. "Keep one process of your own in mind." |
 | 3:10:30 | [5] | The founder's road | Lovable/v0/Replit → off the rails → Claude Code/Codex → your own factory. **Kyndly line (spoken only):** "one or two people shipping at the pace that used to take a team of twenty", framed as my own experience. |
 | 3:13:30 | [6] | Today's factory (diagram) | Read each yellow contract. Point at "round 2." "In rehearsal: picked up → live in about 10–13 min." |
 | **3:16–3:19** | [7] | **LIVE B** · Factory Floor | Crate, lights (blue/green/red), clock, queue, "Shipped today." May already be shipped: save the reveal for 3:35. |

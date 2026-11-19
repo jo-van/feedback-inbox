@@ -25,9 +25,10 @@ The short version of `script.md`. Say it in your own words; the **bold line** is
 - Nesting: hiring is a factory inside, but to the CEO it's one worker. "We need a salesperson" in, "starts Monday" out.
 - **"Keep the contract and you can swap the worker. A person today, an AI tomorrow."**
 
-**[4] 3:09 · This isn't just code** (keep it to 1.5 min)
-- Three examples: a new lead, customer support, planning a trip.
-- Point at the red support box: **"Routing to a human isn't a failure of the design. It is the design."**
+**[4] 3:09 · You already run a few of these** (keep it to 1.5 min)
+- "You already run factories. You just don't call them that."
+- One sentence per row: a new lead, support, a family trip. Read the yellow lines as what each step hands off.
+- Point at "Still stuck? Goes to you": **"Sending it to a person is part of the plan."**
 - "Keep one process of your own in mind. We'll come back to it."
 
 **[5] 3:10:30 · The founder's road**

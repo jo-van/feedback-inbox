@@ -20,7 +20,7 @@ Format notes:
 | 3:01 | 1:00–2:00 | 2 · Your job today | 1 |
 | **3:02** | **2:00–6:00** | **LIVE A · last votes, 3:05 pick, Gatekeeper** (from slide 2) | 4 |
 | 3:06 | 6:00–9:00 | 3 · Every process is a factory | 3 |
-| 3:09 | 9:00–10:30 | 4 · This isn't just code (tightened to 1.5 min) | 1.5 |
+| 3:09 | 9:00–10:30 | 4 · You already run a few of these (1.5 min) | 1.5 |
 | 3:10:30 | 10:30–13:30 | 5 · The founder's road | 3 |
 | 3:13:30 | 13:30–16:00 | 6 · Today's factory (linear diagram) | 2.5 |
 | **3:16** | **16:00–19:00** | **LIVE B · Factory Floor** (counter 7) | 3 |
@@ -37,7 +37,7 @@ Format notes:
 | 3:42 | 42:00–45:00 | 18 · Q&A | 3 |
 | **3:45** | **45:00** | **Hard stop** | **45 total** |
 
-Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job · 3 every process is a factory · 4 this isn't just code · 5 founder's road · 6 today's factory diagram · 7 LIVE Floor card · 8 not a conveyor belt · 9 LIVE n8n card · 10 second AI · 11 agent in chat (Hermes) · 12 humans own · 13 cost · 14 your turn · 15 today's results · 16 LIVE production card · 17 TempoBlueprint · 18 Q&A.
+Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job · 3 every process is a factory · 4 you already run a few of these · 5 founder's road · 6 today's factory diagram · 7 LIVE Floor card · 8 not a conveyor belt · 9 LIVE n8n card · 10 second AI · 11 agent in chat (Hermes) · 12 humans own · 13 cost · 14 your turn · 15 today's results · 16 LIVE production card · 17 TempoBlueprint · 18 Q&A.
 
 **Heads-up on timing:** in rehearsal, a request went from picked up to live in about 5–13 minutes. If the 3:05 pick-up goes that smoothly, request one may already be live by the 3:16 Floor beat. That's fine: the Floor beat has an "already shipped" branch, and the 3:35 beat is where the requester tries it on their phone (plus any later request that's still moving).
 
@@ -144,21 +144,21 @@ Why does this matter? Because once you see your work this way, you can swap a wo
 
 ---
 
-## 9:00–10:30 · 3:09pm · Slide 4 · This isn't just code
+## 9:00–10:30 · 3:09pm · Slide 4 · You already run a few of these
 
-This is not a software idea. It's a shape. Here are three.
+You already run factories. You just don't call them that.
 
-**A new lead.** Qualify: the form goes in, "fit or not" comes out. Book: a fit goes in, a meeting comes out. Follow up: your notes go in, a next step comes out.
+A new lead comes in. Someone reads the form and decides it's worth a call. Someone books it: Tuesday at 2. Someone follows up: proposal sent.
 
-**Customer support.** Sort: an email goes in, a type comes out: billing, bug, how-do-I. Answer: the type goes in, a draft reply comes out. And look at the last one, in red. Escalate: anything stuck goes to a person. Routing to a human isn't a failure of the design. It is the design.
+Support. Someone reads the email: it's billing. Someone drafts the reply. And if it's still stuck, it goes to you. That red box isn't the plan failing. Sending it to a person is part of the plan.
 
-**And a personal one, a trip.** Dates: everyone's calendars go in, a date window comes out. Book: dates in, tickets out. Pack: the plan goes in, a checklist comes out. If you've ever planned a family trip, you already know which worker always drops the ball.
+And a family trip. Pick the dates, book it, pack. If you've ever planned one, you know which of those always falls apart.
 
-Hiring, month-end bookkeeping, your weekly investor update: same shape. Workers, contracts, routing.
+Hiring, closing the books, the Monday update. Same idea.
 
 So while I talk, keep one process of your own in mind. Something you do every week. We'll come back to it near the end.
 
-*[~200 words. Leave space for laughs on the trip line.]*
+*[~120 words. Press Right.]*
 
 ---
 
