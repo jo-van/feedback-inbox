@@ -115,7 +115,7 @@ test('search plus sort', async ({ page }) => {
   expect(r.length).toBe(3);
   expect(idsDesc(r)).toBe(true);
   await page.getByTestId('search').fill(`nomatch${u}zzz`);
-  await expect(page.getByTestId('no-matches')).toHaveText('No matching requests.');
+  await expect(page.getByTestId('no-matches')).toHaveText('No requests match your search');
 });
 
 test('empty state', async ({ page }) => {
