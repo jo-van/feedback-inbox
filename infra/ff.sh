@@ -4,7 +4,7 @@
 #   ff.sh kill                   KILL SWITCH: stop admissions and stop running builds now
 #   ff.sh resume                 undo kill
 #   ff.sh rehearse <cap>         arm a rehearsal now with a build cap (resets the admitted count)
-#   ff.sh live [armAtISO] [cap]  arm for the talk (default 2026-11-19T20:02:00Z = 3:02pm ET, cap 3)
+#   ff.sh live [armAtISO] [cap] [parallel]  arm for the talk (default 2026-11-19T20:02:00Z = 3:02pm ET, cap 3, one build at a time)
 #   ff.sh submit "<title>" "<done when>" [name]   submit a request through the real app
 #   ff.sh vote <id> [n]          add n upvotes through the real app
 #   ff.sh n8n                    open the n8n editor (SSM tunnel to localhost:5678)
@@ -40,8 +40,8 @@ for t in sorted(d["tickets"], key=lambda t: t["id"]):
     echo "rehearsal armed, cap ${2:-1}"
     ;;
   live)
-    upd --update-expression "SET #m = :m, armed = :f, armAt = :a, cap = :c, admitted = :z, killed = :f, allowSeeded = :f" --expression-attribute-names '{"#m":"mode"}' \
-      --expression-attribute-values "{\":m\":{\"S\":\"live\"},\":f\":{\"BOOL\":false},\":a\":{\"S\":\"${2:-2026-11-19T20:02:00Z}\"},\":c\":{\"N\":\"${3:-3}\"},\":z\":{\"N\":\"0\"}}"
+    upd --update-expression "SET #m = :m, armed = :f, armAt = :a, cap = :c, admitted = :z, killed = :f, allowSeeded = :f, maxConcurrent = :p REMOVE inject" --expression-attribute-names '{"#m":"mode"}' \
+      --expression-attribute-values "{\":m\":{\"S\":\"live\"},\":f\":{\"BOOL\":false},\":a\":{\"S\":\"${2:-2026-11-19T20:02:00Z}\"},\":c\":{\"N\":\"${3:-3}\"},\":z\":{\"N\":\"0\"},\":p\":{\"N\":\"${4:-1}\"}}"
     echo "LIVE: auto-admission arms at ${2:-2026-11-19T20:02:00Z} (cap ${3:-3})"
     ;;
   submit)

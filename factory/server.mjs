@@ -555,7 +555,7 @@ async function tick() {
   const armed = f.mode === 'live' ? (f.armAt && Date.now() >= Date.parse(f.armAt)) : Boolean(f.armed);
   if (!armed) return { job: null, why: 'not armed' };
   const active = reqs.filter((r) => ['spec', 'build', 'test', 'checks', 'review', 'security', 'preview'].includes(r.stage));
-  if (active.length >= CFG.maxConcurrent) return { job: null, why: 'line full' };
+  if (active.length >= (Number(f.maxConcurrent) || CFG.maxConcurrent)) return { job: null, why: 'line full' };
   if ((f.admitted || 0) >= (f.cap || 3)) return { job: null, why: 'cap reached' };
   const pool = reqs.filter((r) => r.stage === 'received' && r.eligible && !r.hidden && (f.allowSeeded || !r.seeded))
     .sort((a, b) => (b.votes || 0) - (a.votes || 0) || a.id - b.id);

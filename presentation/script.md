@@ -4,10 +4,13 @@
 
 45 minutes total. The deck is `deck.html`; slide numbers below match the counter in its bottom-right corner (press `N` for notes). "LIVE" beats are where you leave the deck and show a real screen.
 
+**The spine of the talk:** a process is workers with one job each, plus contracts (what goes in, what comes out), plus routing (who gets the work next). Any factory can be a worker inside a bigger factory. Software is the live example, not the point.
+
 Format notes:
 - **Plain text is what you say.** *[Bracketed italics are stage directions.]*
 - **IF SLOW / BLOCKED / FAILED** blocks are what you say if the live run isn't cooperating. Pick the one that matches what's on screen.
 - The recorded fallback video is always introduced as **"a previous run"**. Never present it as today's run.
+- Numbers from rehearsal are always said as **"in rehearsal"**. Never claim them for today's run.
 - Pace: about 140 words a minute. Word counts are already trimmed so live beats have room for pauses.
 
 | Clock | Talk time | Slide / beat | Minutes |
@@ -16,25 +19,27 @@ Format notes:
 | 3:00 | 0:00–1:00 | 1 · Title + the promise | 1 |
 | 3:01 | 1:00–2:00 | 2 · Your job today | 1 |
 | **3:02** | **2:00–5:00** | **LIVE A · admission and Gatekeeper** (from slide 2) | 3 |
-| 3:05 | 5:00–7:00 | 3 · Where founders start | 2 |
-| 3:07 | 7:00–9:00 | 4 · Where it goes off the rails | 2 |
-| 3:09 | 9:00–11:00 | 5 · Graduating to Claude Code and Codex | 2 |
-| 3:11 | 11:00–14:00 | 6 · Your own AI-DLC | 3 |
-| 3:14 | 14:00–16:00 | 7 · The software factory (diagram) | 2 |
-| **3:16** | **16:00–19:00** | **LIVE B · Factory Floor** (slide 7 → 8) | 3 |
-| 3:19 | 19:00–21:00 | 8 · Factories all the way down (diagram; counter shows 9) | 2 |
-| **3:21** | **21:00–26:00** | **LIVE B2 · n8n, drill into Builder** (counter 10) | 5 |
-| 3:26 | 26:00–28:30 | 9 · Why a second AI reviews the first | 2.5 |
-| 3:28:30 | 28:30–31:00 | 10 · What humans still own | 2.5 |
-| 3:31 | 31:00–32:30 | 11 · What it costs | 1.5 |
-| 3:32:30 | 32:30–34:00 | 12 · Start with one station | 1.5 |
-| 3:34 | 34:00–35:00 | 13 · Today's results | 1 |
-| **3:35** | **35:00–40:00** | **LIVE C · production + "Shipped today"** | 5 |
-| 3:40 | 40:00–42:00 | 14 · TempoBlueprint | 2 |
-| 3:42 | 42:00–45:00 | 15 · Q&A | 3 |
+| 3:05 | 5:00–8:00 | 3 · Every process is a factory | 3 |
+| 3:08 | 8:00–10:30 | 4 · This isn't just code | 2.5 |
+| 3:10:30 | 10:30–13:30 | 5 · The founder's road | 3 |
+| 3:13:30 | 13:30–16:00 | 6 · Today's factory (linear diagram) | 2.5 |
+| **3:16** | **16:00–19:00** | **LIVE B · Factory Floor** (counter 7) | 3 |
+| 3:19 | 19:00–21:00 | 8 · Real factories aren't a conveyor belt | 2 |
+| **3:21** | **21:00–25:00** | **LIVE B2 · the wiring (n8n), open Builder** (counter 9) | 4 |
+| 3:25 | 25:00–26:30 | 10 · Why a second AI reviews the first | 1.5 |
+| 3:26:30 | 26:30–30:00 | 11 · Your team's agent lives in chat (Hermes) | 3.5 |
+| 3:30 | 30:00–31:30 | 12 · What humans still own | 1.5 |
+| 3:31:30 | 31:30–32:30 | 13 · What it costs | 1 |
+| 3:32:30 | 32:30–34:00 | 14 · Your turn: map one process | 1.5 |
+| 3:34 | 34:00–35:00 | 15 · Today's results | 1 |
+| **3:35** | **35:00–40:00** | **LIVE C · production + "Shipped today"** (counter 16) | 5 |
+| 3:40 | 40:00–42:00 | 17 · TempoBlueprint | 2 |
+| 3:42 | 42:00–45:00 | 18 · Q&A | 3 |
 | **3:45** | **45:00** | **Hard stop** | **45 total** |
 
-Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job · 3 start · 4 off the rails · 5 Claude Code/Codex · 6 AI-DLC · 7 factory diagram · 8 LIVE Floor card · 9 nested diagram · 10 LIVE n8n card · 11 second AI · 12 humans own · 13 cost · 14 one station · 15 today's results · 16 LIVE production card · 17 TempoBlueprint · 18 Q&A.
+Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job · 3 every process is a factory · 4 this isn't just code · 5 founder's road · 6 today's factory diagram · 7 LIVE Floor card · 8 not a conveyor belt · 9 LIVE n8n card · 10 second AI · 11 agent in chat (Hermes) · 12 humans own · 13 cost · 14 your turn · 15 today's results · 16 LIVE production card · 17 TempoBlueprint · 18 Q&A.
+
+**Heads-up on timing:** in rehearsal, a request went from picked up to live in about 10–13 minutes. If the 3:02 pick-up goes that smoothly, request one may already be live by the 3:16 Floor beat. That's fine: the Floor beat has an "already shipped" branch, and the 3:35 beat is where the requester tries it on their phone (plus any later request that's still moving).
 
 ---
 
@@ -52,15 +57,13 @@ Grab your phone and scan that code. It's a little app called Feedback Inbox. Pla
 
 Good afternoon. I'm Jonathan Vanderford, and this session is called "Your Ideas, Built Live."
 
-I want to start with a promise, and it's on the screen. Something you asked for is going to go live, in a real app, in production, before we finish today.
+I want to start with a promise, and it's on the screen. Something you asked for is going to go live, in a real app, in production, before we finish today. "Production" just means the real version that real people use.
 
-"Production" just means the real version that real people use. Not a demo copy.
+And I'm not going to build it. Nobody in this room is going to touch it. A factory made out of AI agents is going to do the whole thing while I talk.
 
-And here's the part that makes me a little nervous: I'm not going to build it. Nobody in this room is going to touch the code. Not me, not anyone. A software factory made out of AI agents is going to do the whole thing, start to finish, while I talk.
+But here's the secret: this isn't really a talk about software. Software is just the example I can show you live. The real subject is a way of looking at any process in your business, or your life, as a factory.
 
-So if it works, you'll see it. And if it breaks, you'll see that too. Either way, you'll see what's real.
-
-*[~140 words]*
+*[~130 words]*
 
 ---
 
@@ -86,7 +89,7 @@ Okay, here's what you're asking for. Number one, with [N] votes: "[read title]."
 
 *[Pause. Let the room react.]*
 
-Right now the first station in the factory is looking at number one. We call it the Gatekeeper. It's an AI with one job: decide whether a request is something the factory should take on right now.
+Right now the first worker in the factory is looking at number one. We call it the Gatekeeper. It's an AI with one job: decide whether a request is something the factory should take on right now.
 
 It asks a few plain questions. Is this about this app? Is it clear enough to build? Is it small enough to finish today? And is it safe? Meaning it doesn't touch things like logins or deleting other people's data, and it isn't a joke request designed to break things.
 
@@ -100,163 +103,142 @@ And here's the decision. It picked "[admitted title]." The reason it gave was: "
 
 *[Quick flip to the Factory Floor so they see the crate appear, then back to the deck.]*
 
-That box on the conveyor belt is your request. It's going to ride that belt for the next half hour or so. We'll check on it. Meanwhile, let me tell you how we got here.
+That box is your request. We'll check on it. Meanwhile, let me give you the one idea behind all of this.
 
-*[~330 words plus reading and pauses. Return to the deck and press Right to slide 3.]*
+*[~310 words plus reading and pauses. Return to the deck and press Right to slide 3.]*
 
 **IF SLOW** (no decision by about 3:04):
 The Gatekeeper is still thinking. It's taking its time, which honestly I'd rather it did. We'll come back to it in about ten minutes. Keep voting, it's not too late to change the order.
-*[Move on to slide 3. Check the Floor before slide 7.]*
+*[Move on to slide 3. Check the Floor before slide 6.]*
 
 **IF BLOCKED** (nothing on the board is eligible):
 So the Gatekeeper said no to all of the top ones. Here's why: "[reason]." That's the factory protecting itself. If you want to see something built today, suggest something small and specific about this app, like a button, a label, or a filter, and upvote it. It checks again on its own.
-*[Move on. Re-check at slide 7.]*
+*[Move on. Re-check before slide 6.]*
 
 **IF FAILED** (app or factory down):
 Well, I promised you'd see what's real. The app isn't responding right now. Keep that code handy. I'm going to keep going, and later I'll show you a recording of a previous run of this exact factory, labeled as exactly that, a previous run.
 
 ---
 
-## 5:00–7:00 · 3:05pm · Slide 3 · Where founders start
+## 5:00–8:00 · 3:05pm · Slide 3 · Every process is a factory
 
-Let me rewind. If you're a founder in this room, there's a good chance your product started with one of these: Lovable, v0, or Replit.
+Here's the one idea I want you to walk out with.
 
-Quick show of hands. Who has built something with one of these tools?
+Every single process can be viewed as a factory. And every factory is made of three things.
+
+**Workers.** Each worker has one job. Not "handle sales." One job: "decide if this lead is a good fit." A worker can be a person, a piece of software, a contractor, or an AI agent. An AI agent is just a worker that happens to be software.
+
+**Contracts.** For every worker, write down what goes in and what comes out. "In: a filled-out contact form. Out: fit, or not a fit, with one sentence why." That's it. That's a contract. It's the most underrated tool in business.
+
+**Routing.** Who gets the work next? And what happens when it's not the normal case? If it's a fit, book a call. If it's not, send a polite no. If nobody can tell, hand it to a person.
+
+And here's the part that makes it powerful. Any factory can be a worker inside a bigger factory.
+
+Take hiring. Inside, it's a factory: write the job post, screen résumés, interview, make an offer. But from the CEO's chair, the whole hiring process is one worker. In goes "we need a salesperson." Out comes "a salesperson who starts Monday." The CEO doesn't need to see inside, as long as the contract holds.
+
+Why does this matter? Because once you see your work this way, you can swap a worker without breaking the line. A person today, an AI tomorrow, as long as it keeps the same contract. And when something goes wrong, you know exactly which box to look at.
+
+*[~290 words]*
+
+---
+
+## 8:00–10:30 · 3:08pm · Slide 4 · This isn't just code
+
+This is not a software idea. It's a shape. Here are three.
+
+**A new lead.** Qualify: the form goes in, "fit or not" comes out. Book: a fit goes in, a meeting comes out. Follow up: your notes go in, a next step comes out.
+
+**Customer support.** Sort: an email goes in, a type comes out: billing, bug, how-do-I. Answer: the type goes in, a draft reply comes out. And look at the last one, in red. Escalate: anything stuck goes to a person. Routing to a human isn't a failure of the design. It is the design.
+
+**And a personal one, a trip.** Dates: everyone's calendars go in, a date window comes out. Book: dates in, tickets out. Pack: the plan goes in, a checklist comes out. If you've ever planned a family trip, you already know which worker always drops the ball.
+
+Hiring, month-end bookkeeping, your weekly investor update: same shape. Workers, contracts, routing.
+
+So while I talk, keep one process of your own in mind. Something you do every week. We'll come back to it near the end.
+
+*[~200 words. Leave space for laughs on the trip line.]*
+
+---
+
+## 10:30–13:30 · 3:10pm · Slide 5 · The founder's road
+
+So how did I end up building one of these for software? The same way a lot of you might.
+
+Quick show of hands: who has built something with Lovable, v0, or Replit? Tools where you describe an app in plain English and get a working prototype?
 
 *[Pause for hands.]*
 
-That's great. These tools are genuinely amazing. You describe what you want in plain English, and you get a working prototype. A prototype being a first version that works well enough to show people and learn from.
+That's great. Those tools are genuinely amazing, and a lot of you found your first customers that way. That's step one.
 
-A lot of you used that to get your first customers. That's not a toy. That's how you found out people want what you're making. Some of you have early product-market fit because of a weekend with one of these tools.
+Then comes step two, and you know it if you've lived it. Fix one bug, two new ones appear. Nobody really knows how the thing works anymore. And eventually you get scared to touch it.
 
-So I want to be clear: this isn't a talk about how those tools are bad. They're step one. The question this talk is about is, what's step two? What happens when the thing you built starts working, people are using it, and now you need to keep improving it?
+Step three is graduating to tools like Claude Code or Codex. AI that works inside a real codebase: it reads your code, runs your checks, follows your rules. Big jump in quality. But there's still one person doing every handoff. Usually you, at eleven at night.
 
-*[~200 words]*
+Step four is the one this talk is about. You stop thinking "which AI tool?" and start thinking "what's my process?" Name the workers. Write the contracts. Set the routing. Now you have a factory.
 
----
+And here's why I believe in it. In my day job I run the software factory at Kyndly. And in my own experience there, it means one or two people shipping at the pace that used to take a team of twenty. That's my experience, at my company, with our kind of work. Your mileage will vary. But it's why I'm standing here.
 
-## 7:00–9:00 · 3:07pm · Slide 4 · Where it goes off the rails
+The goal isn't more code faster. It's software you can keep improving without fear.
 
-Here's what usually happens next. See if any of this sounds familiar.
-
-You ask the AI to fix one bug, and two new ones show up somewhere else.
-
-Nobody, including the AI, really knows how the whole thing works anymore. It's grown one prompt at a time.
-
-There are no tests. A "test" is a small program that checks your app still does what it's supposed to do, automatically, every time you change something. There's no review, meaning no second set of eyes. And there's no easy undo.
-
-And eventually you get scared to touch it. You stop making changes because every change feels like a gamble.
-
-*[Pause.]* Who's felt that?
-
-*[Let a few hands go up.]*
-
-So the goal isn't just "more code faster." The goal is software that's scalable and maintainable. Software you can keep improving and fixing bugs in, month after month, without it going off the rails.
-
-*[~180 words]*
+*[~280 words. Spoken only: the Kyndly line never goes on a slide or in the deck notes.]*
 
 ---
 
-## 9:00–11:00 · 3:09pm · Slide 5 · Graduating to Claude Code and Codex
+## 13:30–16:00 · 3:13pm · Slide 6 · Today's factory
 
-So the next step a lot of people take is graduating to tools like Claude Code, from Anthropic, and Codex, from OpenAI.
+Here's the factory that's working on your request, drawn simply. Read the yellow text under each box: that's the contract.
 
-These are AI coding agents. "Agent" just means an AI that doesn't only answer questions; it takes actions. These ones work inside a real codebase, which is all the files that make up your app.
+The **Gatekeeper**: idea in, ticket out. You saw it decide.
 
-They read your existing code before they change it. They run your tests to check they didn't break anything. And they follow your rules. You can write down how your team does things, and they'll stick to it.
+**Spec**: ticket in, a written definition of "done" out. Things like "when I tap this, I should see that."
 
-That's a big jump in quality. You're now building software a real engineer would recognize.
+**Build**: spec in, code out. That's an AI coding agent.
 
-But notice what's still true. There's one person at the keyboard. That person decides what to work on, writes the instructions, waits, reads the result, decides if it's good, runs the next step, and pushes it live. Every handoff goes through a human.
+**Test**: code in, results out. Does it actually work?
 
-That human becomes the bottleneck. And usually that human is you, at eleven at night.
+Then two workers at the same time. **Review**, a different AI whose job is to find problems. And **Security**, a scan for anything unsafe.
 
-*[~190 words]*
+See the dashed arrow? If the reviewer doesn't like it, the work goes back to Build for round two.
 
----
+Then **Preview**, a private trial copy. And **Release**: it goes live, gets a quick "is the app still alive?" check, and if anything's wrong, it undoes itself.
 
-## 11:00–14:00 · 3:11pm · Slide 6 · Your own AI-DLC
-
-So here's step four, and it's where this talk lives.
-
-Software teams have a name for the whole process of building software: the SDLC, the software development lifecycle. Figure out what to build, write it down, build it, test it, review it, ship it.
-
-The idea is to build your own AI-DLC: an AI development lifecycle.
-
-It works like this. First, you take the discrete capabilities, the separate jobs. Writing a spec. Writing code. Testing. Reviewing. Shipping.
-
-Second, you turn each of those into an agent or a skill. A skill is just a packaged set of instructions an AI follows for one specific job, the same way every time.
-
-Third, you chain them together with triggers and logic. A trigger is "when this happens, start that." Logic is "if the tests fail, go back; if they pass, go forward."
-
-And what you get at the end is a software factory.
-
-You pass in a bug report or a feature request. What comes out the other end is working code that's been fully tested, adversarially reviewed by a second AI, security checked, and deployed to production. Without a human lifting a finger.
-
-That's the dream scenario. And I'll tell you why I believe in it.
-
-In my day job I run the software factory at Kyndly. And in my own experience there, it means one or two people shipping at the pace that used to take a team of twenty. That's my experience, at my company, with our kind of work. Your mileage will vary. But it's why I'm standing here.
-
-And it's why the request you voted for is on a conveyor belt right now instead of in my to-do list.
-
-*[~290 words. Spoken only: the Kyndly line never goes on a slide.]*
-
----
-
-## 14:00–16:00 · 3:14pm · Slide 7 · The software factory
-
-Here's the factory that's running right now. Left to right.
-
-The **Gatekeeper** screens the request. You saw that already.
-
-**Spec** writes down exactly what "done" means. A spec, short for specification, is the written definition of what we're building and how we'll know it works.
-
-**Build** is where Claude Code writes the actual code.
-
-**Test** runs automated checks to prove it works.
-
-Then two things happen at the same time. **Review**, where a different AI, Gemini from Google, tries to find problems with the work. And **Security**, which scans for security holes.
-
-See that dashed yellow arrow? If the reviewer doesn't like what it sees, it sends the work back to Build for a round two. The builder fixes it, and it goes through test and review again.
-
-Then **Preview**, a private trial copy of the app with the change in it, so the factory can check it before it touches the real thing.
-
-And finally **Release**. It puts the change into production, runs a quick smoke test (a fast "is the app still alive?" check), and if anything's wrong, it automatically rolls back to the previous version.
-
-No human touches any of it. Let's go see where your request is.
+One more thing. In rehearsal, a request went from picked up to live in about ten to thirteen minutes, with no human doing anything. So it's possible your request is already further along than you'd think. Let's go see.
 
 *[~220 words. Press Right to the LIVE card, then switch windows.]*
 
 ---
 
-## 16:00–19:00 · 3:16pm · LIVE B · Factory Floor
+## 16:00–19:00 · 3:16pm · LIVE B · Factory Floor (counter 7)
 
 *[Switch to the Factory Floor (FLOOR_URL). Point at things as you name them.]*
 
-This is the Factory Floor. Same stations, same order, just animated.
+This is the Factory Floor. Same workers, just animated.
 
 That crate is your request: "[read the title]." It's sitting at [station] right now.
 
-The little lights tell you what's happening. Blue and blinking means that station is working. Green means done. Red means the line stopped itself. I'll come back to red.
+The lights tell you what's happening. Blue and blinking means that worker is busy. Green means done. Red means the line stopped itself. I'll come back to red.
 
-Up top, that clock is how long it's been since the request went in. The panel on the left is everything waiting in line behind it. That's your other ideas. The panel on the right says "Shipped today." It's empty. That's the one we're trying to fill.
+Up top, that clock is how long it's been since the request went in. The panel on the left is everything waiting in line: your other ideas. The panel on the right says "Shipped today." That's the one we're trying to fill.
 
 *[Narrate whichever station is active:]*
-- *Spec:* Right now it's writing down what "done" means for your request. Things like: "when I tap this, I should see that." That becomes the checklist everything else is measured against.
-- *Build:* Right now Claude Code is reading the app's code and making the change. We'll look inside this station in a minute.
-- *Test:* Right now it's running the app's automated tests, the old ones and the new ones it just wrote.
-- *Review / Security:* Right now a second AI is trying to find something wrong with the work, and a scanner is looking for security problems. Both at once.
-- *Round two (crate bounced back):* There it is. The crate just went backward. The reviewer found something and sent it back for repairs. That's not a failure. That's the system doing its job.
+- *Spec:* It's writing down what "done" means. That becomes the checklist everything else is measured against.
+- *Build:* An AI is reading the app and making the change. We'll look inside this worker in a few minutes.
+- *Test:* It's running the app's automatic checks, the old ones and any new ones it just wrote.
+- *Review / Security:* A second AI is trying to find something wrong, and a scanner is looking for security problems. Both at once.
+- *Round two (crate bounced back):* There it is. The crate just went backward. The reviewer found something and sent it back. That's not a failure. That's the system doing its job.
 
-Here's the thing I want you to notice. I'm not doing anything. I'm narrating. There's no one backstage typing.
+Here's what I want you to notice. I'm not doing anything. I'm narrating. There's no one backstage typing.
 
-*[~290 words plus pointing. Return to the deck, press Right to slide 8 (counter 9).]*
+*[~250 words plus pointing. Return to the deck, press Right to slide 8.]*
+
+**IF ALREADY SHIPPED** (crate is in "Shipped today"):
+Well, look at that. It's already in "Shipped today," and the clock says [read time]. It didn't wait for me to finish talking. I'm going to save the big reveal: at 3:35 we'll open the real app together and the person who asked for it can try it on their phone. *[If another crate is moving:]* Meanwhile, that's the next idea on the line. Same trip, different request.
 
 **IF SLOW** (crate still at Gatekeeper or Spec):
-It's taking a bit longer to get started than in rehearsal. That's normal. These are real AI calls over conference Wi-Fi. Let me show you what's inside the factory while it works, and we'll come back.
+It's taking a bit longer to get started than in rehearsal. That's normal. These are real AI calls over conference Wi-Fi. Let me show you what's really going on inside, and we'll come back.
 
 **IF BLOCKED** (red station):
-See that red light? The line stopped itself. Something didn't pass, and instead of guessing, the factory stopped and flagged it. That's the guardrail working. A factory that never stops is one you shouldn't trust. If it doesn't clear itself, I'll show you a previous run later so you can see the whole trip.
+See that red light? The line stopped itself. Something didn't pass, and instead of guessing, the factory stopped and flagged it for a human. That's the guardrail working. A factory that never stops is one you shouldn't trust. If it doesn't clear itself, I'll show you a previous run later so you can see the whole trip.
 
 **IF FAILED** (Floor won't load / nothing moving at all):
 The screen isn't cooperating. So instead, here's a recording. I want to be really clear: this is a **previous run** of this same factory, recorded during rehearsal. It's not today's request.
@@ -264,161 +246,172 @@ The screen isn't cooperating. So instead, here's a recording. I want to be reall
 
 ---
 
-## 19:00–21:00 · 3:19pm · Slide 8 · Factories all the way down (counter 9)
+## 19:00–21:00 · 3:19pm · Slide 8 · Real factories aren't a conveyor belt
 
-Now, here's the idea that I think matters most, and it's the one I'd want you to steal.
+Now I have to come clean about something. That straight line I showed you is simplified for a 45-minute talk.
 
-Factories all the way down.
+Real factories aren't a conveyor belt. Work doesn't march through every station in order.
 
-Look at the top row. Every station has a contract, written right on the box. A contract is a promise about what goes in and what comes out. The Gatekeeper takes in an idea and puts out a ticket. Spec takes a ticket and puts out a spec. Builder takes a spec and puts out code. And so on.
+Look at this one. The first worker can **route** work away: "not today," and it stays on the board. It can **skip a station**: a tiny change doesn't need a big plan. Two workers can run **side by side**. A reviewer can **loop work back** for repair. And when something can't be fixed, it goes to **a person** instead of shipping.
 
-Now look at the Builder, the one highlighted in yellow, and follow it down. When you open it up, it's not one magic step. It's its own smaller factory. Read the code. Make a plan. Edit the files. Run the tests. Fix what failed, and repeat until the tests pass.
+Different requests take different paths. Some skip stations. Some hit things in a different order. Some get worked on by different parts of the factory at the same time.
 
-And each of those boxes has its own contract too. In, out.
+And today's demo already does some of this. Review and security run side by side. Failed work loops back to the builder: in rehearsal, one request failed its tests on the first try, and the builder fixed it on round two, with nobody stepping in. And work that can't be fixed stops and goes to a human. That's the red light.
 
-Why does this matter to you? Because it means you can improve one box without breaking the others. Better reviewer? Swap it in. As long as it keeps the same contract, the rest of the line doesn't care. And when something goes wrong, you know exactly which box to look at.
-
-Same shape at every level. Input, work, output.
+Same thing in your business. Your support process isn't a straight line either. Draw the loops. That's where the real work hides.
 
 *[~220 words. Press Right to the LIVE card.]*
 
 ---
 
-## 21:00–26:00 · 3:21pm · LIVE B2 · n8n, drill into Builder (counter 10)
+## 21:00–25:00 · 3:21pm · LIVE B2 · The wiring, open Builder (counter 9)
 
 *[Switch to the n8n canvas (N8N_NOTE). Start at the top-level workflow.]*
 
-This is the real wiring. It's a tool called n8n. It's a visual automation tool. Think boxes and arrows, where each box does one job and the arrows decide what happens next.
-
-This is the top-level factory. You can see the same stations: Gatekeeper, Spec, Builder, Tester, Reviewer and Security side by side, Preview, Releaser.
-
-Each one of these boxes is its own sub-workflow. That's n8n's word for a workflow inside a workflow: a smaller factory.
+This is the real wiring. It's a tool called n8n, and you don't need to remember the name. It's boxes and arrows. Each box is a worker. The arrows are the routing: what happens if it passes, what happens if it doesn't.
 
 *[Open the current execution, the run in progress for today's request.]*
 
-This is today's run. Your request. You can see which boxes have finished. They're marked as done. And the one that's running now.
+This is today's run. Your request. You can see which workers have finished and which one is working now.
 
 *[Click a finished station, e.g. Gatekeeper or Spec, and show its input and output.]*
 
-Here's the contract in real life. This is exactly what went into the Spec station: your request, as written. And this is what came out: the spec, with the checklist for "done." Plain text. You could read it.
+Here's a contract in real life. This is exactly what went into the Spec worker: your request, as written. And this is what came out: the definition of "done." Plain text. You could read it.
 
 *[Double-click into Builder.]*
 
-Now watch. I'm going to open the Builder.
+Now remember: any factory can be a worker inside a bigger factory. Let me open the Builder.
 
 *[Pause while it opens.]*
 
-And there it is. A smaller factory inside. Read the code. Plan. Edit. Run tests. Fix. Exactly the diagram from a minute ago, except this one is real and it's running on your request.
+And there it is. A smaller factory inside. Read the code. Plan. Make the changes. Run the checks. Fix what failed. Same shape: workers, contracts, routing.
 
-*[If a test/fix loop is visible:]* See this loop? The tests failed, it went to Fix, and it ran the tests again. That happened without anyone asking it to.
+*[If a test/fix loop is visible:]* See this loop? The checks failed, it went to Fix, and it ran them again. Nobody asked it to.
 
-*[Point at Reviewer:]* And when the Builder finishes, it hands its output to the Reviewer, a different AI, judging the work fresh, like a real code review. If it says no, this arrow right here sends it back for round two.
+*[Point at the arrow from Reviewer back to Builder.]* And this arrow is the round two you saw on the diagram.
 
-*[Back out to the top level.]*
+So that's the whole thing. A factory of factories. Let's let it keep working.
 
-So that's the whole thing. A factory of factories. Every box has one job and a contract. And the arrows are the logic: what happens if it passes, what happens if it doesn't.
-
-Let's let it keep working.
-
-*[~380 words plus clicking and pauses. Return to the deck, press Right to slide 9 (counter 11).]*
+*[~270 words plus clicking. Return to the deck, press Right to slide 10.]*
 
 **IF SLOW** (today's run hasn't reached Builder yet):
 Our run hasn't reached the Builder yet, so let me open the Builder on its own, so you can see what's inside, and we'll catch up with your request on the Floor.
 *[Open the Builder sub-workflow definition, not the execution, and walk read → plan → edit → test → fix.]*
 
 **IF BLOCKED** (execution shows an error):
-You can see right here where it stopped, and the error it hit. This is the nice thing about every box having a contract: I don't have to search. It's this box, and here's what came in. Let's see whether it recovers on its own; if it doesn't, it'll show up red on the Floor, and that's the factory telling a human to look.
+You can see right here where it stopped, and the error it hit. This is the nice thing about every box having a contract: I don't have to search. It's this box, and here's what came in. If it doesn't recover on its own, it'll show up red on the Floor, and that's the factory telling a human to look.
 
 **IF FAILED** (tunnel down, n8n won't load):
-The connection to the factory's control panel is down. It runs on a machine that I reach through a tunnel, and the tunnel's not happy. The factory itself may still be running fine. Let me go back to the diagram and walk you through it, and then I'll show you a short clip from a **previous run**, clearly labeled, so you can see the real screens.
-*[Back to slide 8 (counter 9) for 1 minute, then the PREVIOUS RUN video segment for n8n.]*
+The connection to the factory's control panel is down. The factory itself may still be running fine. Let me go back to the diagram and walk you through it, and then I'll show you a short clip from a **previous run**, clearly labeled, so you can see the real screens.
+*[Back to slide 6 for 1 minute, then the PREVIOUS RUN video segment for n8n.]*
 
 ---
 
-## 26:00–28:30 · 3:26pm · Slide 9 · Why a second AI reviews the first (counter 11)
+## 25:00–26:30 · 3:25pm · Slide 10 · Why a second AI reviews the first
 
-Let me zoom in on one decision in that factory, because people always ask about it. Why have a second AI review the first one?
+One design choice people always ask about: why have a second AI review the first?
 
 Simple. You don't let the student grade their own exam.
 
-If the same AI that wrote the code also reviews it, it tends to agree with itself. It has the same blind spots. It made the choice, so the choice looks reasonable to it.
+If the same AI that did the work also reviews it, it tends to agree with itself. Same blind spots. So we use a different model, from a different company: Claude builds, Gemini reviews. Its job is specifically to find problems, not to say "looks good." And it can say no. That sends the work back for round two.
 
-So we use a different model. Claude Code builds. Gemini, from a different company, trained differently, reviews. Different model, different blind spots.
+This works for people too. The person who wrote the proposal shouldn't be the only one approving it. When you design any factory, put a worker whose only job is to check another worker.
 
-And its job is specifically to find problems. Not to say "looks good." It's adversarial on purpose. Adversarial just means it's set up to push back.
-
-And it has real power: it can say no. When it does, the work goes back for a round two, with the reviewer's notes attached. That's the dashed arrow you saw.
-
-The reason this matters for you as a founder: this is the thing that was missing when your prototype went off the rails. Nobody was checking. Now something is, every single time, and it never gets tired.
-
-*[If today's run had a round two:]* And you saw it happen today. Your request got sent back once. That's this, working.
-
-*[~220 words. If you can, glance at the Floor on your laptop before pressing Right.]*
+*[~120 words. Glance at the Floor if you can.]*
 
 ---
 
-## 28:30–31:00 · 3:28pm · Slide 10 · What humans still own (counter 12)
+## 26:30–30:00 · 3:26pm · Slide 11 · Your team's agent lives in chat
 
-Now, if a factory can do all of that, what's left for people? A lot, actually. Four things.
+Now I want to step off the factory floor for a few minutes, because this next part is something I'd tell any small team to try.
 
-**Choosing what matters.** The factory can build anything you feed it. It can't tell you what's worth building. Today, you did that, by voting. That's the most valuable job in the room.
+On our team, we have an AI agent called Hermes, and it lives in our Discord. Discord is just our team's chat app, the same place we talk to each other all day.
 
-**Defining "done."** What does good look like? What must never break? The spec station drafts it, but the standards it writes against come from you.
+Quick show of hands: who works on a small team where not everyone is technical?
 
-**Designing the factory and its guardrails.** Which stations exist. What the Gatekeeper is allowed to accept. What happens when a test fails. When to stop the line. Somebody designed every one of those rules. Today, that was me.
+*[Pause for hands.]*
 
-**And owning the outcome.** If this change breaks production for your customers, "the AI did it" is not an answer your customers will accept. You own it. That's why the guardrails exist: the automatic rollback, the security scan, the second reviewer.
+Here's why that matters. Not everyone on my team is technical. And for a small team, that's normal. So the question was: how do I give my coworkers something more capable than a regular ChatGPT or Claude app, while keeping it as simple as sending a message?
 
-So the job changes. You stop being the person who writes or chases every change, and you become the person who designs the system that makes the changes.
+The answer was to put the agent where they already are. **Anyone can ask.** Technical or not, you just send it a message.
 
-*[~200 words]*
+But it's **more than a chat app.** It's connected to our tools. And it **follows our process.** We customized it to work the way our team builds things, not a generic way. In factory terms, it's a worker whose input is a message from anyone on the team.
 
----
+And then there's the part the team likes most. **It runs on a schedule.** Remember routing? A trigger doesn't have to be a person. It can be a clock. We use it for our async standup updates, and the team finds them incredibly useful.
 
-## 31:00–32:30 · 3:31pm · Slide 11 · What it costs (counter 13)
+*[TODO (Jonathan): optional, add one concrete example of your own here, 2–3 sentences. For example, a real request a non-technical coworker sent it, or what a standup update looks like for your team. Only use something that actually happened. If you don't add one, skip straight to the next paragraph.]*
 
-Everybody wants to know what it costs. Let me be honest about it.
+And if you're a solo founder thinking "I don't have a team": this works for you too. It's a team of one, plus agents. You can set up the same things a team would have, a standup, a process, a teammate to ask, while you're working on your own.
 
-Setup is weeks, not an afternoon. Anyone who tells you that you can stand up a trustworthy factory in an afternoon is selling something. You have to write the spec templates, the tests, the guardrails, and then run a lot of practice requests through it before you trust it.
+Think about the process you picked a few minutes ago. If one worker in it lived in your team chat, who on your team would use it first?
 
-Running it is a different story. It's a subscription-level monthly bill: AI tools and hosting. Compare that to salaries, and it's a very different line on your budget.
+So here's the takeaway: put your agent where your team already talks.
 
-*[TODO before the talk: replace this paragraph with the measured rehearsal numbers, or cut it.]*
-From our rehearsals of this exact factory: a request like today's took about [TODO: build minutes] minutes, end to end, and cost about [TODO: cost per request] in AI usage.
-
-*[~140 words]*
+*[~330 words plus hands and room for the optional example. Phrase everything as your own experience. Don't add features, numbers or integrations beyond what's here.]*
 
 ---
 
-## 32:30–34:00 · 3:32pm · Slide 12 · Start with one station (counter 14)
+## 30:00–31:30 · 3:30pm · Slide 12 · What humans still own
 
-So what do you actually do on Monday? Don't build the whole factory. Start with one station.
+So if a factory can do all of that, what's left for people? Four things.
 
-One: write down what "done" means for your next change. Just that. It'll make every tool you already use better.
+**Choosing what matters.** The factory can build anything you feed it. It can't tell you what's worth building. Today, you did that, by voting.
 
-Two: give one AI builder one small bug. Claude Code or Codex. Something boring.
+**Defining "done."** What does good look like? What must never break? That's your standard, not the AI's.
 
-Three: add automatic tests, so you find out when something breaks before your customers do.
+**Designing the factory and its guardrails.** Which workers exist, what the Gatekeeper accepts, when to stop the line. Today, that was me.
 
-Four: add a second AI as a reviewer. A different model.
+**And owning the outcome.** If it breaks for your customers, "the AI did it" is not an answer they'll accept.
 
-Five: wire up the handoffs, so one step starts the next without you.
+The job changes. You stop being the person who does every step, and you become the person who designs the factory.
 
-Six, and only once you trust the rest: let it deploy on its own, with automatic rollback.
+*[~130 words]*
 
-Every one of those steps is useful by itself. You'll get value from step one this week.
+---
+
+## 31:30–32:30 · 3:31pm · Slide 13 · What it costs
+
+Everybody wants to know what it costs. Honest numbers.
+
+Setup is weeks, not an afternoon. You have to build the guardrails and run a lot of practice requests before you trust it.
+
+Running it: the server the factory runs on costs about seventeen cents an hour. That's the AWS on-demand price for its size. The AI work runs on a Claude subscription we already had, plus a Gemini API key. I didn't measure a dollar cost per request, so I'm not going to make one up.
+
+And speed. In rehearsal, a request went from picked up to live in about ten to thirteen minutes, with no human action. That includes one run where the reviewer was slow, and one where the first attempt failed its tests and the builder fixed it on round two.
+
+*[~130 words]*
+
+---
+
+## 32:30–34:00 · 3:32pm · Slide 14 · Your turn: map one process
+
+Okay, your turn. Remember that process I asked you to keep in mind? Pick one you repeat every week.
+
+*[Pause about 20 seconds. Let them actually think.]*
+
+Got one? Here's Monday morning.
+
+One: name the workers. One job each.
+
+Two: write each contract. What does each worker take in, and what does it hand out?
+
+Three: draw the routing. Where does it skip, where does it loop back, and who gets the stuck work?
+
+Four: hand one job to AI first. Just one. Keep everything else the way it is.
+
+Don't build the whole factory on day one. Every one of those steps is useful by itself, and the first two cost nothing but a piece of paper.
 
 Okay. Enough talking. Let's go see what you built.
 
-*[~150 words]*
+*[~140 words plus the pause]*
 
 ---
 
-## 34:00–35:00 · 3:34pm · Slide 13 · Today's results (counter 15)
+## 34:00–35:00 · 3:34pm · Slide 15 · Today's results
 
 *[Before speaking, check the Floor on your laptop. Know the state before you say a word.]*
 
-This is the moment of truth. About half an hour ago, you asked for something. A factory picked it up, wrote the spec, built it, tested it, had it reviewed by a second AI, scanned it for security problems, tried it on a preview, and, if everything went right, pushed it live.
+This is the moment of truth. About half an hour ago, you asked for something. A factory picked it up, wrote down what "done" meant, built it, tested it, had a second AI try to find problems with it, scanned it for security, tried it on a preview, and, if everything went right, pushed it live.
 
 Nobody touched it. Let's find out if it shipped.
 
@@ -446,7 +439,7 @@ Everyone else, refresh your phone too. You're all looking at the live version.
 
 *[Switch to the Factory Floor. Point at "Shipped today."]*
 
-And here's the Floor. Your request is in "Shipped today," and that clock is the total time from request to production: [read time]. Every station, the review, the security scan, the deploy, the smoke test. Zero humans.
+And here's the Floor. Your request is in "Shipped today," and that clock is the total time from request to production: [read time]. Every worker, the review, the security scan, the release, the "still alive?" check. Zero humans.
 
 *[If there was a round two:]* And remember, it went back for repairs once along the way. It still made it.
 
@@ -456,14 +449,14 @@ And here's the Floor. Your request is in "Shipped today," and that clock is the 
 
 So: you had an idea at 3:00. It's live at [time]. That's the whole talk, really.
 
-*[~260 words plus interaction. Press Right to slide 14 (counter 17).]*
+*[~260 words plus interaction. Press Right to slide 17.]*
 
 ### IF SLOW (not shipped yet, still moving)
 
-It's not there yet. Here's where it is. *[Floor: point at the station.]* It's at [station]. Everything before this has passed. This is the honest version of software: sometimes the review takes another lap.
+It's not there yet. Here's where it is. *[Floor: point at the station.]* It's at [station]. Everything before this has passed. This is the honest version: sometimes the review takes another lap.
 
 Here's what we'll do. I'll tell you about how to get one of these for yourself, take some questions, and I'll come back to this screen before 3:45. Keep the app open on your phone.
-*[Go to slide 14 and Q&A. Check the Floor during questions. Come back by 3:43 at the latest and use "If it shipped," or the 3:44 line below.]*
+*[Go to slide 17 and Q&A. Check the Floor during questions. Come back by 3:43 at the latest and use "If it shipped," or the 3:44 line below.]*
 
 At 3:44, if it's still not done: It's at [station], and it's going to finish after we leave. The app link on your phone will show it when it does. I'll post the result where [TODO: wherever Jonathan will post the follow-up].
 
@@ -471,9 +464,9 @@ At 3:44, if it's still not done: It's at [station], and it's going to finish aft
 
 *[Floor shows red, or the Releaser rolled back.]*
 
-So here's what happened. *[Point.]* It got to [station], and [it failed the check / the smoke test failed after deploy]. And look what the factory did. *[If rolled back:]* It pulled its own change back out. Production went right back to how it was. Your app never broke for anyone.
+So here's what happened. *[Point.]* It got to [station], and [it failed the check / the "still alive?" check failed after release]. And look what the factory did. *[If rolled back:]* It pulled its own change back out. Production went right back to how it was. Your app never broke for anyone.
 
-That's not the demo failing. That's the most important feature of the whole factory. A factory that can deploy without a human has to be able to undo without a human.
+That's not the demo failing. That's the most important feature of the whole factory. A factory that can ship without a human has to be able to undo without a human.
 
 I promised you'd see what's real. This is real. Now, so you can see what the end of the line looks like when it goes through, here's a recording. This is a **previous run** of this same factory, from rehearsal, not today's request.
 *[Play the PREVIOUS RUN video: production change + "Shipped today." Narrate it.]*
@@ -486,13 +479,13 @@ And your request is still on the board. When the factory's back up, it'll pick i
 
 ---
 
-## 40:00–42:00 · 3:40pm · Slide 14 · TempoBlueprint (counter 17)
+## 40:00–42:00 · 3:40pm · Slide 17 · TempoBlueprint
 
 One quick thing and then your questions.
 
-Everything you saw today is something you can have for your own product. Some of you will build it yourselves, and I hope this gave you the map.
+Everything you saw today, the way of thinking and the factory itself, is something you can have for your own business. Some of you will build it yourselves, and I hope this gave you the map.
 
-If you'd rather have help, that's what I'm starting with TempoBlueprint. We help companies stand up their own software factory. Three steps. An assessment: where you are, and which station to start with. Setup: building the factory around your product, with your guardrails. And training: so your team can run it, improve it, and trust it, without us.
+If you'd rather have help, that's what I'm starting with TempoBlueprint. We help companies map their processes and stand up their own factory. Three steps. An assessment: where you are, and which worker to start with. Setup: building the factory around your business, with your guardrails. And training: so your team can run it, improve it, and trust it, without us.
 
 If that's interesting, here's how to reach me: [TODO: read {{CONTACT}} once it's filled in]. Or just come find me after.
 
@@ -500,16 +493,16 @@ If that's interesting, here's how to reach me: [TODO: read {{CONTACT}} once it's
 
 ---
 
-## 42:00–45:00 · 3:42pm · Slide 15 · Q&A (counter 18)
+## 42:00–45:00 · 3:42pm · Slide 18 · Q&A
 
 That's what I've got. What questions do you have?
 
 *[If the ship moment is still pending, say:]* And I'm keeping one eye on the factory. If it ships while we're talking, I'll stop and show you.
 
 *[If the room is quiet, seed one of these:]*
-- "A question I always get is: what happens when the AI writes something that's wrong but passes all the tests? That's exactly why the second reviewer exists, and why you own 'done.'"
-- "People also ask: do I need to be technical to run this? You need someone technical to help design the factory. After that, the daily job is choosing what matters and judging the result, which you just did."
-- "Another one: what can't it do? Big, vague, or risky changes. That's what the Gatekeeper is for. You saw it say no."
+- "A question I always get is: does this only work for software? No. Software is just the part I can show you live. Leads, support, hiring, month-end books: same shape. Workers, contracts, routing."
+- "People also ask: do I need to be technical? You need someone technical to help build a software factory. But mapping the process, choosing what matters and judging the result, which you just did, that's not technical. And putting an agent in your team chat is how non-technical teammates get to use it."
+- "Another one: what happens when the AI does something wrong but it passes every check? That's exactly why the second reviewer exists, and why you own 'done.'"
 
 *[3:44:30]* We're at time. Thank you all for building something with me today. The app's still on your phone. Keep suggesting things.
 
@@ -521,15 +514,15 @@ That's what I've got. What questions do you have?
 
 | Segment | Scripted words (approx.) | Minutes allotted |
 | --- | --- | --- |
-| Slides 1–2 | 270 | 2 |
-| LIVE A | 330 + reading/pauses | 3 |
-| Slides 3–7 | 1,080 | 11 |
-| LIVE B | 290 + pointing | 3 |
-| Slide 8 | 220 | 2 |
-| LIVE B2 | 380 + clicking | 5 |
-| Slides 9–13 | 780 | 9 |
-| LIVE C | 260 + interaction | 5 |
-| Slides 14–15 | 130 + questions | 5 |
-| **Total** | **~3,700 spoken + live time** | **45** |
+| Slides 1–2 | 240 | 2 |
+| LIVE A | 210 + reading the requests and the decision | 3 |
+| Slides 3–6 (big idea, not just code, founder's road, today's factory) | 900 + hands | 11 |
+| LIVE B (Floor) | 110 + station narration + pointing | 3 |
+| Slide 8 (not a conveyor belt) | 210 | 2 |
+| LIVE B2 (wiring) | 185 + clicking | 4 |
+| Slides 10–15 (second AI, Hermes, humans, cost, your turn, results) | 880 + hands + 20-second pause | 9 |
+| LIVE C | 170 + interaction | 5 |
+| Slides 17–18 | 290 incl. seed questions | 5 |
+| **Total** | **~3,200 spoken (main branch, stage directions excluded) + live time** | **45** |
 
-At about 140 words a minute the spoken words take about 26–27 minutes. The other 18 minutes go to live screens, audience reading, hands, and questions. Rehearse with a clock. If you're running long, the cheapest trims are slide 5 (Claude Code and Codex) and the second half of slide 10.
+At about 140 words a minute the main-branch spoken words take about 23 minutes. The other 22 minutes go to live screens, reading requests aloud, hands, the exercise pause, interaction and questions. Rehearse with a clock. If you're running long, the cheapest trims are the middle of slide 5 (founder's road: say steps two and three in one breath) and slide 12 (read the four cards, skip the commentary). Never cut LIVE C. If Jonathan adds the Hermes example, take the time back from slide 5.

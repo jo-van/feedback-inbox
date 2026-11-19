@@ -8,3 +8,4 @@ playwright-report
 next-env.d.ts
 factory/node_modules
 .DS_Store
+presentation/previous-run.*

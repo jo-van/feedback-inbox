@@ -88,6 +88,20 @@
   .flow .step { flex: 1; background: var(--panel); border: 3px solid var(--line); border-radius: 24px; padding: 34px 28px; font-size: 46px; font-weight: 800; line-height: 1.12; display: flex; align-items: center; }
   .flow .step.last { border-color: var(--hazard); background: #2a2614; }
   .flow .arrow { flex: none; width: 70px; display: grid; place-items: center; color: var(--hazard); font-size: 64px; font-weight: 800; }
+  .flow.road { margin-top: 30px; }
+  .flow.road .step { font-size: 44px; }
+  .flow .step small { display: block; margin-top: 14px; font-size: 36px; font-weight: 600; color: var(--muted); line-height: 1.2; }
+  .flow .step.bad { border-color: var(--stop); }
+
+  /* tiny factories (non-software examples) */
+  .minis { display: flex; flex-direction: column; gap: 28px; }
+  .mini { display: flex; align-items: stretch; }
+  .mini .who { flex: none; width: 290px; display: flex; align-items: center; font-size: 46px; font-weight: 800; color: var(--hazard); }
+  .mini .st { flex: 1; background: var(--panel); border: 3px solid var(--line); border-radius: 22px; padding: 18px 28px; }
+  .mini .st.person { border-color: var(--stop); }
+  .mini .st b { display: block; color: var(--text); font-size: 46px; line-height: 1.15; }
+  .mini .st span { display: block; color: var(--hazard); font-size: 36px; font-weight: 700; line-height: 1.25; margin-top: 4px; }
+  .mini .ar { flex: none; width: 64px; display: grid; place-items: center; color: var(--muted); font-size: 52px; font-weight: 800; }
 
   /* diagrams */
   svg.diagram { width: 100%; height: auto; display: block; }
@@ -103,6 +117,9 @@
   svg.diagram .frame { fill: rgba(255, 201, 40, .05); stroke: var(--hazard); stroke-width: 4; stroke-dasharray: 18 12; }
   svg.diagram .zoom { fill: rgba(255, 201, 40, .07); stroke: var(--hazard); stroke-width: 2; stroke-opacity: .5; }
   svg.diagram .label { fill: var(--hazard); font-weight: 800; }
+  svg.diagram .box.human { stroke: var(--stop); stroke-width: 5; }
+  svg.diagram .esc { stroke: var(--stop); stroke-width: 5; fill: none; stroke-dasharray: 16 10; }
+  svg.diagram .esclabel { fill: var(--stop); font-weight: 800; }
   .caption { font-size: 48px; font-weight: 700; margin-top: 26px; text-align: center; }
   .caption .muted { font-weight: 600; }
 
@@ -182,7 +199,7 @@
   </div>
   <div class="stripe"></div>
   <aside class="notes">
-    <p>Welcome. The promise. No human touches the factory today, including me.</p>
+    <p>Welcome. The promise. No human touches the factory today, including me. Software is the live example; the real subject is how to see any process as a factory.</p>
   </aside>
 </section>
 
@@ -208,91 +225,87 @@
   <div class="stripe"></div>
   <aside class="notes">
     <p>Recap, then at ~3:02 switch to the app's top-voted list and read the top 3 aloud. When the Gatekeeper decides, read its reason and switch to Floor briefly.</p>
-    <p class="fb">If Gatekeeper is slow: keep reading requests, explain what it screens for, move on to slide 3 and check back at slide 7. If the app is down: keep the QR up, use PREVIOUS RUN video later.</p>
+    <p class="fb">If Gatekeeper is slow: keep reading requests, explain what it screens for, move on to slide 3 and check back before slide 6. If the app is down: keep the QR up, use PREVIOUS RUN video later.</p>
   </aside>
 </section>
 
-<!-- 3 · WHERE FOUNDERS START -->
-<section class="slide" data-title="Where founders start" data-time="5:00–7:00">
+<!-- 3 · EVERY PROCESS IS A FACTORY -->
+<section class="slide" data-title="Every process is a factory" data-time="5:00–8:00">
   <div class="stripe"></div>
   <div class="body">
-    <div class="kicker">Step 1</div>
-    <h2>Where founders start</h2>
+    <div class="kicker">The big idea</div>
+    <h2>Every process is a factory</h2>
     <div class="cards c3">
-      <div class="card"><div class="big">Lovable</div></div>
-      <div class="card"><div class="big">v0</div></div>
-      <div class="card"><div class="big">Replit</div></div>
+      <div class="card hz-card"><div class="big">Workers</div><p>one job each</p></div>
+      <div class="card hz-card"><div class="big">Contracts</div><p>what goes in, what comes out</p></div>
+      <div class="card hz-card"><div class="big">Routing</div><p>who gets the work next</p></div>
     </div>
-    <p class="lead" style="margin-top: 80px;">Describe it in plain English. <span class="hz">Get a working prototype.</span></p>
-    <p class="small" style="margin-top: 24px;">Great for proving the idea. That's how a lot of you got here.</p>
+    <div class="banner">And any factory can be a <b>worker</b> inside a bigger factory.</div>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>Show of hands: who has built something with one of these? Celebrate it. That is step one.</p></aside>
+  <aside class="notes"><p>The spine of the talk. Software is the live example, not the point. Nesting example: hiring is a factory, and from the CEO's chair the whole hiring process is one worker ("we need a salesperson" in, "a salesperson who starts Monday" out).</p></aside>
 </section>
 
-<!-- 4 · OFF THE RAILS -->
-<section class="slide" data-title="Where it goes off the rails" data-time="7:00–9:00">
+<!-- 4 · THIS ISN'T JUST CODE -->
+<section class="slide" data-title="This isn't just code" data-time="8:00–10:30">
   <div class="stripe"></div>
   <div class="body">
-    <div class="kicker">Step 2: the wall</div>
-    <h2>Where it goes off the rails</h2>
-    <ul class="bars red">
-      <li>Fix one bug, two new ones appear</li>
-      <li>Nobody knows how it really works</li>
-      <li>No tests. No review. No undo.</li>
-      <li>You get scared to touch it</li>
-    </ul>
+    <div class="kicker">This isn't just code</div>
+    <h2 style="margin-bottom: .35em;">Same shape, everywhere</h2>
+    <div class="minis">
+      <div class="mini">
+        <div class="who">New lead</div>
+        <div class="st"><b>Qualify</b><span>form → fit or not</span></div><div class="ar">→</div>
+        <div class="st"><b>Book</b><span>fit → a meeting</span></div><div class="ar">→</div>
+        <div class="st"><b>Follow up</b><span>notes → next step</span></div>
+      </div>
+      <div class="mini">
+        <div class="who">Support</div>
+        <div class="st"><b>Sort</b><span>email → type</span></div><div class="ar">→</div>
+        <div class="st"><b>Answer</b><span>type → draft reply</span></div><div class="ar">→</div>
+        <div class="st person"><b>Escalate</b><span>stuck → a person</span></div>
+      </div>
+      <div class="mini">
+        <div class="who">A trip</div>
+        <div class="st"><b>Dates</b><span>calendars → dates</span></div><div class="ar">→</div>
+        <div class="st"><b>Book</b><span>dates → tickets</span></div><div class="ar">→</div>
+        <div class="st"><b>Pack</b><span>plan → checklist</span></div>
+      </div>
+    </div>
+    <p class="small" style="margin: 40px 0 0;">Hiring · month-end books · weekly reports: same shape.</p>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>The goal: software you can keep improving and fixing without it going off the rails. Ask: who has felt this?</p></aside>
+  <aside class="notes"><p>One sentence per row. Point out that the last support worker is a person: routing to a human is part of the design. Close with: "Keep one process of your own in mind. We'll come back to it."</p></aside>
 </section>
 
-<!-- 5 · CLAUDE CODE & CODEX -->
-<section class="slide" data-title="Graduating to Claude Code and Codex" data-time="9:00–11:00">
+<!-- 5 · THE FOUNDER'S ROAD -->
+<section class="slide" data-title="The founder's road" data-time="10:30–13:30">
   <div class="stripe"></div>
   <div class="body">
-    <div class="kicker">Step 3</div>
-    <h2>Graduate to Claude&nbsp;Code &amp; Codex</h2>
-    <p class="lead">AI that works <span class="hz">inside a real codebase</span>.</p>
-    <div class="cards c3" style="margin-top: 60px;">
-      <div class="card"><div class="big" style="font-size: 60px;">Reads your code</div></div>
-      <div class="card"><div class="big" style="font-size: 60px;">Runs your tests</div></div>
-      <div class="card"><div class="big" style="font-size: 60px;">Follows your rules</div></div>
+    <div class="kicker">How founders get here</div>
+    <h2>The road to your own factory</h2>
+    <div class="flow road">
+      <div class="step"><span>Prompt-to-app<small>Lovable · v0 · Replit</small></span></div>
+      <div class="arrow">→</div>
+      <div class="step bad"><span>Off the rails<small>fix one bug, get two</small></span></div>
+      <div class="arrow">→</div>
+      <div class="step"><span>AI coding agents<small>Claude Code · Codex</small></span></div>
+      <div class="arrow">→</div>
+      <div class="step last"><span>Your own factory<small>workers, contracts, routing</small></span></div>
     </div>
-    <p class="small" style="margin-top: 50px;">But there's still one person at the keyboard, doing every handoff.</p>
+    <div class="banner">The goal: software you can keep improving <b>without fear</b>.</div>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>Codebase = all the files that make up your app. Tests = small programs that check the app still does what it should.</p></aside>
+  <aside class="notes"><p>Show of hands on step one, celebrate it. Keep the middle steps quick. The Kyndly line is in the script: spoken only, never on screen.</p></aside>
 </section>
 
-<!-- 6 · YOUR OWN AI-DLC -->
-<section class="slide" data-title="Your own AI-DLC" data-time="11:00–14:00">
-  <div class="stripe"></div>
-  <div class="body">
-    <div class="kicker">Step 4 · AI development lifecycle</div>
-    <h2>Build your own AI-DLC</h2>
-    <div class="flow">
-      <div class="step">Discrete capabilities</div>
-      <div class="arrow">→</div>
-      <div class="step">Agents &amp; skills</div>
-      <div class="arrow">→</div>
-      <div class="step">Chained by triggers &amp; logic</div>
-      <div class="arrow">→</div>
-      <div class="step last">A software factory</div>
-    </div>
-    <div class="banner" style="font-size: 48px;">Bug or idea in. Out: code that's <b>tested</b>, <b>reviewed</b>, <b>security-checked</b> and <b>live</b>. No human lifting a finger.</div>
-  </div>
-  <div class="stripe"></div>
-  <aside class="notes"><p>The dream scenario. Kyndly line is in the script (spoken only, never on screen). Mention TempoBlueprint lightly or not at all here.</p></aside>
-</section>
-
-<!-- 7 · THE SOFTWARE FACTORY (diagram) -->
-<section class="slide" data-title="The software factory" data-time="14:00–16:00">
+<!-- 6 · TODAY'S FACTORY (linear diagram) -->
+<section class="slide" data-title="Today's factory" data-time="13:30–16:00">
   <div class="stripe"></div>
   <div class="body" style="padding-top: 56px;">
-    <div class="kicker">Today's factory</div>
+    <div class="kicker">Today's factory · simplified</div>
     <h2 style="margin-bottom: .2em;">The software factory</h2>
-    <svg class="diagram" viewBox="0 0 1800 500" role="img" aria-label="Factory line: Gatekeeper, Spec, Build, Test, then Review and Security in parallel, then Preview and Release. Review can send work back to Build.">
+    <svg class="diagram" viewBox="0 0 1800 500" role="img" aria-label="Factory line, each station with its contract: Gatekeeper idea to ticket, Spec ticket to spec, Build spec to code, Test code to results, then Review and Security side by side, then Preview and Release. Review can send work back to Build.">
       <defs>
         <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#9aa3b5"/></marker>
         <marker id="ahY" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#ffc928"/></marker>
@@ -304,53 +317,51 @@
       <!-- main row: y 210..370 -->
       <g>
         <rect class="box" x="40" y="210" width="220" height="160" rx="20"/>
-        <text x="150" y="268" text-anchor="middle" font-size="50">🚦</text>
-        <text class="name" x="150" y="324" text-anchor="middle" font-size="34">Gatekeeper</text>
-        <text class="sub" x="150" y="355" text-anchor="middle" font-size="26">screens it</text>
+        <text x="150" y="264" text-anchor="middle" font-size="46">🚦</text>
+        <text class="name" x="150" y="316" text-anchor="middle" font-size="34">Gatekeeper</text>
+        <text class="contract" x="150" y="352" text-anchor="middle" font-size="26">idea → ticket</text>
       </g>
       <g>
         <rect class="box" x="290" y="210" width="220" height="160" rx="20"/>
-        <text x="400" y="268" text-anchor="middle" font-size="50">📝</text>
-        <text class="name" x="400" y="324" text-anchor="middle" font-size="34">Spec</text>
-        <text class="sub" x="400" y="355" text-anchor="middle" font-size="26">defines "done"</text>
+        <text x="400" y="264" text-anchor="middle" font-size="46">📝</text>
+        <text class="name" x="400" y="316" text-anchor="middle" font-size="34">Spec</text>
+        <text class="contract" x="400" y="352" text-anchor="middle" font-size="26">ticket → spec</text>
       </g>
       <g>
         <rect class="box hot" x="540" y="210" width="220" height="160" rx="20"/>
-        <text x="650" y="268" text-anchor="middle" font-size="50">🤖</text>
-        <text class="name" x="650" y="324" text-anchor="middle" font-size="34">Build</text>
-        <text class="sub" x="650" y="355" text-anchor="middle" font-size="26">Claude Code</text>
+        <text x="650" y="264" text-anchor="middle" font-size="46">🤖</text>
+        <text class="name" x="650" y="316" text-anchor="middle" font-size="34">Build</text>
+        <text class="contract" x="650" y="352" text-anchor="middle" font-size="26">spec → code</text>
       </g>
       <g>
         <rect class="box" x="790" y="210" width="220" height="160" rx="20"/>
-        <text x="900" y="268" text-anchor="middle" font-size="50">🧪</text>
-        <text class="name" x="900" y="324" text-anchor="middle" font-size="34">Test</text>
-        <text class="sub" x="900" y="355" text-anchor="middle" font-size="26">does it work?</text>
+        <text x="900" y="264" text-anchor="middle" font-size="46">🧪</text>
+        <text class="name" x="900" y="316" text-anchor="middle" font-size="34">Test</text>
+        <text class="contract" x="900" y="352" text-anchor="middle" font-size="26">code → results</text>
       </g>
-      <!-- parallel pair -->
+      <!-- side-by-side pair -->
       <g>
         <rect class="box ai2" x="1040" y="150" width="220" height="120" rx="20"/>
-        <text x="1074" y="225" text-anchor="middle" font-size="36">🕵️</text>
-        <text class="name" x="1172" y="210" text-anchor="middle" font-size="34">Review</text>
-        <text class="sub" x="1172" y="246" text-anchor="middle" font-size="26">Gemini</text>
+        <text class="name" x="1150" y="202" text-anchor="middle" font-size="34">🕵️ Review</text>
+        <text class="contract" x="1150" y="246" text-anchor="middle" font-size="26">code → verdict</text>
       </g>
       <g>
         <rect class="box" x="1040" y="310" width="220" height="120" rx="20"/>
-        <text x="1074" y="385" text-anchor="middle" font-size="36">🔒</text>
-        <text class="name" x="1180" y="370" text-anchor="middle" font-size="34">Security</text>
-        <text class="sub" x="1180" y="406" text-anchor="middle" font-size="26">scan</text>
+        <text class="name" x="1150" y="362" text-anchor="middle" font-size="34">🔒 Security</text>
+        <text class="contract" x="1150" y="406" text-anchor="middle" font-size="26">code → report</text>
       </g>
-      <text class="sub" x="1150" y="296" text-anchor="middle" font-size="24">in parallel</text>
+      <text class="sub" x="1150" y="296" text-anchor="middle" font-size="24">side by side</text>
       <g>
         <rect class="box" x="1290" y="210" width="220" height="160" rx="20"/>
-        <text x="1400" y="268" text-anchor="middle" font-size="50">👀</text>
-        <text class="name" x="1400" y="324" text-anchor="middle" font-size="34">Preview</text>
-        <text class="sub" x="1400" y="355" text-anchor="middle" font-size="26">trial copy</text>
+        <text x="1400" y="264" text-anchor="middle" font-size="46">👀</text>
+        <text class="name" x="1400" y="316" text-anchor="middle" font-size="34">Preview</text>
+        <text class="contract" x="1400" y="352" text-anchor="middle" font-size="26">code → trial</text>
       </g>
       <g>
         <rect class="box" x="1540" y="210" width="220" height="160" rx="20"/>
-        <text x="1650" y="268" text-anchor="middle" font-size="50">🚀</text>
-        <text class="name" x="1650" y="324" text-anchor="middle" font-size="34">Release</text>
-        <text class="sub" x="1650" y="355" text-anchor="middle" font-size="26">auto-rollback</text>
+        <text x="1650" y="264" text-anchor="middle" font-size="46">🚀</text>
+        <text class="name" x="1650" y="316" text-anchor="middle" font-size="34">Release</text>
+        <text class="contract" x="1650" y="352" text-anchor="middle" font-size="26">trial → live</text>
       </g>
 
       <!-- wires -->
@@ -366,156 +377,117 @@
       <text class="sub" x="40" y="470" font-size="32">📥 your request in</text>
       <text class="sub" x="1760" y="470" text-anchor="end" font-size="32">live in production 🎉</text>
     </svg>
-    <div class="caption">Each station is an AI with one job. <span class="hz">No human touches it.</span></div>
+    <div class="caption">Each station: one worker, one job, <span class="hz">one contract.</span></div>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>Walk the line left to right in one sentence each. Point at the dashed yellow arrow: the reviewer can send it back. Then go to the LIVE card.</p></aside>
+  <aside class="notes"><p>One sentence per station, reading the yellow contract. Point at the dashed "round 2" arrow. Mention the rehearsal time (about 10–13 minutes, picked up to live), so it may already be through. Then the LIVE card.</p></aside>
 </section>
 
-<!-- 7L · LIVE: FACTORY FLOOR -->
+<!-- 7 · LIVE: FACTORY FLOOR -->
 <section class="slide" data-title="LIVE B: Factory Floor" data-time="16:00–19:00">
   <div class="live">
     <div class="badge">▶ LIVE</div>
     <h2>Switch to the Factory Floor</h2>
     <div class="where" data-show="floor"></div>
-    <div class="watch">Watch <b>your request</b> ride the belt.<br>Blue = working · Green = done · Red = the line stopped itself.</div>
+    <div class="watch">Watch <b>your request</b> move through the stations.<br>Blue = working · Green = done · Red = the line stopped itself.</div>
   </div>
   <aside class="notes">
     <p>Switch to the Floor window. Point at the crate, the station lights, the clock, the queue.</p>
+    <p>If it already shipped: point at "Shipped today" and the clock, say we'll try it on phones at 3:35, then follow the next crate if there is one.</p>
     <p class="fb">If stuck or red: "The line stopped itself. That's the guardrail working." If nothing is moving at all: play PREVIOUS RUN video and say out loud that it's a previous run.</p>
   </aside>
 </section>
 
-<!-- 8 · FACTORIES ALL THE WAY DOWN -->
-<section class="slide" data-title="Factories all the way down" data-time="19:00–21:00">
+<!-- 8 · NOT A CONVEYOR BELT -->
+<section class="slide" data-title="Not a conveyor belt" data-time="19:00–21:00">
   <div class="stripe"></div>
-  <div class="body" style="padding: 36px 60px 24px;">
-    <h2 style="margin: 0 0 .15em 60px; font-size: 88px;">Factories all the way down</h2>
-    <svg class="diagram" viewBox="0 0 1840 790" role="img" aria-label="Top: the factory line, each station with an input and output. Below: zooming into Builder shows its own smaller line: read code, plan, edit, run tests, fix.">
+  <div class="body" style="padding-top: 48px;">
+    <div class="kicker">The honest version</div>
+    <h2 style="font-size: 76px; margin: .1em 0 .2em;">Real factories aren't a conveyor belt</h2>
+    <svg class="diagram" viewBox="0 0 1800 620" role="img" aria-label="A factory with routing: Screen can turn work away or skip Plan and go straight to Build. Review and Security run side by side. Review can loop work back to Build for repair. Work that can't be fixed goes to a person instead of shipping.">
       <defs>
-        <marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#9aa3b5"/></marker>
-        <marker id="ah2Y" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#ffc928"/></marker>
+        <marker id="ah3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#9aa3b5"/></marker>
+        <marker id="ah3Y" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#ffc928"/></marker>
+        <marker id="ah3R" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#ff5a5f"/></marker>
       </defs>
 
-      <!-- zoom wedge from Builder -->
-      <polygon class="zoom" points="553,212 783,212 1810,338 30,338"/>
-
-      <!-- top line: x = 49 + i*252, w 230; row y 70..210 -->
-      <g>
-        <rect class="box" x="49" y="70" width="230" height="140" rx="18"/>
-        <text class="name" x="164" y="128" text-anchor="middle" font-size="34">Gatekeeper</text>
-        <text class="contract" x="164" y="180" text-anchor="middle" font-size="28">idea → ticket</text>
-      </g>
-      <g>
-        <rect class="box" x="301" y="70" width="230" height="140" rx="18"/>
-        <text class="name" x="416" y="128" text-anchor="middle" font-size="34">Spec</text>
-        <text class="contract" x="416" y="180" text-anchor="middle" font-size="28">ticket → spec</text>
-      </g>
-      <g>
-        <rect class="box hot" x="553" y="70" width="230" height="140" rx="18"/>
-        <text class="name" x="668" y="128" text-anchor="middle" font-size="34">Builder</text>
-        <text class="contract" x="668" y="180" text-anchor="middle" font-size="28">spec → code</text>
-      </g>
-      <g>
-        <rect class="box" x="805" y="70" width="230" height="140" rx="18"/>
-        <text class="name" x="920" y="128" text-anchor="middle" font-size="34">Tester</text>
-        <text class="contract" x="920" y="180" text-anchor="middle" font-size="28">code → results</text>
-      </g>
-      <g>
-        <rect class="box ai2" x="1057" y="38" width="230" height="96" rx="18"/>
-        <text class="name" x="1172" y="80" text-anchor="middle" font-size="30">Reviewer</text>
-        <text class="contract" x="1172" y="118" text-anchor="middle" font-size="26">code → verdict</text>
-      </g>
-      <g>
-        <rect class="box" x="1057" y="146" width="230" height="90" rx="18"/>
-        <text class="name" x="1172" y="186" text-anchor="middle" font-size="30">Security</text>
-        <text class="contract" x="1172" y="222" text-anchor="middle" font-size="26">code → report</text>
-      </g>
-      <g>
-        <rect class="box" x="1309" y="70" width="230" height="140" rx="18"/>
-        <text class="name" x="1424" y="128" text-anchor="middle" font-size="34">Preview</text>
-        <text class="contract" x="1424" y="180" text-anchor="middle" font-size="28">code → trial</text>
-      </g>
-      <g>
-        <rect class="box" x="1561" y="70" width="230" height="140" rx="18"/>
-        <text class="name" x="1676" y="128" text-anchor="middle" font-size="34">Releaser</text>
-        <text class="contract" x="1676" y="180" text-anchor="middle" font-size="28">code → live</text>
-      </g>
-      <path class="wire" d="M279 140 H297" marker-end="url(#ah2)"/>
-      <path class="wire" d="M531 140 H549" marker-end="url(#ah2)"/>
-      <path class="wire" d="M783 140 H801" marker-end="url(#ah2)"/>
-      <path class="wire" d="M1035 140 H1046 V86 H1053" marker-end="url(#ah2)"/>
-      <path class="wire" d="M1046 140 V191 H1053" marker-end="url(#ah2)"/>
-      <path class="wire" d="M1287 86 H1298 V191 H1287"/>
-      <path class="wire" d="M1298 140 H1305" marker-end="url(#ah2)"/>
-      <path class="wire" d="M1539 140 H1557" marker-end="url(#ah2)"/>
-
-      <!-- inner factory -->
-      <rect class="frame" x="30" y="338" width="1780" height="440" rx="26"/>
-      <text class="label" x="70" y="396" font-size="36">Inside the Builder: spec in → tested code change out</text>
+      <!-- skip: Screen -> Build, over Plan -->
+      <path class="back" d="M155 250 V120 H760 V246" marker-end="url(#ah3Y)"/>
+      <text class="label" x="457" y="100" text-anchor="middle" font-size="34">skip a station</text>
+      <!-- loop: Review -> Build -->
+      <path class="back" d="M1165 150 V70 H880 V246" marker-end="url(#ah3Y)"/>
+      <text class="label" x="1022" y="50" text-anchor="middle" font-size="34">loop back for repair</text>
 
       <g>
-        <rect class="box" x="70" y="430" width="300" height="230" rx="20"/>
-        <text class="name" x="220" y="494" text-anchor="middle" font-size="38">Read code</text>
-        <text class="sub" x="220" y="566" text-anchor="middle" font-size="30">in: spec</text>
-        <text class="contract" x="220" y="616" text-anchor="middle" font-size="30">out: code map</text>
+        <rect class="box" x="30" y="250" width="250" height="130" rx="20"/>
+        <text class="name" x="155" y="329" text-anchor="middle" font-size="40">Screen</text>
       </g>
       <g>
-        <rect class="box" x="420" y="430" width="300" height="230" rx="20"/>
-        <text class="name" x="570" y="494" text-anchor="middle" font-size="38">Plan</text>
-        <text class="sub" x="570" y="566" text-anchor="middle" font-size="30">in: code map</text>
-        <text class="contract" x="570" y="616" text-anchor="middle" font-size="30">out: step list</text>
+        <rect class="box" x="360" y="250" width="250" height="130" rx="20"/>
+        <text class="name" x="485" y="329" text-anchor="middle" font-size="40">Plan</text>
       </g>
       <g>
-        <rect class="box" x="770" y="430" width="300" height="230" rx="20"/>
-        <text class="name" x="920" y="494" text-anchor="middle" font-size="38">Edit</text>
-        <text class="sub" x="920" y="566" text-anchor="middle" font-size="30">in: step list</text>
-        <text class="contract" x="920" y="616" text-anchor="middle" font-size="30">out: changes</text>
+        <rect class="box hot" x="690" y="250" width="250" height="130" rx="20"/>
+        <text class="name" x="815" y="329" text-anchor="middle" font-size="40">Build</text>
       </g>
       <g>
-        <rect class="box" x="1120" y="430" width="300" height="230" rx="20"/>
-        <text class="name" x="1270" y="494" text-anchor="middle" font-size="38">Run tests</text>
-        <text class="sub" x="1270" y="566" text-anchor="middle" font-size="30">in: changes</text>
-        <text class="contract" x="1270" y="616" text-anchor="middle" font-size="30">out: pass / fail</text>
+        <rect class="box ai2" x="1040" y="150" width="250" height="120" rx="20"/>
+        <text class="name" x="1165" y="224" text-anchor="middle" font-size="40">Review</text>
       </g>
       <g>
-        <rect class="box" x="1470" y="430" width="300" height="230" rx="20"/>
-        <text class="name" x="1620" y="494" text-anchor="middle" font-size="38">Fix</text>
-        <text class="sub" x="1620" y="566" text-anchor="middle" font-size="30">in: failures</text>
-        <text class="contract" x="1620" y="616" text-anchor="middle" font-size="30">out: fixes</text>
+        <rect class="box" x="1040" y="370" width="250" height="120" rx="20"/>
+        <text class="name" x="1165" y="444" text-anchor="middle" font-size="40">Security</text>
       </g>
-      <path class="wire" d="M370 545 H416" marker-end="url(#ah2)"/>
-      <path class="wire" d="M720 545 H766" marker-end="url(#ah2)"/>
-      <path class="wire" d="M1070 545 H1116" marker-end="url(#ah2)"/>
-      <path class="wire" d="M1420 545 H1466" marker-end="url(#ah2)"/>
-      <path class="back" d="M1620 660 V700 H1270 V666" marker-end="url(#ah2Y)"/>
-      <text class="label" x="1445" y="748" text-anchor="middle" font-size="30">repeat until tests pass</text>
+      <text class="sub" x="1165" y="332" text-anchor="middle" font-size="32">side by side</text>
+      <g>
+        <rect class="box" x="1520" y="250" width="250" height="130" rx="20"/>
+        <text class="name" x="1645" y="329" text-anchor="middle" font-size="40">Ship</text>
+      </g>
+      <g>
+        <rect class="box human" x="1520" y="470" width="250" height="120" rx="20"/>
+        <text class="name" x="1645" y="544" text-anchor="middle" font-size="40">A person</text>
+      </g>
+
+      <!-- wires -->
+      <path class="wire" d="M280 315 H356" marker-end="url(#ah3)"/>
+      <path class="wire" d="M610 315 H686" marker-end="url(#ah3)"/>
+      <path class="wire" d="M940 315 H990 V210 H1036" marker-end="url(#ah3)"/>
+      <path class="wire" d="M990 315 V430 H1036" marker-end="url(#ah3)"/>
+      <path class="wire" d="M1290 210 H1380 V430 H1290"/>
+      <path class="wire" d="M1380 315 H1516" marker-end="url(#ah3)"/>
+      <!-- escalate -->
+      <path class="esc" d="M1380 430 V530 H1516" marker-end="url(#ah3R)"/>
+      <text class="esclabel" x="1360" y="590" text-anchor="end" font-size="34">can't fix → a person</text>
+      <!-- route away -->
+      <path class="wire" d="M155 380 V462" marker-end="url(#ah3)"/>
+      <text class="label" x="30" y="512" font-size="34">route: not today</text>
+      <text class="sub" x="30" y="556" font-size="32">stays on the board</text>
     </svg>
-    <div class="caption" style="margin-top: 6px;">Every box is its own factory. <span class="hz">Input → work → output.</span></div>
+    <div class="caption">Today's demo line is <span class="hz">simplified for a 45-minute talk.</span></div>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>Contract = a promise about what goes in and what comes out. Swap a box without breaking the line. Then LIVE card → n8n.</p></aside>
+  <aside class="notes"><p>Route, skip, loop back, side by side, hand to a person. Point out what today's demo already does: review and security side by side; failed work loops back to the builder; work that can't be fixed stops and goes to a human. Then LIVE card.</p></aside>
 </section>
 
-<!-- 8L · LIVE: n8n -->
-<section class="slide" data-title="LIVE B2: n8n, drill into Builder" data-time="21:00–26:00">
+<!-- 9 · LIVE: n8n -->
+<section class="slide" data-title="LIVE B2: the wiring, open Builder" data-time="21:00–25:00">
   <div class="live">
     <div class="badge">▶ LIVE</div>
     <h2>Switch to the factory's wiring</h2>
     <div class="where" data-show="n8n"></div>
-    <div class="watch">Each box is one station. <b>Open Builder</b> and there's a smaller factory inside.</div>
+    <div class="watch">Boxes are workers. Arrows are routing. <b>Open Builder</b> and there's a smaller factory inside.</div>
   </div>
   <aside class="notes">
-    <p>n8n: top-level line → open the run in progress → double-click Builder → show read code / plan / edit / run tests / fix. Show one input and one output.</p>
-    <p class="fb">If the tunnel is down: say so, go back to slide 8 diagram and narrate it, or play PREVIOUS RUN video (label it).</p>
+    <p>n8n: top-level line → open today's run → click one finished station, show what went in and what came out → double-click Builder → its own mini factory. Point at an arrow that sends work back.</p>
+    <p class="fb">If the tunnel is down: say so, go back to slide 6 diagram and narrate it, or play PREVIOUS RUN video (label it).</p>
   </aside>
 </section>
 
-<!-- 9 · SECOND AI -->
-<section class="slide" data-title="Why a second AI reviews the first" data-time="26:00–28:30">
+<!-- 10 · SECOND AI -->
+<section class="slide" data-title="Why a second AI reviews the first" data-time="25:00–26:30">
   <div class="stripe"></div>
   <div class="body">
-    <div class="kicker">Adversarial review</div>
+    <div class="kicker">A worker that checks a worker</div>
     <h2>Why a second AI reviews the first</h2>
     <p class="lead" style="margin-bottom: 60px;">Don't let the student grade their own exam.</p>
     <ul class="bars">
@@ -525,11 +497,32 @@
     </ul>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>Claude Code builds, Gemini reviews. If today's run had a round 2, point to it. Glance at the Floor between slides if you can.</p></aside>
+  <aside class="notes"><p>Keep it short. Works for people too: the person who wrote the proposal shouldn't be the only one approving it. Glance at the Floor if you can.</p></aside>
 </section>
 
-<!-- 10 · WHAT HUMANS OWN -->
-<section class="slide" data-title="What humans still own" data-time="28:30–31:00">
+<!-- 11 · HERMES IN CHAT -->
+<section class="slide" data-title="Your team's agent lives in chat" data-time="26:30–30:00">
+  <div class="stripe"></div>
+  <div class="body">
+    <div class="kicker">Hermes · in our team's Discord</div>
+    <h2 style="font-size: 84px;">Your team's agent lives in chat</h2>
+    <div class="cards c2" style="gap: 36px;">
+      <div class="card"><div class="big" style="font-size: 56px;">Anyone can ask</div><p>technical or not: just send a message</p></div>
+      <div class="card"><div class="big" style="font-size: 56px;">More than a chat app</div><p>connected to our tools</p></div>
+      <div class="card"><div class="big" style="font-size: 56px;">Follows our process</div><p>set up the way our team works</p></div>
+      <div class="card"><div class="big" style="font-size: 56px;">Runs on a schedule</div><p>our async standup updates</p></div>
+    </div>
+    <div class="banner" style="margin-top: 40px;">Working solo? It's a <b>team of one</b>, plus agents.</div>
+  </div>
+  <div class="stripe"></div>
+  <aside class="notes">
+    <p>Jonathan's own experience only. Don't add features or numbers beyond what's on the slide.</p>
+    <p class="fb">TODO (Jonathan): add one concrete example of your own here, e.g. a real request a non-technical coworker made, or what a standup update looks like. Or delete this line.</p>
+  </aside>
+</section>
+
+<!-- 12 · WHAT HUMANS OWN -->
+<section class="slide" data-title="What humans still own" data-time="30:00–31:30">
   <div class="stripe"></div>
   <div class="body">
     <div class="kicker">The part you can't hand off</div>
@@ -542,46 +535,46 @@
     </div>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>Today you chose what mattered by voting. I designed the factory. If it breaks production, that's on me, not the AI.</p></aside>
+  <aside class="notes"><p>One line each. Today you chose what mattered by voting. I designed the factory. If it breaks production, that's on me, not the AI.</p></aside>
 </section>
 
-<!-- 11 · COST -->
-<section class="slide" data-title="What it costs" data-time="31:00–32:30">
+<!-- 13 · COST -->
+<section class="slide" data-title="What it costs" data-time="31:30–32:30">
   <div class="stripe"></div>
   <div class="body">
     <div class="kicker">Honest numbers</div>
-    <h2>What it costs</h2>
-    <div class="cards c2">
-      <div class="card"><div class="tag">Setup</div><div class="big" style="font-size: 64px;">Weeks, not an afternoon</div></div>
-      <div class="card"><div class="tag">Running</div><div class="big" style="font-size: 64px;">A subscription-level monthly bill, not salaries</div></div>
+    <h2 style="margin-bottom: .3em;">What it costs</h2>
+    <div class="cards c2" style="gap: 36px;">
+      <div class="card" style="padding: 32px 40px;"><div class="tag">Setup</div><div class="big" style="font-size: 54px;">Weeks, not an afternoon</div></div>
+      <div class="card" style="padding: 32px 40px;"><div class="tag">Server</div><div class="big" style="font-size: 54px;">About $0.17 an hour</div><p>AWS on-demand price for its size</p></div>
+      <div class="card" style="padding: 32px 40px;"><div class="tag">AI</div><div class="big" style="font-size: 54px;">Claude subscription + Gemini API key</div><p>a subscription we already had</p></div>
+      <div class="card hz-card" style="padding: 32px 40px;"><div class="tag">In rehearsal</div><div class="big" style="font-size: 54px;">Picked up → live in about 10–13 min</div><p>no human action</p></div>
     </div>
-    <div class="todo" style="margin-top: 50px;"><span class="t">TODO</span>Measured at rehearsal: build minutes per request <b>[__]</b> · cost per request <b>[__]</b></div>
+    <p class="small" style="margin: 30px 0 0;">We didn't measure a dollar cost per request.</p>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>Stay qualitative. Replace the TODO line with measured rehearsal numbers before the talk, or delete it.</p></aside>
+  <aside class="notes"><p>Rehearsal numbers only. One rehearsal had a slow reviewer; another failed its tests the first time and the builder fixed it on round two. Both still landed in about 10–13 minutes.</p></aside>
 </section>
 
-<!-- 12 · START WITH ONE STATION -->
-<section class="slide" data-title="Start with one station" data-time="32:30–34:00">
+<!-- 14 · YOUR TURN -->
+<section class="slide" data-title="Your turn: map one process" data-time="32:30–34:00">
   <div class="stripe"></div>
   <div class="body">
-    <div class="kicker">Monday morning</div>
-    <h2>Start with one station</h2>
-    <ol class="steps" style="columns: 2; column-gap: 80px;">
-      <li style="font-size: 50px; break-inside: avoid; margin-top: 0;"><span>Write down "<b>done</b>"</span></li>
-      <li style="font-size: 50px; break-inside: avoid;"><span>One AI builder, one small bug</span></li>
-      <li style="font-size: 50px; break-inside: avoid;"><span>Add automatic <b>tests</b></span></li>
-      <li style="font-size: 50px; break-inside: avoid; margin-top: 0;"><span>Add a second-AI <b>reviewer</b></span></li>
-      <li style="font-size: 50px; break-inside: avoid;"><span>Wire up the <b>handoffs</b></span></li>
-      <li style="font-size: 50px; break-inside: avoid;"><span>Auto-deploy, with <b>rollback</b></span></li>
+    <div class="kicker">Your turn · Monday morning</div>
+    <h2 style="font-size: 84px;">Pick one process you repeat every week</h2>
+    <ol class="steps">
+      <li style="font-size: 50px;"><span>Name the <b>workers</b>: one job each</span></li>
+      <li style="font-size: 50px;"><span>Write each <b>contract</b>: what goes in, what comes out</span></li>
+      <li style="font-size: 50px;"><span>Draw the <b>routing</b>: skips, loops, who gets stuck work</span></li>
+      <li style="font-size: 50px;"><span>Hand <b>one</b> job to AI first.</span></li>
     </ol>
-    <div class="banner" style="font-size: 46px;">Each step is useful on its own. Don't build the whole factory on day one.</div>
+    <div class="banner" style="font-size: 46px;">Don't build the whole factory on day one.</div>
   </div>
   <div class="stripe"></div>
-  <aside class="notes"><p>Practical sequence. Each step pays off before the next. Then: let's go see what you built.</p></aside>
+  <aside class="notes"><p>Give them 20 seconds of silence to pick one. No worksheets. Then: let's go see what you built.</p></aside>
 </section>
 
-<!-- 13 · TODAY'S RESULTS -->
+<!-- 15 · TODAY'S RESULTS -->
 <section class="slide" data-title="Today's results" data-time="34:00–35:00">
   <div class="stripe"></div>
   <div class="body center">
@@ -593,7 +586,7 @@
   <aside class="notes"><p>Check the Floor before you say anything about the outcome. Then LIVE card.</p></aside>
 </section>
 
-<!-- 13L · LIVE: PRODUCTION -->
+<!-- 16 · LIVE: PRODUCTION -->
 <section class="slide" data-title="LIVE C: production + Shipped today" data-time="35:00–40:00">
   <div class="live">
     <div class="badge">▶ LIVE</div>
@@ -604,11 +597,11 @@
   </div>
   <aside class="notes">
     <p>Production URL on big screen → find the change → ask the requester to try it on their phone → Floor "Shipped today" with the clock.</p>
-    <p class="fb">Not done yet: show where it is, go to slide 14 + Q&amp;A, come back by 3:44. Rolled back: "The factory caught its own mistake; production is untouched." Failed/blocked: show the red station, then PREVIOUS RUN video, labeled.</p>
+    <p class="fb">Not done yet: show where it is, go to slide 17 + Q&amp;A, come back by 3:43. Rolled back: "The factory caught its own mistake; production is untouched." Failed/blocked: show the red station, then PREVIOUS RUN video, labeled.</p>
   </aside>
 </section>
 
-<!-- 14 · TEMPOBLUEPRINT -->
+<!-- 17 · TEMPOBLUEPRINT -->
 <section class="slide" data-title="TempoBlueprint" data-time="40:00–42:00">
   <div class="stripe"></div>
   <div class="body">
@@ -621,14 +614,14 @@
       <div class="arrow">→</div>
       <div class="step last">Training</div>
     </div>
-    <p class="lead">We help companies stand up their own software factory.</p>
+    <p class="lead">We help companies map their processes and stand up their own factory.</p>
     <div class="todo" style="margin-top: auto; font-size: 52px;"><span class="t">TODO</span>{{CONTACT}}</div>
   </div>
   <div class="stripe"></div>
   <aside class="notes"><p>One slide, one ask. Replace {{CONTACT}} before the talk.</p></aside>
 </section>
 
-<!-- 15 · Q&A -->
+<!-- 18 · Q&A -->
 <section class="slide" data-title="Q&amp;A" data-time="42:00–45:00">
   <div class="stripe"></div>
   <div class="body center">
