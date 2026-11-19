@@ -49,3 +49,4 @@ textarea { min-height: 90px; resize: vertical; }
 @keyframes vote-bounce { 0%,100% { transform: translateY(0) } 40% { transform: translateY(-8px) scale(1.12) } 70% { transform: translateY(0) scale(.96) } }
 .vote.bounce { animation: vote-bounce 500ms ease-out; }
 @media (prefers-reduced-motion: reduce) { .vote.bounce { animation: none; } }
+.site-footer { text-align: center; font-size: 13px; color: var(--muted); max-width: 760px; margin: 32px auto 0; padding: 16px; }
