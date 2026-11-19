@@ -5,7 +5,7 @@ export default function Home() {
     <main>
       <header className="top">
         <h1>📥 Feedback Inbox</h1>
-        <a className="btn pinned" href="/new">Suggest a change</a>
+        <a className="btn pinned" href="/new">Suggest an idea</a>
         <p>Tell us what to change about this app. Upvote the ideas you like. An AI software factory builds the top ones live.</p>
       </header>
       <Board />

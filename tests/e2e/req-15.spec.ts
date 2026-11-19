@@ -20,7 +20,7 @@ const intersects = (a: Box, b: Box) =>
   a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
 
 const cards = (page: Page) => page.getByTestId('request-card');
-const link = (page: Page) => page.getByRole('link', { name: 'Suggest a change' });
+const link = (page: Page) => page.getByRole('link', { name: 'Suggest an idea' });
 const scrollY = (page: Page) => page.evaluate(() => window.scrollY);
 const scrollDown = async (page: Page) => {
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
