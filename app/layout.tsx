@@ -14,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <div className="stripe" />
         {children}
+        <footer className="site-footer">Built live at Startup Week Louisville</footer>
       </body>
     </html>
   );
