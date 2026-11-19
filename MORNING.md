@@ -54,7 +54,8 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 - **n8n canvas:** the top-level line looks busy because every station has an error route to "Needs a human". It reads well as "not a conveyor belt". First time you open it, dismiss n8n's "Production Checklist" popup ("Ignore for all workflows").
 - **NOT DONE: Floor repair loop shown during a real run.** The PREVIOUS RUN recording shows two real requests moving at once, but no repair loop. Real repairs happened overnight (#14, #13, #18), but I never captured the return belt on screen during one. **Fallback:** `/floor?sim=1` (clearly badged SIMULATION) plays a repair loop. If one happens live during the talk, the Floor will show it.
 - **Not tested:** a real room's worth of phones at once, venue Wi-Fi, and the deck on the actual projector.
-- **Teardown order:** AWS deletes everything at 4:45pm, but CloudFormation marks the empty stack "DELETE_FAILED". It used the teardown role it had just deleted, so no resources remain. The laptop job at 5:00pm finishes it off. If the laptop is asleep, it runs when you wake it.
+- **Teardown needs the laptop for the last step.** AWS deletes every resource at 4:45pm without the laptop, but an empty CloudFormation stack record (no resources, no cost) remains until the laptop job runs at 5:00pm, or when you next wake the laptop.
+- **Open placeholders in the deck (yours to fill):** your Hermes example (TODO in slide 11 notes and the script) and `{{CONTACT}}` on the TempoBlueprint slide. **Fallback:** the slides read fine without them; say the contact line aloud.
 
 ## Show-day checklist
 
@@ -88,12 +89,12 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 - 4:44pm ET: AWS Scheduler deletes the secrets. 4:45pm: it deletes the whole AWS stack (server, database tables, roles).
 - 4:50pm: if the server still exists, it switches itself off, and that deletes it.
 - 5:00pm (and 5:30, 6:00 if the laptop was asleep): this laptop runs `infra/teardown.sh`, removes anything left plus the GitHub deploy key, and writes `TEARDOWN-RECEIPT.md`. Expected: every row empty.
-- **What was actually proven tonight, on throwaway copies:**
-  - The AWS scheduled delete removed every resource, including its own role. CloudFormation then marked the empty stack DELETE_FAILED.
-  - The VM's own power-off timer terminated its server on time.
-  - `teardown.sh`, run by hand, finished off the leftover stack record and its receipt showed nothing remaining.
-- **Not proven:** the laptop's scheduled launchd job itself. It is installed and loaded, but it has never fired (its first run is 5:00pm today). The real stack's scheduled delete also hasn't fired yet (4:45pm).
-- **If you want certainty:** after 5:00pm, check `TEARDOWN-RECEIPT.md`. If it's missing, run `~/projects/feedback-inbox/infra/teardown.sh` by hand.
+- **Proven end to end tonight (08:15–08:26 UTC) on a throwaway copy, `ff-tdtest3`, with all three in sequence:**
+  - Its server powered itself off on schedule and AWS terminated it.
+  - The AWS schedule deleted the secrets and every stack resource. It left only an empty stack record marked failed, because CloudFormation's last call used the role it had just deleted.
+  - A real launchd job on this laptop fired at its set time, ran `teardown.sh`, removed the empty record, and wrote an all-empty receipt (`docs/teardown-rehearsal-receipt.md`).
+- **The same three are armed for the real stack:** AWS schedules for 21:44 and 21:45 UTC, the VM timer for 21:50 UTC, and the launchd job for 5:00, 5:30 and 6:00pm ET. Only their real firing remains, by definition, after the talk.
+- **Belt and braces:** after 5pm check `TEARDOWN-RECEIPT.md`. If it's missing (laptop off), run `~/projects/feedback-inbox/infra/teardown.sh` by hand.
 - The Vercel site and GitHub repo stay (not AWS); after teardown the app has no data.
 - To tear down early by hand: `~/projects/feedback-inbox/infra/teardown.sh`.
 
