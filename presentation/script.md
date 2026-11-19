@@ -39,7 +39,7 @@ Format notes:
 
 Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job · 3 every process is a factory · 4 this isn't just code · 5 founder's road · 6 today's factory diagram · 7 LIVE Floor card · 8 not a conveyor belt · 9 LIVE n8n card · 10 second AI · 11 agent in chat (Hermes) · 12 humans own · 13 cost · 14 your turn · 15 today's results · 16 LIVE production card · 17 TempoBlueprint · 18 Q&A.
 
-**Heads-up on timing:** in rehearsal, a request went from picked up to live in about 10–13 minutes. If the 3:02 pick-up goes that smoothly, request one may already be live by the 3:16 Floor beat. That's fine: the Floor beat has an "already shipped" branch, and the 3:35 beat is where the requester tries it on their phone (plus any later request that's still moving).
+**Heads-up on timing:** in rehearsal, a request went from picked up to live in about 5–13 minutes. If the 3:02 pick-up goes that smoothly, request one may already be live by the 3:16 Floor beat. That's fine: the Floor beat has an "already shipped" branch, and the 3:35 beat is where the requester tries it on their phone (plus any later request that's still moving).
 
 ---
 
@@ -202,7 +202,7 @@ See the dashed arrow? If the reviewer doesn't like it, the work goes back to Bui
 
 Then **Preview**, a private trial copy. And **Release**: it goes live, gets a quick "is the app still alive?" check, and if anything's wrong, it undoes itself.
 
-One more thing. In rehearsal, a request went from picked up to live in about ten to thirteen minutes, with no human doing anything. So it's possible your request is already further along than you'd think. Let's go see.
+One more thing. In rehearsal, a request went from picked up to live in about five to thirteen minutes, with no human doing anything. So it's possible your request is already further along than you'd think. Let's go see.
 
 *[~220 words. Press Right to the LIVE card, then switch windows.]*
 
@@ -377,7 +377,7 @@ Setup is weeks, not an afternoon. You have to build the guardrails and run a lot
 
 Running it: the server the factory runs on costs about seventeen cents an hour. That's the AWS on-demand price for its size. The AI work runs on a Claude subscription we already had, plus a Gemini API key. I didn't measure a dollar cost per request, so I'm not going to make one up.
 
-And speed. In rehearsal, a request went from picked up to live in about ten to thirteen minutes, with no human action. That includes one run where the reviewer was slow, and one where the first attempt failed its tests and the builder fixed it on round two.
+And speed. In rehearsal, a request went from picked up to live in about five to thirteen minutes, with no human action. That includes one run where the reviewer was slow, and one where the first attempt failed its tests and the builder fixed it on round two.
 
 *[~130 words]*
 

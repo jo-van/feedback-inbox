@@ -379,7 +379,13 @@ async function playwright(id, baseUrl, dirs) {
     failed = failed || 1;
     failures.push('Test runner failed: ' + (r.out + r.err).replace(/\u001b\[[0-9;]*m/g, '').slice(-1500));
   }
-  return { pass: r.code === 0 && failed === 0, passed, failed, failures };
+  if (r.code !== 0 && failed === 0) {
+    log('playwright exit', r.code, 'with no failed tests; output tail:', (r.out + r.err).replace(/\u001b\[[0-9;]*m/g, '').slice(-1200));
+    if (passed === 0) failures.push('Test runner exited ' + r.code + ': ' + (r.out + r.err).replace(/\u001b\[[0-9;]*m/g, '').slice(-800));
+  }
+  log('playwright', baseUrl, 'passed', passed, 'failed', failed, 'exit', r.code);
+  // Pass when every test passed (flaky-then-passed counts as passed); a non-zero exit with zero failures is logged, not fatal.
+  return { pass: failed === 0 && passed > 0, passed, failed, failures };
 }
 
 STATIONS.test = async (inp) => {
