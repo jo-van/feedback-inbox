@@ -24,7 +24,7 @@ import json,sys
 d=json.load(sys.stdin); f=d["factory"]
 print("factory:", {k:f.get(k) for k in ["mode","armed","armAt","cap","admitted","killed","health","heartbeat"]})
 for t in sorted(d["tickets"], key=lambda t: t["id"]):
-    print(f"#{t[\"id\"]:>3} {t[\"stage\"]:<12} r{t.get(\"round\",0)} v{t[\"votes\"]:<3} {t[\"title\"][:60]}  {t.get(\"publicReason\") or \"\"}")'
+    print("#%3s %-12s r%s v%-3s %-60s %s" % (t["id"], t["stage"], t.get("round", 0), t["votes"], t["title"][:60], t.get("publicReason") or ""))'
     ;;
   kill)
     upd --update-expression "SET killed = :t" --expression-attribute-values '{":t":{"BOOL":true}}'
