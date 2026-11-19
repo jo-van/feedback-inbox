@@ -81,7 +81,7 @@ const wf = (id, name, nodes, connections, description) => workflows.push({
 const simple = [
   ['ffStationSpec001', '2 · Spec writer', 'spec', ['id', 'round', 'title', 'doneWhen'], null, 'Admitted request → testable acceptance criteria.'],
   ['ffStationTest001', '4 · Tester', 'test', ['id', 'round', 'branch', 'sha'], null, 'Waits for the preview deploy, then runs browser tests and the privacy guard against it.'],
-  ['ffStationRevw001', '5a · Adversarial reviewer (Gemini)', 'review', ['id', 'round', 'sha'], 'review', 'A different AI model hunts for problems in the diff.'],
+  ['ffStationRevw001', '5a · Adversarial reviewer (Codex)', 'review', ['id', 'round', 'sha'], 'review', 'A different AI model hunts for problems in the diff.'],
   ['ffStationSecu001', '5b · Security scan', 'security', ['id', 'round', 'sha'], 'security', 'Secret scan, path allowlist and risky-pattern checks.'],
   ['ffStationPrev001', '6 · Preview', 'preview', ['id', 'round', 'previewUrl'], null, 'Shows the private preview copy before release.'],
   ['ffStationRels001', '7 · Releaser', 'release', ['id', 'round', 'sha'], null, 'Ships to production, smoke tests it, rolls back automatically on failure.'],
@@ -144,7 +144,7 @@ n = 9000;
     iff('Built?', '$json.built === true', [1320, -20]),
     sub('4 · Tester', 'ffStationTest001', [1540, -40]),
     iff('Tests pass?', '$json.pass === true', [1760, -40]),
-    sub('5a · Adversarial review (Gemini)', 'ffStationRevw001', [1980, 80]),
+    sub('5a · Adversarial review (Codex)', 'ffStationRevw001', [1980, 80]),
     sub('5b · Security scan', 'ffStationSecu001', [1980, -160]),
     { id: uid(), name: 'Both checks back', type: 'n8n-nodes-base.merge', typeVersion: 3, position: [2200, -40], parameters: { mode: 'combine', combineBy: 'combineByPosition', options: {} } },
     code('Decide', `const j = $input.first().json;
@@ -168,15 +168,15 @@ const reason = j.rolledBack ? 'Shipped but failed its production check, so it wa
   : 'The line hit an error on this one; a human will take a look.';
 return [{ json: { id, round: Math.min(j.round ?? 0, 9), reason } }];`, [2200, 620]),
     http('Park', '/station/park', [2420, 620]),
-    note('# Feedback Factory\nRequests from the Feedback Inbox app move left to right. No human touches them.\n\n1 Gatekeeper → 2 Spec → 3 Builder → 4 Tester → 5a Review (Gemini) + 5b Security → 6 Preview → 7 Release\n\nFailures loop back to the Builder (max 3 tries) or go to **Needs a human**.', [0, -360], 900, 240, 6),
+    note('# Feedback Factory\nRequests from the Feedback Inbox app move left to right. No human touches them.\n\n1 Gatekeeper → 2 Spec → 3 Builder → 4 Tester → 5a Review (Codex) + 5b Security → 6 Preview → 7 Release\n\nFailures loop back to the Builder (max 3 tries) or go to **Needs a human**.', [0, -360], 900, 240, 6),
   ];
-  const errorsToPark = ['2 · Spec writer', '3 · Builder', '4 · Tester', '5a · Adversarial review (Gemini)', '5b · Security scan', '6 · Preview', '7 · Release to production'];
+  const errorsToPark = ['2 · Spec writer', '3 · Builder', '4 · Tester', '5a · Adversarial review (Codex)', '5b · Security scan', '6 · Preview', '7 · Release to production'];
   wf('ffFactoryLine001', 'Factory Line', nodes, conn2([
     ['Every 15 seconds', '1 · Gatekeeper & intake'], ['1 · Gatekeeper & intake', 'Work admitted?'], ['Work admitted?', 'Start job', 0],
     ['Start job', '2 · Spec writer'], ['2 · Spec writer', '3 · Builder'], ['3 · Builder', 'Built?'],
     ['Built?', '4 · Tester', 0], ['Built?', 'Repair: send back to Builder', 1],
-    ['4 · Tester', 'Tests pass?'], ['Tests pass?', '5a · Adversarial review (Gemini)', 0], ['Tests pass?', '5b · Security scan', 0], ['Tests pass?', 'Repair: send back to Builder', 1],
-    ['5a · Adversarial review (Gemini)', 'Both checks back', 0, 0], ['5b · Security scan', 'Both checks back', 0, 1],
+    ['4 · Tester', 'Tests pass?'], ['Tests pass?', '5a · Adversarial review (Codex)', 0], ['Tests pass?', '5b · Security scan', 0], ['Tests pass?', 'Repair: send back to Builder', 1],
+    ['5a · Adversarial review (Codex)', 'Both checks back', 0, 0], ['5b · Security scan', 'Both checks back', 0, 1],
     ['Both checks back', 'Decide'], ['Decide', 'Approved?'], ['Approved?', '6 · Preview', 0], ['Approved?', 'Repair: send back to Builder', 1],
     ['6 · Preview', '7 · Release to production'], ['7 · Release to production', 'Live?'], ['Live?', '🚀 Shipped', 0], ['Live?', 'Rolled back?', 1],
     ['Rolled back?', 'Park: needs a human', 0], ['Rolled back?', 'Repair: send back to Builder', 1],

@@ -128,6 +128,34 @@ async function gemini(prompt, schema) {
   throw new Error('gemini failed: ' + lastErr);
 }
 
+/** Codex (OpenAI, the presenter's ChatGPT subscription) as the second-opinion reviewer.
+ * Runs as the unprivileged ffreview user in an empty temp dir, read-only sandbox, no repo, no secrets. */
+const REVIEW_SCHEMA_STRICT = {
+  type: 'object', additionalProperties: false, required: ['verdict', 'findings'],
+  properties: {
+    verdict: { type: 'string', enum: ['approve', 'changes'] },
+    findings: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['severity', 'file', 'quote', 'issue', 'fix'],
+      properties: { severity: { type: 'string', enum: ['blocking', 'minor'] }, file: { type: 'string' }, quote: { type: 'string' }, issue: { type: 'string' }, fix: { type: 'string' } } } },
+  },
+};
+async function codexReview(prompt) {
+  const dir = await fs.mkdtemp('/tmp/ff-review-');
+  try {
+    await fs.writeFile(path.join(dir, 'schema.json'), JSON.stringify(REVIEW_SCHEMA_STRICT));
+    await run('chown', ['-R', 'ffreview:ffreview', dir]);
+    const args = ['-u', 'ffreview', '--', 'env', '-i', 'HOME=/home/ffreview', 'PATH=/usr/local/bin:/usr/bin:/bin',
+      'codex', 'exec', '--skip-git-repo-check', '--ephemeral', '--sandbox', 'read-only', '-C', dir,
+      '--output-schema', path.join(dir, 'schema.json'), '-o', path.join(dir, 'out.json'),
+      ...(E.FF_CODEX_MODEL ? ['-m', E.FF_CODEX_MODEL] : []), '-'];
+    const r = await run('runuser', args, { input: prompt + '\n\nDo not run commands or read files: everything you need is above. Answer with the JSON verdict only.', timeoutMs: Number(E.FF_CODEX_TIMEOUT_MS || 300_000) });
+    const out = await fs.readFile(path.join(dir, 'out.json'), 'utf8').catch(() => '');
+    if (!out.trim()) throw new Error(`codex failed (${r.code}): ${(r.err || r.out).slice(-500)}`);
+    return { model: 'codex' + (E.FF_CODEX_MODEL ? ' ' + E.FF_CODEX_MODEL : ''), value: extractJson(out) };
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true }).catch(() => {});
+  }
+}
+
 // ---------------------------------------------------------------- state
 async function getReq(id) {
   const r = await ddb.send(new GetCommand({ TableName: CFG.table, Key: { pk: 'REQ', sk: pad(id) } }));
@@ -440,13 +468,17 @@ ${(req.spec?.acceptance || []).map((a) => '- ' + a).join('\n')}
 Diff:
 ${diff}`;
   const schema = { type: 'OBJECT', properties: { verdict: { type: 'STRING', enum: ['approve', 'changes'] }, findings: { type: 'ARRAY', items: { type: 'OBJECT', properties: { severity: { type: 'STRING', enum: ['blocking', 'minor'] }, file: { type: 'STRING' }, quote: { type: 'STRING' }, issue: { type: 'STRING' }, fix: { type: 'STRING' } }, required: ['severity', 'issue'] } } }, required: ['verdict', 'findings'] };
-  let model, value;
-  try {
-    ({ model, value } = await gemini(prompt, schema));
-  } catch (e) {
-    // Gemini is down or overloaded: a different Claude model reviews instead of parking good work.
-    log('review fallback to claude', inp.id, e.message.slice(0, 200));
-    model = (E.FF_REVIEW_FALLBACK_MODEL || 'claude-opus-5-5') + ' (Gemini unavailable)';
+  let model, value, lastErr = '';
+  // Reviewer chain: Codex (OpenAI) first; Gemini only if configured; a different Claude model as the last resort.
+  for (const who of (E.FF_REVIEWERS || 'codex').split(',')) {
+    try {
+      ({ model, value } = who === 'gemini' ? await gemini(prompt, schema) : await codexReview(prompt));
+      break;
+    } catch (e) { lastErr = e.message; log('reviewer failed', who, inp.id, e.message.slice(0, 300)); }
+  }
+  if (!value) {
+    log('review fallback to claude', inp.id, lastErr.slice(0, 200));
+    model = (E.FF_REVIEW_FALLBACK_MODEL || 'claude-opus-5-5') + ' (fallback)';
     value = extractJson(await claude(inp.id, prompt + `
 
 Respond with ONLY a JSON object, no prose: {"verdict":"approve"|"changes","findings":[{"severity":"blocking"|"minor","file":"...","quote":"exact code from the diff","issue":"...","fix":"..."}]}`,

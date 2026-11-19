@@ -65,7 +65,7 @@ The short version of `script.md`. Say it in your own words; the **bold line** is
 
 **[10] 3:25 · A second AI reviews**
 - **"You don't let the student grade their own exam."**
-- Claude builds, Gemini (an AI from a different company) reviews, and it can say no.
+- Claude (Anthropic) builds, Codex (OpenAI, a different company) reviews, and it can say no.
 - Works for people too: put a checker on every important worker.
 
 **[11] 3:26:30 · Hermes, the agent in our team chat**
@@ -82,7 +82,7 @@ The short version of `script.md`. Say it in your own words; the **bold line** is
 - Banner: same for your first hires. Hire someone to answer every support email: one worker. Hire them to set up how support gets answered and keep improving it: a factory. **"Hire people to build the line, not stand on it."**
 
 **[13] 3:31:30 · Cost** (honest numbers)
-- Setup takes weeks. The server is about 17¢ an hour. The AI runs on a Claude subscription plus a Gemini key.
+- Setup takes weeks. The server is about 17¢ an hour. The AI runs on a Claude subscription and a ChatGPT subscription we already had.
 - No per-request dollar figure: "I'm not going to make one up."
 
 **[14] 3:32:30 · Your turn**

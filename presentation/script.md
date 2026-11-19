@@ -314,7 +314,7 @@ One design choice people always ask about: why have a second AI review the first
 
 Simple. You don't let the student grade their own exam.
 
-If the same AI that did the work also reviews it, it tends to agree with itself. Same blind spots. So we use a different model, from a different company: Claude builds, Gemini reviews. Its job is specifically to find problems, not to say "looks good." And it can say no. That sends the work back for round two.
+If the same AI that did the work also reviews it, it tends to agree with itself. Same blind spots. So we use a different model, from a different company: Claude, from Anthropic, builds. Codex, from OpenAI, reviews. Its job is specifically to find problems, not to say "looks good." And it can say no. That sends the work back for round two.
 
 This works for people too. The person who wrote the proposal shouldn't be the only one approving it. When you design any factory, put a worker whose only job is to check another worker.
 
@@ -378,7 +378,7 @@ Everybody wants to know what it costs. Honest numbers.
 
 Setup is weeks, not an afternoon. You have to build the guardrails and run a lot of practice requests before you trust it.
 
-Running it: the server the factory runs on costs about seventeen cents an hour. That's the AWS on-demand price for its size. The AI work runs on a Claude subscription we already had, plus a Gemini API key. I didn't measure a dollar cost per request, so I'm not going to make one up.
+Running it: the server the factory runs on costs about seventeen cents an hour. That's the AWS on-demand price for its size. The AI work runs on a Claude subscription and a ChatGPT subscription we already had. I didn't measure a dollar cost per request, so I'm not going to make one up.
 
 And speed. In rehearsal, a request went from picked up to live in about five to thirteen minutes, with no human action. That includes one run where the reviewer was slow, and one where the first attempt failed its tests and the builder fixed it on round two.
 
