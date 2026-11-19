@@ -11,6 +11,7 @@ export default function Board() {
   const [requests, setRequests] = useState<PublicRequest[] | null>(null);
   const [voted, setVoted] = useState<number[]>([]);
   const [error, setError] = useState('');
+  const [query, setQuery] = useState('');
 
   const load = useCallback(async () => {
     try {
@@ -43,11 +44,23 @@ export default function Board() {
   if (requests === null) return <p className="empty">{error || 'Loading…'}</p>;
   const list = [...requests].sort((a, b) => b.id - a.id);
   if (list.length === 0) return <p className="empty">No requests.</p>;
+  const q = query.trim().toLowerCase();
+  const visible = q ? list.filter((r) => r.title.toLowerCase().includes(q)) : list;
 
   return (
     <div>
+      <input
+        type="text"
+        data-testid="search"
+        aria-label="Search requests by title"
+        placeholder="Search by title"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        style={{ width: '100%', marginBottom: 12 }}
+      />
       {error && <p className="error">{error}</p>}
-      {list.map((r) => {
+      {q && visible.length === 0 && <p className="empty" data-testid="no-matches">No matching requests.</p>}
+      {visible.map((r) => {
         const label = statusLabel(r.stage);
         const mine = voted.includes(r.id);
         return (
