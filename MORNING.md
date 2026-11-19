@@ -55,7 +55,7 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 - **NOT DONE: Floor repair loop shown during a real run.** The PREVIOUS RUN recording shows two real requests moving at once, but no repair loop. Real repairs happened overnight (#14, #13, #18), but I never captured the return belt on screen during one. **Fallback:** `/floor?sim=1` (clearly badged SIMULATION) plays a repair loop. If one happens live during the talk, the Floor will show it.
 - **Not tested:** a real room's worth of phones at once, venue Wi-Fi, and the deck on the actual projector.
 - **Teardown needs the laptop for the last step.** AWS deletes every resource at 4:45pm without the laptop, but an empty CloudFormation stack record (no resources, no cost) remains until the laptop job runs at 5:00pm, or when you next wake the laptop.
-- **Open placeholders in the deck (yours to fill):** your Hermes example (TODO in slide 11 notes and the script) and `{{CONTACT}}` on the TempoBlueprint slide. **Fallback:** the slides read fine without them; say the contact line aloud.
+- **Open placeholders in the deck (yours to fill):** your Hermes example (TODO in slide 11 notes and the script). The TempoBlueprint slide was removed: no sales pitches at Startup Week. **Fallback:** the slide reads fine without it.
 
 ## Show-day checklist
 
@@ -102,7 +102,6 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 
 1. **Deck:** click through it once. Is the balance right between the "every process is a factory" philosophy and the live software demo?
 2. **Hermes slide:** add one real example of your own (marked TODO in the slide notes and script).
-3. **Contact line:** replace `{{CONTACT}}` on the TempoBlueprint slide.
-4. **Gemini billing:** add billing to the Gemini key so reviews use Gemini Pro? Optional.
-5. **Pace:** keep one build at a time (3 total), or allow two at once (`ff.sh live 2026-11-19T20:05:00Z 3 2`)?
-6. **Timing risk:** the first request may be live by about 3:11, before the 3:16 Floor beat. The script has an "already shipped" branch. Tell me if you'd rather show the first ship at 3:16.
+3. **Gemini billing:** add billing to the Gemini key so reviews use Gemini Pro? Optional.
+4. **Pace:** keep one build at a time (3 total), or allow two at once (`ff.sh live 2026-11-19T20:05:00Z 3 2`)?
+5. **Timing risk:** the first request may be live by about 3:11, before the 3:16 Floor beat. The script has an "already shipped" branch. Tell me if you'd rather show the first ship at 3:16.

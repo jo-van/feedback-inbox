@@ -33,11 +33,10 @@ Format notes:
 | 3:32:30 | 32:30–34:00 | 14 · Your turn: map one process | 1.5 |
 | 3:34 | 34:00–35:00 | 15 · Today's results | 1 |
 | **3:35** | **35:00–40:00** | **LIVE C · production + "Shipped today"** (counter 16) | 5 |
-| 3:40 | 40:00–42:00 | 17 · TempoBlueprint | 2 |
-| 3:42 | 42:00–45:00 | 18 · Q&A | 3 |
+| 3:40 | 40:00–45:00 | 17 · Q&A | 5 |
 | **3:45** | **45:00** | **Hard stop** | **45 total** |
 
-Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job · 3 every process is a factory · 4 you already run a few of these · 5 founder's road · 6 today's factory diagram · 7 LIVE Floor card · 8 not a conveyor belt · 9 LIVE n8n card · 10 second AI · 11 agent in chat (Hermes) · 12 humans own · 13 cost · 14 your turn · 15 today's results · 16 LIVE production card · 17 TempoBlueprint · 18 Q&A.
+Counter mapping (deck position → section): 0 walk-in · 1 title · 2 your job · 3 every process is a factory · 4 you already run a few of these · 5 founder's road · 6 today's factory diagram · 7 LIVE Floor card · 8 not a conveyor belt · 9 LIVE n8n card · 10 second AI · 11 agent in chat (Hermes) · 12 humans own · 13 cost · 14 your turn · 15 today's results · 16 LIVE production card · 17 Q&A.
 
 **Heads-up on timing:** in rehearsal, a request went from picked up to live in about 5–13 minutes. If the 3:05 pick-up goes that smoothly, request one may already be live by the 3:16 Floor beat. That's fine: the Floor beat has an "already shipped" branch, and the 3:35 beat is where the requester tries it on their phone (plus any later request that's still moving).
 
@@ -453,14 +452,14 @@ And here's the Floor. Your request is in "Shipped today," and that clock is the 
 
 So: you had an idea at 3:00. It's live at [time]. That's the whole talk, really.
 
-*[~260 words plus interaction. Press Right to slide 17.]*
+*[~260 words plus interaction. Press Right to slide 17, Q&A.]*
 
 ### IF SLOW (not shipped yet, still moving)
 
 It's not there yet. Here's where it is. *[Floor: point at the station.]* It's at [station]. Everything before this has passed. This is the honest version: sometimes the review takes another lap.
 
 Here's what we'll do. I'll tell you about how to get one of these for yourself, take some questions, and I'll come back to this screen before 3:45. Keep the app open on your phone.
-*[Go to slide 17 and Q&A. Check the Floor during questions. Come back by 3:43 at the latest and use "If it shipped," or the 3:44 line below.]*
+*[Go to slide 17, Q&A. Check the Floor during questions. Come back by 3:43 at the latest and use "If it shipped," or the 3:44 line below.]*
 
 At 3:44, if it's still not done: It's at [station], and it's going to finish after we leave. The app link on your phone will show it when it does. I'll post the result where [TODO: wherever Jonathan will post the follow-up].
 
@@ -483,21 +482,7 @@ And your request is still on the board. When the factory's back up, it'll pick i
 
 ---
 
-## 40:00–42:00 · 3:40pm · Slide 17 · TempoBlueprint
-
-One quick thing and then your questions.
-
-Everything you saw today, the way of thinking and the factory itself, is something you can have for your own business. Some of you will build it yourselves, and I hope this gave you the map.
-
-If you'd rather have help, that's what I'm starting with TempoBlueprint. We help companies map their processes and stand up their own factory. Three steps. An assessment: where you are, and which worker to start with. Setup: building the factory around your business, with your guardrails. And training: so your team can run it, improve it, and trust it, without us.
-
-If that's interesting, here's how to reach me: [TODO: read {{CONTACT}} once it's filled in]. Or just come find me after.
-
-*[~130 words]*
-
----
-
-## 42:00–45:00 · 3:42pm · Slide 18 · Q&A
+## 40:00–45:00 · 3:40pm · Slide 17 · Q&A
 
 That's what I've got. What questions do you have?
 
@@ -526,7 +511,7 @@ That's what I've got. What questions do you have?
 | LIVE B2 (wiring) | 185 + clicking | 4 |
 | Slides 10–15 (second AI, Hermes, humans, cost, your turn, results) | 880 + hands + 20-second pause | 9 |
 | LIVE C | 170 + interaction | 5 |
-| Slides 17–18 | 290 incl. seed questions | 5 |
+| Slide 17 (Q&A) | 160 incl. seed questions | 5 |
 | **Total** | **~3,200 spoken (main branch, stage directions excluded) + live time** | **45** |
 
 At about 140 words a minute the main-branch spoken words take about 23 minutes. The other 22 minutes go to live screens, reading requests aloud, hands, the exercise pause, interaction and questions. Rehearse with a clock. If you're running long, the cheapest trims are the middle of slide 5 (founder's road: say steps two and three in one breath) and slide 12 (read the four cards, skip the commentary). Never cut LIVE C. If Jonathan adds the Hermes example, take the time back from slide 5.

@@ -26,8 +26,7 @@ Deck keys: **→ / Space / PageDown** next · **← / PageUp** back · **N** not
 | 3:32:30 | [14] | Your turn | 20-second pause. Workers → contracts → routing → hand one job to AI. |
 | 3:34 | [15] | Today's results | **Check the Floor before speaking.** |
 | **3:35–3:40** | [16] | **LIVE C** · production | Production app → find change → requester tries it on phone → Floor "Shipped today" + clock. |
-| 3:40 | [17] | TempoBlueprint | Assessment → setup → training. Read {{CONTACT}}. |
-| 3:42 | [18] | Q&A | Seed questions in script. **3:44:30 wrap. 3:45 hard stop.** |
+| 3:40 | [17] | Q&A | Seed questions in script. **3:44:30 wrap. 3:45 hard stop.** |
 
 ## The three live cut-aways
 
@@ -48,7 +47,7 @@ Plus the **3:05 admission beat** (from [2]): app top-voted list → Gatekeeper d
 | LIVE B | Floor won't load or nothing moving by **3:17** | Play the **PREVIOUS RUN** video. Say "previous run, from rehearsal" out loud. |
 | LIVE B2 | Run hasn't reached Builder | Open the Builder sub-workflow definition instead of the execution. |
 | LIVE B2 | Tunnel / n8n down for **30 seconds** | Back to [6] diagram, then PREVIOUS RUN n8n clip, labeled. |
-| LIVE C | Not shipped at **3:35** | Show where it is. Go to [17] + Q&A. Re-check during Q&A. Return by **3:43**. |
+| LIVE C | Not shipped at **3:35** | Show where it is. Go to [17] Q&A. Re-check during Q&A. Return by **3:43**. |
 | LIVE C | Rolled back / blocked | "It undid its own change. Production never broke." Then PREVIOUS RUN video, labeled. |
 | LIVE C | Still not done at **3:44** | "It'll finish after we leave. The app link will show it." |
 | Any | Running long | Trim the middle of [5] and the commentary on [12]. Never cut LIVE C. |

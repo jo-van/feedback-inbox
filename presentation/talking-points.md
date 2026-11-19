@@ -97,12 +97,8 @@ The short version of `script.md`. Say it in your own words; the **bold line** is
 - Find the person who asked. Have them try it on their phone and tell the room if it does what they asked.
 - Floor, "Shipped today," read the clock.
 - **"You had an idea at 3:00. It's live at [time]. That's the whole talk."**
-- *Not shipped:* show where it is, go to [17], come back by 3:43. *Rolled back:* "It undid its own change. Production never broke. That's the most important feature."
+- *Not shipped:* show where it is, go to [17] Q&A, come back by 3:43. *Rolled back:* "It undid its own change. Production never broke. That's the most important feature."
 
-**[17] 3:40 · TempoBlueprint**
-- Build it yourself with this map, or get help: assessment → setup → training.
-- Contact line, or "come find me after."
-
-**[18] 3:42 · Q&A**
+**[17] 3:40 · Q&A** (5 min)
 - Seed questions if it's quiet: does it only work for software? Do I need to be technical? What if it's wrong but passes every check?
 - 3:44:30: "Thank you for building something with me today." **Hard stop at 3:45.**
