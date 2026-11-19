@@ -1,0 +1,6 @@
+# Paths the factory's Builder may change (one regex per line). Everything else is blocked.
+^app/
+^components/
+^lib/(?!db\.ts$|contacts\.ts$)
+^tests/(unit|e2e)/
+^public/(?!floor\.html$)

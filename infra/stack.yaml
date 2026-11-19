@@ -1,0 +1,298 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  feedback-factory demo (Louisville Startup Week 2026-11-19). Everything here is
+  deleted automatically by EventBridge Scheduler at 2026-11-19T21:45Z.
+
+Parameters:
+  Prefix:
+    Type: String
+    Default: feedback-factory
+  VercelTeam:
+    Type: String
+    Default: jo-vans-projects
+  VercelProject:
+    Type: String
+    Default: feedback-inbox
+  InstanceType:
+    Type: String
+    Default: t3.xlarge
+  VolumeGb:
+    Type: Number
+    Default: 60
+  CreateVercelOidc:
+    Type: String
+    Default: 'true'
+    AllowedValues: ['true', 'false']
+  PoweroffAt:
+    Type: String
+    Default: '2026-11-19 21:50:00 UTC'
+    Description: systemd OnCalendar value for the VM backstop poweroff (terminates the instance)
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Default: vpc-05baf1c6111d83898
+  AmiId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/canonical/ubuntu/server/24.04/stable/current/amd64/hvm/ebs-gp3/ami-id
+
+Conditions:
+  WithOidc: !Equals [!Ref CreateVercelOidc, 'true']
+
+Resources:
+  # ---------- teardown (deleted LAST: every other resource DependsOn it) ----------
+  TeardownRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${Prefix}-teardown'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: { Service: scheduler.amazonaws.com }
+            Action: sts:AssumeRole
+            Condition: { StringEquals: { 'aws:SourceAccount': !Ref 'AWS::AccountId' } }
+      Policies:
+        - PolicyName: teardown
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [cloudformation:DeleteStack, cloudformation:DescribeStacks, cloudformation:DescribeStackResources, cloudformation:DescribeStackEvents]
+                Resource: !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AWS::StackName}/*'
+              - Effect: Allow
+                Action: [ec2:TerminateInstances, ec2:DeleteSecurityGroup, ec2:DeleteLaunchTemplate, ec2:Describe*]
+                Resource: '*'
+              - Effect: Allow
+                Action: [iam:DeleteRole, iam:DeleteRolePolicy, iam:DetachRolePolicy, iam:GetRole, iam:ListRolePolicies, iam:ListAttachedRolePolicies, iam:ListInstanceProfilesForRole, iam:RemoveRoleFromInstanceProfile, iam:DeleteInstanceProfile, iam:GetInstanceProfile, iam:UntagRole, iam:DeleteOpenIDConnectProvider, iam:GetOpenIDConnectProvider, iam:PassRole]
+                Resource:
+                  - !Sub 'arn:aws:iam::${AWS::AccountId}:role/${Prefix}-*'
+                  - !Sub 'arn:aws:iam::${AWS::AccountId}:instance-profile/${Prefix}-*'
+                  - !Sub 'arn:aws:iam::${AWS::AccountId}:oidc-provider/oidc.vercel.com/${VercelTeam}'
+              - Effect: Allow
+                Action: [dynamodb:DeleteTable, dynamodb:DescribeTable, dynamodb:DescribeTimeToLive, dynamodb:UpdateTable, dynamodb:ListTagsOfResource]
+                Resource: !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${Prefix}-*'
+              - Effect: Allow
+                Action: [ssm:DeleteParameters, ssm:DeleteParameter]
+                Resource: !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Prefix}/*'
+  # ---------- data ----------
+  ProdTable:
+    Type: AWS::DynamoDB::Table
+    DependsOn: TeardownRole
+    Properties:
+      TableName: !Sub '${Prefix}-prod'
+      BillingMode: PAY_PER_REQUEST
+      DeletionProtectionEnabled: false
+      AttributeDefinitions:
+        - { AttributeName: pk, AttributeType: S }
+        - { AttributeName: sk, AttributeType: S }
+      KeySchema:
+        - { AttributeName: pk, KeyType: HASH }
+        - { AttributeName: sk, KeyType: RANGE }
+      TimeToLiveSpecification: { AttributeName: ttl, Enabled: true }
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+  PreviewTable:
+    Type: AWS::DynamoDB::Table
+    DependsOn: TeardownRole
+    Properties:
+      TableName: !Sub '${Prefix}-preview'
+      BillingMode: PAY_PER_REQUEST
+      DeletionProtectionEnabled: false
+      AttributeDefinitions:
+        - { AttributeName: pk, AttributeType: S }
+        - { AttributeName: sk, AttributeType: S }
+      KeySchema:
+        - { AttributeName: pk, KeyType: HASH }
+        - { AttributeName: sk, KeyType: RANGE }
+      TimeToLiveSpecification: { AttributeName: ttl, Enabled: true }
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+  # Private contact tables: emails live only here. The factory VM has NO access.
+  ProdContacts:
+    Type: AWS::DynamoDB::Table
+    DependsOn: TeardownRole
+    Properties:
+      TableName: !Sub '${Prefix}-prod-contacts'
+      BillingMode: PAY_PER_REQUEST
+      DeletionProtectionEnabled: false
+      AttributeDefinitions: [{ AttributeName: id, AttributeType: S }]
+      KeySchema: [{ AttributeName: id, KeyType: HASH }]
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+  PreviewContacts:
+    Type: AWS::DynamoDB::Table
+    DependsOn: TeardownRole
+    Properties:
+      TableName: !Sub '${Prefix}-preview-contacts'
+      BillingMode: PAY_PER_REQUEST
+      DeletionProtectionEnabled: false
+      AttributeDefinitions: [{ AttributeName: id, AttributeType: S }]
+      KeySchema: [{ AttributeName: id, KeyType: HASH }]
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+
+  # ---------- Vercel access (keyless OIDC federation) ----------
+  VercelOidc:
+    Type: AWS::IAM::OIDCProvider
+    DependsOn: TeardownRole
+    Condition: WithOidc
+    Properties:
+      Url: !Sub 'https://oidc.vercel.com/${VercelTeam}'
+      ClientIdList: [!Sub 'https://vercel.com/${VercelTeam}']
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+  VercelProdRole:
+    Type: AWS::IAM::Role
+    DependsOn: TeardownRole
+    Condition: WithOidc
+    Properties:
+      RoleName: !Sub '${Prefix}-vercel-prod'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: { Federated: !Ref VercelOidc }
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                'oidc.vercel.com/jo-vans-projects:aud': !Sub 'https://vercel.com/${VercelTeam}'
+                'oidc.vercel.com/jo-vans-projects:sub': !Sub 'owner:${VercelTeam}:project:${VercelProject}:environment:production'
+      Policies:
+        - PolicyName: data
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:Query, dynamodb:BatchGetItem]
+                Resource: [!GetAtt ProdTable.Arn]
+              - Effect: Allow
+                Action: [dynamodb:PutItem]
+                Resource: [!GetAtt ProdContacts.Arn]
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+  VercelPreviewRole:
+    Type: AWS::IAM::Role
+    DependsOn: TeardownRole
+    Condition: WithOidc
+    Properties:
+      RoleName: !Sub '${Prefix}-vercel-preview'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: { Federated: !Ref VercelOidc }
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                'oidc.vercel.com/jo-vans-projects:aud': !Sub 'https://vercel.com/${VercelTeam}'
+                'oidc.vercel.com/jo-vans-projects:sub': !Sub 'owner:${VercelTeam}:project:${VercelProject}:environment:preview'
+      Policies:
+        - PolicyName: data
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:Query, dynamodb:BatchGetItem]
+                Resource: [!GetAtt PreviewTable.Arn]
+              - Effect: Allow
+                Action: [dynamodb:PutItem]
+                Resource: [!GetAtt PreviewContacts.Arn]
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+
+  # ---------- factory VM ----------
+  InstanceRole:
+    Type: AWS::IAM::Role
+    DependsOn: TeardownRole
+    Properties:
+      RoleName: !Sub '${Prefix}-vm'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: { Service: ec2.amazonaws.com }
+            Action: sts:AssumeRole
+      ManagedPolicyArns: [arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore]
+      Policies:
+        - PolicyName: factory
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:DeleteItem, dynamodb:Query, dynamodb:Scan, dynamodb:BatchWriteItem]
+                Resource: [!GetAtt ProdTable.Arn, !GetAtt PreviewTable.Arn]
+              - Effect: Deny
+                Action: 'dynamodb:*'
+                Resource: [!GetAtt ProdContacts.Arn, !GetAtt PreviewContacts.Arn]
+              - Effect: Allow
+                Action: [ssm:GetParameter, ssm:GetParameters]
+                Resource: !Sub 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${Prefix}/*'
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+  InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    DependsOn: TeardownRole
+    Properties:
+      InstanceProfileName: !Sub '${Prefix}-vm'
+      Roles: [!Ref InstanceRole]
+  NoInbound:
+    Type: AWS::EC2::SecurityGroup
+    DependsOn: TeardownRole
+    Properties:
+      GroupDescription: feedback-factory VM - no inbound, admin via SSM only
+      VpcId: !Ref VpcId
+      SecurityGroupEgress:
+        - { IpProtocol: '-1', CidrIp: 0.0.0.0/0 }
+      Tags: [{ Key: project, Value: !Ref Prefix }]
+  Template:
+    Type: AWS::EC2::LaunchTemplate
+    DependsOn: TeardownRole
+    Properties:
+      LaunchTemplateName: !Sub '${Prefix}-vm'
+      LaunchTemplateData:
+        # Hop limit 1: containers on bridge networks cannot reach instance credentials.
+        MetadataOptions: { HttpTokens: required, HttpPutResponseHopLimit: 1, HttpEndpoint: enabled }
+        InstanceInitiatedShutdownBehavior: terminate
+  Vm:
+    Type: AWS::EC2::Instance
+    DependsOn: TeardownRole
+    Properties:
+      ImageId: !Ref AmiId
+      InstanceType: !Ref InstanceType
+      LaunchTemplate:
+        LaunchTemplateId: !Ref Template
+        Version: !GetAtt Template.LatestVersionNumber
+      IamInstanceProfile: !Ref InstanceProfile
+      SecurityGroupIds: [!GetAtt NoInbound.GroupId]
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs: { VolumeSize: !Ref VolumeGb, VolumeType: gp3, DeleteOnTermination: true }
+      Tags:
+        - { Key: Name, Value: !Ref Prefix }
+        - { Key: project, Value: !Ref Prefix }
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -eux
+          # Teardown backstop: power off (instance is set to TERMINATE on shutdown).
+          # Persistent=true also fires on any boot after the deadline.
+          cat >/etc/systemd/system/ff-teardown-poweroff.service <<'EOF'
+          [Unit]
+          Description=feedback-factory teardown backstop (terminates this instance)
+          [Service]
+          Type=oneshot
+          ExecStart=/usr/sbin/poweroff
+          EOF
+          cat >/etc/systemd/system/ff-teardown-poweroff.timer <<'EOF'
+          [Unit]
+          Description=feedback-factory teardown backstop timer
+          [Timer]
+          OnCalendar=${PoweroffAt}
+          Persistent=true
+          [Install]
+          WantedBy=timers.target
+          EOF
+          systemctl daemon-reload
+          systemctl enable --now ff-teardown-poweroff.timer
+          echo armed > /var/log/ff-teardown-armed
+
+Outputs:
+  TeardownRoleArn: { Value: !GetAtt TeardownRole.Arn }
+  InstanceId: { Value: !Ref Vm }
+  VercelProdRoleArn:
+    Condition: WithOidc
+    Value: !GetAtt VercelProdRole.Arn
+  VercelPreviewRoleArn:
+    Condition: WithOidc
+    Value: !GetAtt VercelPreviewRole.Arn

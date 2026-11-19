@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Factory Floor</title>
+<style>
+  :root {
+    --bg: #14161c; --panel: #1e222b; --panel2: #272c38; --line: #394052;
+    --text: #f3f5f9; --muted: #9aa3b5; --hazard: #ffc928; --go: #3ddc84;
+    --stop: #ff5a5f; --busy: #5ab0ff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex; flex-direction: column; overflow-x: hidden;
+  }
+  header {
+    display: flex; align-items: center; gap: 16px; padding: 14px 24px;
+    border-bottom: 4px solid transparent;
+    border-image: repeating-linear-gradient(-45deg, var(--hazard) 0 14px, #14161c 14px 28px) 4;
+  }
+  header h1 { margin: 0; font-size: 22px; letter-spacing: .04em; text-transform: uppercase; }
+  .badge {
+    font-size: 12px; font-weight: 700; letter-spacing: .08em; padding: 4px 10px;
+    border-radius: 999px; background: var(--panel2); color: var(--muted); text-transform: uppercase;
+  }
+  .badge.sim { background: var(--hazard); color: #1a1500; }
+  .badge.live { background: var(--go); color: #00210f; }
+  .clock { margin-left: auto; font-variant-numeric: tabular-nums; font-size: 34px; font-weight: 700; }
+  .clock small { display: block; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; text-align: right; }
+
+  .now { padding: 22px 24px 6px; min-height: 128px; }
+  .now .label { color: var(--hazard); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .now .title { font-size: clamp(24px, 3.4vw, 46px); font-weight: 800; line-height: 1.1; margin: 6px 0; text-wrap: balance; }
+  .now .blurb { font-size: clamp(16px, 1.8vw, 24px); color: var(--muted); }
+  .now .blurb b { color: var(--text); }
+
+  .scroll { overflow-x: auto; padding: 0 24px; }
+  .floor { position: relative; min-width: 940px; padding-bottom: 150px; }
+  .stations { display: flex; gap: 10px; }
+  .station {
+    flex: 1; background: var(--panel); border: 2px solid var(--line); border-radius: 14px 14px 4px 4px;
+    padding: 14px 6px 12px; text-align: center; position: relative; transition: border-color .4s, background .4s, transform .4s;
+  }
+  .station .light {
+    width: 12px; height: 12px; border-radius: 50%; background: var(--line);
+    position: absolute; top: 10px; right: 10px; transition: background .3s;
+  }
+  .station .icon { font-size: clamp(30px, 3.6vw, 52px); line-height: 1; display: inline-block; }
+  .station .name { margin-top: 8px; font-weight: 700; font-size: clamp(12px, 1.25vw, 18px); }
+  .station .gear { position: absolute; left: 8px; top: 6px; font-size: 18px; opacity: .25; }
+  .station.busy { border-color: var(--busy); background: #1d2a3d; transform: translateY(-4px); }
+  .station.busy .light { background: var(--busy); animation: pulse .9s infinite; }
+  .station.busy .gear { opacity: 1; animation: spin 1.6s linear infinite; }
+  .station.busy .icon { animation: work .5s ease-in-out infinite alternate; }
+  .station.done { border-color: var(--go); }
+  .station.done .light { background: var(--go); }
+  .station.blocked { border-color: var(--stop); background: #3a1d22; }
+  .station.blocked .light { background: var(--stop); animation: pulse .5s infinite; }
+  .station::after { /* chute */
+    content: ""; position: absolute; left: 50%; bottom: -16px; width: 26px; height: 16px;
+    transform: translateX(-50%); background: var(--line); clip-path: polygon(0 0, 100% 0, 78% 100%, 22% 100%);
+  }
+
+  .belt {
+    position: absolute; left: -24px; right: -24px; bottom: 34px; height: 22px; border-radius: 11px;
+    background: repeating-linear-gradient(90deg, #3b4152 0 18px, #2a2f3c 18px 36px);
+    background-size: 36px 100%; animation: belt 1.1s linear infinite; box-shadow: 0 6px 0 #0d0f13;
+  }
+  .crate {
+    position: absolute; bottom: 56px; width: 112px; margin-left: -56px; left: 0;
+    background: linear-gradient(#e2a85b, #c98a3c); color: #2b1a05; border: 3px solid #7a4f1c; border-radius: 6px;
+    padding: 6px 6px 7px; text-align: center; font-weight: 800; font-size: 20px;
+    transition: left 1.8s cubic-bezier(.6,.05,.3,1), bottom .5s, opacity .5s; animation: bob 1.2s ease-in-out infinite alternate;
+    text-decoration: none; display: block;
+  }
+  .crate small { display: block; font-size: 10.5px; font-weight: 600; line-height: 1.15; margin-top: 2px;
+    overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .crate.released { background: linear-gradient(#6ff0a8, #2fc474); border-color: #14693a; color: #00210f; animation: none; }
+  .crate.blocked { background: linear-gradient(#ff8a8e, #e0484d); border-color: #7a1418; color: #2a0002; animation: shake .4s infinite; }
+  .crate.bounce { animation: shake .35s 4; }
+
+  .lower { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 8px 24px 20px; flex: 1; }
+  .panel { background: var(--panel); border-radius: 12px; padding: 14px 16px; }
+  .panel h2 { margin: 0 0 8px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .panel ul { margin: 0; padding: 0; list-style: none; }
+  .panel li { padding: 6px 0; border-top: 1px solid var(--line); font-size: 16px; display: flex; gap: 10px; }
+  .panel li:first-child { border-top: 0; }
+  .panel li span { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 2.6em; }
+  .panel .empty { color: var(--muted); font-size: 15px; }
+  footer { padding: 0 24px 12px; color: var(--muted); font-size: 12px; }
+
+  .toast {
+    position: fixed; left: 50%; top: 42%; transform: translate(-50%, -50%) scale(.8); opacity: 0;
+    background: var(--hazard); color: #1a1500; font-weight: 800; font-size: clamp(22px, 3vw, 40px);
+    padding: 18px 30px; border-radius: 14px; pointer-events: none; transition: opacity .3s, transform .3s; z-index: 5;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .confetti { position: fixed; top: -20px; width: 10px; height: 16px; z-index: 6; pointer-events: none; animation: fall linear forwards; }
+
+  @keyframes belt { to { background-position: 36px 0; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 50% { opacity: .25; } }
+  @keyframes work { to { transform: translateY(-5px) rotate(-4deg); } }
+  @keyframes bob { to { transform: translateY(-3px); } }
+  @keyframes shake { 25% { transform: translateX(-4px) rotate(-2deg); } 75% { transform: translateX(4px) rotate(2deg); } }
+  @keyframes fall { to { transform: translateY(1500px) rotate(720deg); } }
+  @media (max-width: 700px) { .lower { grid-template-columns: 1fr; } .clock { font-size: 24px; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🏭 Factory Floor</h1>
+  <span class="badge" id="mode"></span>
+  <div class="clock"><small>Request to now</small><span id="clock">0:00</span></div>
+</header>
+
+<section class="now">
+  <div class="label" id="nowLabel">Waiting for a request</div>
+  <div class="title" id="nowTitle">The line is clear.</div>
+  <div class="blurb" id="nowBlurb">Submit an idea and we'll send one down the belt.</div>
+</section>
+
+<div class="scroll">
+  <div class="floor" id="floor">
+    <div class="stations" id="stations"></div>
+    <div class="belt"></div>
+  </div>
+</div>
+
+<div class="lower">
+  <div class="panel"><h2>Waiting in the queue</h2><ul id="queue"></ul></div>
+  <div class="panel"><h2>Shipped today</h2><ul id="shipped"></ul></div>
+</div>
+<footer id="status"></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/*
+  Factory Floor visualizer.
+  Live:   factory-floor.html?repo=owner/name      (optional #token=ghp_... for higher rate limit)
+  Demo:   factory-floor.html                      (simulated run, clearly badged)
+  Contract with the pipeline: each factory issue carries the label "factory" and
+  one "stage:<id>" label from STAGES below. "factory:blocked" marks a stuck ticket.
+  Issues labelled "factory" with no stage label show in the waiting queue.
+*/
+const STAGES = [
+  { id: 'intake',   name: 'Intake',     icon: '📥', blurb: 'Request received and admitted to the line.' },
+  { id: 'spec',     name: 'Spec',       icon: '📝', blurb: 'Writing down exactly what <b>"done"</b> means.' },
+  { id: 'build',    name: 'Build',      icon: '🤖', blurb: 'An AI agent is <b>writing the code</b>.' },
+  { id: 'test',     name: 'Test',       icon: '🧪', blurb: 'Automated tests are <b>checking it works</b>.' },
+  { id: 'review',   name: 'Review',     icon: '🕵️', blurb: 'A <b>second AI</b> is hunting for problems.' },
+  { id: 'security', name: 'Security',   icon: '🔒', blurb: 'Scanning for <b>security holes</b>.' },
+  { id: 'preview',  name: 'Preview',    icon: '👀', blurb: 'Ready for <b>you</b> to try it.' },
+  { id: 'released', name: 'Production', icon: '🚀', blurb: '<b>Live in production.</b>' },
+];
+const IDX = Object.fromEntries(STAGES.map((s, i) => [s.id, i]));
+const $ = id => document.getElementById(id);
+const qs = new URLSearchParams(location.search);
+const repo = qs.get('repo');
+const token = new URLSearchParams(location.hash.slice(1)).get('token');
+const POLL_MS = Math.max(5, +qs.get('poll') || 15) * 1000;
+
+$('stations').innerHTML = STAGES.map(s =>
+  `<div class="station" data-id="${s.id}"><span class="gear">⚙️</span><span class="light"></span>
+   <div class="icon">${s.icon}</div><div class="name">${s.name}</div></div>`).join('');
+
+const crates = new Map();   // id -> element
+const prev = new Map();     // id -> stage
+let tickets = [];
+let focusId = null;
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fmt = ms => { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
+function toast(msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('show'), 2600);
+}
+function confetti() {
+  const colors = ['#ffc928', '#3ddc84', '#5ab0ff', '#ff5a5f', '#f3f5f9'];
+  for (let i = 0; i < 110; i++) {
+    const c = document.createElement('span'); c.className = 'confetti';
+    c.style.left = Math.random() * 100 + 'vw'; c.style.background = colors[i % colors.length];
+    c.style.animationDuration = 2 + Math.random() * 2.5 + 's'; c.style.animationDelay = Math.random() * .6 + 's';
+    document.body.appendChild(c); setTimeout(() => c.remove(), 5500);
+  }
+}
+
+function render() {
+  const active = tickets.filter(t => t.stage in IDX);
+  const waiting = tickets.filter(t => !(t.stage in IDX));
+  const stationEls = [...document.querySelectorAll('.station')];
+  const slot = {};
+
+  // Detect stage changes before drawing.
+  for (const t of active) {
+    const was = prev.get(t.id);
+    if (was !== t.stage) {
+      t.changedAt = Date.now();
+      if (was !== undefined) {
+        if (t.stage === 'released') { confetti(); toast('🚀 #' + t.id + ' is live!'); }
+        else if (IDX[t.stage] < IDX[was]) { toast('🔧 Sent back for repairs'); t.bounced = true; }
+      }
+      prev.set(t.id, t.stage);
+    }
+  }
+
+  // Crates.
+  const seen = new Set();
+  for (const t of active) {
+    seen.add(t.id);
+    let el = crates.get(t.id);
+    if (!el) {
+      el = document.createElement('a'); el.className = 'crate'; el.target = '_blank'; el.rel = 'noopener';
+      $('floor').appendChild(el); crates.set(t.id, el);
+    }
+    if (t.url) el.href = t.url;
+    el.innerHTML = '#' + esc(t.id) + '<small>' + esc(t.title) + '</small>';
+    const st = stationEls[IDX[t.stage]];
+    const n = slot[t.stage] = (slot[t.stage] || 0) + 1;
+    el.style.left = (st.offsetLeft + st.offsetWidth / 2) + 'px';
+    el.style.bottom = (56 + (n - 1) * 14) + 'px';
+    el.style.zIndex = 3 - Math.min(n, 2);
+    el.classList.toggle('released', t.stage === 'released');
+    el.classList.toggle('blocked', !!t.blocked);
+    if (t.bounced) { t.bounced = false; el.classList.add('bounce'); setTimeout(() => el.classList.remove('bounce'), 1500); }
+  }
+  for (const [id, el] of crates) if (!seen.has(id)) { el.remove(); crates.delete(id); prev.delete(id); }
+
+  // Station lights.
+  for (const el of stationEls) {
+    const here = active.filter(t => t.stage === el.dataset.id);
+    const rel = el.dataset.id === 'released';
+    el.classList.toggle('blocked', here.some(t => t.blocked));
+    el.classList.toggle('busy', !rel && here.some(t => !t.blocked));
+    el.classList.toggle('done', rel && here.length > 0);
+  }
+
+  // Focus: the in-flight ticket that changed most recently, else the latest release.
+  const inflight = active.filter(t => t.stage !== 'released').sort((a, b) => (b.changedAt || 0) - (a.changedAt || 0));
+  const done = active.filter(t => t.stage === 'released').sort((a, b) => (b.changedAt || 0) - (a.changedAt || 0));
+  const f = inflight[0] || done[0];
+  focusId = f ? f.id : null;
+  if (f) {
+    const s = STAGES[IDX[f.stage]];
+    $('nowLabel').textContent = f.blocked ? 'Stopped at ' + s.name : 'Now at ' + s.name + ' — request #' + f.id;
+    $('nowTitle').textContent = f.title;
+    $('nowBlurb').innerHTML = f.blocked ? 'The line stopped. A human needs to look at this one.' : s.blurb;
+  } else {
+    $('nowLabel').textContent = 'Waiting for a request';
+    $('nowTitle').textContent = 'The line is clear.';
+    $('nowBlurb').textContent = "Submit an idea and we'll send one down the belt.";
+  }
+
+  $('queue').innerHTML = waiting.length
+    ? waiting.map(t => `<li><span>#${esc(t.id)}</span>${esc(t.title)}</li>`).join('')
+    : '<li class="empty">Nothing waiting.</li>';
+  $('shipped').innerHTML = done.length
+    ? done.map(t => `<li><span>${fmt((t.doneAt || Date.now()) - t.createdAt)}</span>#${esc(t.id)} ${esc(t.title)}</li>`).join('')
+    : '<li class="empty">Nothing yet. Watch this space.</li>';
+  tick();
+}
+
+function tick() {
+  const f = tickets.find(t => t.id === focusId);
+  $('clock').textContent = f ? fmt((f.stage === 'released' ? (f.doneAt || Date.now()) : Date.now()) - f.createdAt) : '0:00';
+}
+setInterval(tick, 1000);
+addEventListener('resize', render);
+
+// ---------- Live mode: GitHub issues ----------
+async function poll() {
+  try {
+    const r = await fetch(`https://api.github.com/repos/${repo}/issues?state=all&labels=factory&per_page=40&sort=created&direction=desc`, {
+      cache: 'no-cache',
+      headers: Object.assign({ Accept: 'application/vnd.github+json' }, token ? { Authorization: 'Bearer ' + token } : {}),
+    });
+    if (!r.ok) throw new Error('GitHub ' + r.status + (r.status === 403 ? ' (rate limit? add #token=…)' : ''));
+    const old = new Map(tickets.map(t => [t.id, t]));
+    tickets = (await r.json()).filter(i => !i.pull_request).map(i => {
+      const labels = i.labels.map(l => l.name);
+      const stage = (labels.find(l => l.startsWith('stage:')) || '').slice(6) || null;
+      const o = old.get(i.number) || {};
+      return {
+        id: i.number, title: i.title, url: i.html_url, stage,
+        blocked: labels.includes('factory:blocked'),
+        createdAt: Date.parse(i.created_at),
+        doneAt: stage === 'released' ? (o.doneAt || Date.parse(i.closed_at || i.updated_at)) : null,
+        changedAt: o.changedAt || Date.parse(i.updated_at),
+      };
+    });
+    render();
+    $('status').textContent = `${repo} · updated ${new Date().toLocaleTimeString()} · every ${POLL_MS / 1000}s`;
+  } catch (e) {
+    $('status').textContent = '⚠️ ' + e.message + ' · retrying';
+  }
+}
+
+// ---------- Demo mode: scripted run ----------
+function demo() {
+  clearTimeout(demo.h);
+  const speed = +qs.get('speed') || 1;
+  const script = [['intake', 2500], ['spec', 4000], ['build', 7000], ['test', 4000], ['review', 5000],
+                  ['build', 4500], ['test', 3000], ['review', 3500], ['security', 3500], ['preview', 6500], ['released', 0]];
+  const t = { id: 12, title: qs.get('title') || 'Add a "Due today" filter to the follow-up board', stage: null, createdAt: Date.now() };
+  tickets = [t,
+    { id: 13, title: 'Clearer message when there are no open quotes', stage: null, createdAt: Date.now() },
+    { id: 14, title: 'Sort by follow-up date', stage: null, createdAt: Date.now() }];
+  prev.clear(); render();
+  let i = 0;
+  (function step() {
+    if (i >= script.length) return;
+    const [stage, ms] = script[i++];
+    t.stage = stage; if (stage === 'released') t.doneAt = Date.now();
+    render();
+    if (ms) demo.h = setTimeout(step, ms / speed);
+  })();
+  $('status').textContent = 'Simulated run, not a real build. Press R to replay. Add ?repo=owner/name for live data.';
+}
+
+if (repo) {
+  $('mode').textContent = 'Live'; $('mode').classList.add('live');
+  poll(); setInterval(poll, POLL_MS);
+} else {
+  $('mode').textContent = 'Simulation'; $('mode').classList.add('sim');
+  setTimeout(demo, 1200);
+  addEventListener('keydown', e => { if (e.key === 'r' || e.key === 'R') demo(); });
+}
+</script>
+</body>
+</html>

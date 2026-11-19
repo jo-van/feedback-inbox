@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Walk-in Slide</title>
+<style>
+  :root { --bg: #14161c; --panel: #1e222b; --line: #394052; --text: #f3f5f9; --muted: #9aa3b5; --hazard: #ffc928; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--text); min-height: 720px;
+    font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .stripe { height: 14px; background: repeating-linear-gradient(-45deg, var(--hazard) 0 18px, var(--bg) 18px 36px); }
+  main { display: grid; grid-template-columns: 1.25fr 1fr; gap: 5%; align-items: center; padding: 4% 6%; }
+  .kicker { color: var(--hazard); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: clamp(14px, 1.6vw, 22px); }
+  h1 { font-size: clamp(36px, 5.6vw, 84px); line-height: 1.02; margin: .25em 0 .5em; font-weight: 800; text-wrap: balance; }
+  ol { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+  li { counter-increment: s; display: flex; gap: .7em; align-items: baseline; font-size: clamp(20px, 2.5vw, 38px); margin: .55em 0; line-height: 1.2; }
+  li::before {
+    content: counter(s); flex: none; width: 1.5em; height: 1.5em; border-radius: 50%; background: var(--hazard); color: #1a1500;
+    font-weight: 800; display: grid; place-items: center; font-size: .8em; transform: translateY(-.1em);
+  }
+  li b { color: var(--hazard); }
+  .note { margin-top: 1.6em; color: var(--muted); font-size: clamp(15px, 1.6vw, 24px); }
+  .scan { text-align: center; }
+  .qr { background: #fff; border-radius: 24px; padding: 4%; aspect-ratio: 1; display: grid; place-items: center; }
+  .qr img { width: 100%; height: auto; image-rendering: pixelated; display: block; }
+  .qr .ph { color: #555; font-size: 20px; font-weight: 700; padding: 20px; }
+  .url { margin-top: .7em; font-size: clamp(20px, 2.6vw, 40px); font-weight: 800; word-break: break-all; }
+  .or { color: var(--muted); font-size: clamp(13px, 1.3vw, 18px); letter-spacing: .12em; text-transform: uppercase; margin-top: 1.2em; }
+  @media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+<main>
+  <section>
+    <div class="kicker">While you get settled</div>
+    <h1>Help us build this app. Live.</h1>
+    <ol>
+      <li><span><b>Scan</b> the code to open the app.</span></li>
+      <li><span><b>Play</b> with it for a minute.</span></li>
+      <li><span>Tap <b>Suggest a change</b> and tell us what to fix or add.</span></li>
+    </ol>
+    <p class="note">No login. Nothing to install. We'll pick one idea and try to ship it before this session ends.</p>
+  </section>
+  <section class="scan">
+    <div class="qr" id="qr"><div class="ph">QR appears once the app URL is set</div></div>
+    <div class="or">or type</div>
+    <div class="url" id="url">app-url-goes-here</div>
+  </section>
+</main>
+<div class="stripe"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+  // Set the app URL here, or pass ?url=https://... on the address bar.
+  const DEFAULT_URL = '';
+  const url = new URLSearchParams(location.search).get('url') || DEFAULT_URL;
+  if (url) {
+    document.getElementById('url').textContent = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    if (window.qrcode) {
+      const q = qrcode(0, 'M'); q.addData(url); q.make();
+      document.getElementById('qr').innerHTML = q.createImgTag(10, 0);
+    } else {
+      document.querySelector('#qr .ph').textContent = 'QR library did not load (needs internet)';
+    }
+  }
+</script>
+</body>
+</html>
