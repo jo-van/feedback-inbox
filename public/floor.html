@@ -573,7 +573,7 @@ function renderBadges() {
   const armed = f.mode === 'live' ? (armAt > 0 && now >= armAt) : f.armed === true;
   if (!armed && armAt > now) {
     arm.hidden = false;
-    arm.textContent = 'Arms at ' + new Date(armAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) + ' · ' + fmt(armAt - now);
+    arm.textContent = 'Arms at ' + new Date(armAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' }) + ' · ' + fmt(armAt - now);
   } else if (!armed && !f.killed) { arm.hidden = false; arm.textContent = 'Not armed'; }
   else arm.hidden = true;
   const cap = +f.cap, adm = +f.admitted;
