@@ -67,6 +67,9 @@ export default function Board() {
 
   return (
     <div>
+      {requests.length > 0 && (
+        <p data-testid="request-count" style={{ marginBottom: 12 }}>{requests.length} {requests.length === 1 ? 'request' : 'requests'} so far</p>
+      )}
       <input
         type="text"
         data-testid="search"
