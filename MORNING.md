@@ -51,6 +51,7 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 - **The preview site is public.** The Tester needs it; someone could post junk there and make tests flaky. Accepted for one day.
 - **Rejected text stays visible.** A rejected prompt-injection title shows on the board and Floor under "Not today", which makes a good teaching moment. Only offensive or personal content is hidden.
 - **n8n canvas:** the top-level line looks busy because every station has an error route to "Needs a human". It reads well as "not a conveyor belt". First time you open it, dismiss n8n's "Production Checklist" popup ("Ignore for all workflows").
+- **Floor repair animation:** the PREVIOUS RUN recording shows two real requests moving at once, but no repair loop. Real repairs happened overnight (#14, #13, #18), but I never captured the return-belt animation on screen during one. The animation is exercised in `/floor?sim=1`.
 - **Not tested:** a real room's worth of phones at once, venue Wi-Fi, and the deck on the actual projector.
 - **Teardown order:** AWS deletes everything at 4:45pm, but CloudFormation marks the empty stack "DELETE_FAILED". It used the teardown role it had just deleted, so no resources remain. The laptop job at 5:00pm finishes it off. If the laptop is asleep, it runs when you wake it.
 
