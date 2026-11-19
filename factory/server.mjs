@@ -56,7 +56,7 @@ async function must(cmd, args, opts) {
   return r.out;
 }
 const ws = (id) => path.join(CFG.root, 'work', String(id), 'repo');
-const git = (id, ...args) => must('git', args, { cwd: ws(id) });
+const git = (id, ...args) => must('git', ['-c', 'safe.directory=*', ...args], { cwd: ws(id) });
 
 /** Run a command inside the locked-down sandbox (internal network, egress via allowlist proxy, no AWS). */
 function sandbox(id, args, { mountRepo = true, timeoutMs = 900_000, input } = {}) {
@@ -298,8 +298,8 @@ STATIONS['build.ship'] = async (inp) => {
   const files = await changedFiles(inp.id);
   // Restore anything outside the allowlist rather than shipping it.
   for (const f of await blockedPaths(files)) {
-    await run('git', ['checkout', 'origin/main', '--', f], { cwd: ws(inp.id) });
-    await run('git', ['clean', '-fdq', '--', f], { cwd: ws(inp.id) });
+    await run('git', ['-c', 'safe.directory=*', 'checkout', 'origin/main', '--', f], { cwd: ws(inp.id) });
+    await run('git', ['-c', 'safe.directory=*', 'clean', '-fdq', '--', f], { cwd: ws(inp.id) });
   }
   const req = await getReq(inp.id);
   await git(inp.id, 'add', '-A');
@@ -308,7 +308,7 @@ STATIONS['build.ship'] = async (inp) => {
   if (!left.length) throw new Error('builder produced no changes');
   if ((await blockedPaths(left)).length) throw new Error('blocked paths still staged');
   const msg = `#${inp.id}: ${req.spec?.summary || req.title}\n\nRequested by ${req.name} in Feedback Inbox.\n\nAcceptance:\n${(req.spec?.acceptance || []).map((a) => '- ' + a).join('\n')}\n\nBuilt by the feedback factory (round ${inp.round + 1}).`;
-  await must('git', ['commit', '-q', '-F', '-'], { cwd: ws(inp.id), input: msg });
+  await must('git', ['-c', 'safe.directory=*', 'commit', '-q', '-F', '-'], { cwd: ws(inp.id), input: msg });
   const branch = `factory/${inp.id}`;
   await serial(() => git(inp.id, 'push', '-q', '--force', 'origin', `HEAD:refs/heads/${branch}`));
   const sha = (await git(inp.id, 'rev-parse', 'HEAD')).trim();
@@ -441,11 +441,11 @@ async function doRelease(inp) {
   await assertNotKilled();
   const id = inp.id;
   await git(id, 'fetch', '-q', 'origin', 'main');
-  const isAncestor = (await run('git', ['merge-base', '--is-ancestor', 'origin/main', 'HEAD'], { cwd: ws(id) })).code === 0;
+  const isAncestor = (await run('git', ['-c', 'safe.directory=*', 'merge-base', '--is-ancestor', 'origin/main', 'HEAD'], { cwd: ws(id) })).code === 0;
   if (!isAncestor) {
-    const rb = await run('git', ['rebase', 'origin/main'], { cwd: ws(id) });
+    const rb = await run('git', ['-c', 'safe.directory=*', 'rebase', 'origin/main'], { cwd: ws(id) });
     if (rb.code !== 0) {
-      await run('git', ['rebase', '--abort'], { cwd: ws(id) });
+      await run('git', ['-c', 'safe.directory=*', 'rebase', '--abort'], { cwd: ws(id) });
       return { id, round: inp.round, released: false, productionSha: '', rolledBack: false, failures: ['Another change shipped first and this one conflicts with it; rebuild on top of the new code.'] };
     }
   }
@@ -460,13 +460,13 @@ async function doRelease(inp) {
   } catch (e) { failures.push(e.message); }
   if (!failures.length) {
     await setStage(id, 'released', { releasedAt: now(), releaseStep: 'live' });
-    await serial(() => run('git', ['push', '-q', 'origin', '--delete', `factory/${id}`], { cwd: ws(id) }));
+    await serial(() => run('git', ['-c', 'safe.directory=*', 'push', '-q', 'origin', '--delete', `factory/${id}`], { cwd: ws(id) }));
     return { id, round: inp.round, released: true, productionSha: sha, rolledBack: false, failures: [] };
   }
   // Roll back: revert the commit on main and wait for production to return.
   await git(id, 'fetch', '-q', 'origin', 'main');
   await git(id, 'checkout', '-q', '-B', `rollback/${id}`, 'origin/main');
-  await must('git', ['revert', '--no-edit', sha], { cwd: ws(id) });
+  await must('git', ['-c', 'safe.directory=*', 'revert', '--no-edit', sha], { cwd: ws(id) });
   const back = (await git(id, 'rev-parse', 'HEAD')).trim();
   await serial(() => git(id, 'push', '-q', 'origin', 'HEAD:refs/heads/main'));
   await waitForVersion(CFG.prodUrl, back, 420_000).catch((e) => failures.push('Rollback deploy: ' + e.message));

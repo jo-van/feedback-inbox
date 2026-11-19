@@ -3,6 +3,7 @@ Description=feedback factory station service
 After=docker.service network-online.target
 Wants=network-online.target
 [Service]
+Environment=HOME=/root
 ExecStartPre=/srv/ff/src/factory/env-refresh.sh
 WorkingDirectory=/srv/ff/src/factory
 ExecStart=/bin/bash -c 'set -a; . /etc/ff/ff.env; exec /usr/bin/node /srv/ff/src/factory/server.mjs'
