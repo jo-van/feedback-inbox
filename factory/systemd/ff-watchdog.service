@@ -1,0 +1,7 @@
+[Unit]
+Description=feedback factory watchdog
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/ff/ff.env
+WorkingDirectory=/srv/ff/src/factory
+ExecStart=/usr/bin/node /srv/ff/src/factory/watchdog.mjs
