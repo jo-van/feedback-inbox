@@ -122,6 +122,14 @@ export default function Board() {
           </article>
         );
       })}
+      {visible.length > 0 && (
+        <button
+          type="button"
+          data-testid="back-to-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{ marginTop: 12, display: 'block' }}
+        >Back to top</button>
+      )}
     </div>
   );
 }
