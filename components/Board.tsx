@@ -72,7 +72,7 @@ export default function Board() {
         style={{ width: '100%', marginBottom: 12 }}
       />
       {error && <p className="error">{error}</p>}
-      {q && visible.length === 0 && <p className="empty" data-testid="no-matches">No matching requests.</p>}
+      {q && visible.length === 0 && <p className="empty" data-testid="no-matches">No requests match your search</p>}
       {visible.map((r) => {
         const label = statusLabel(r.stage);
         const mine = voted.includes(r.id);

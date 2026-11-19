@@ -85,7 +85,7 @@ test('clear and whitespace-only show everything', async ({ page }) => {
 test('no match message', async ({ page }) => {
   await page.getByTestId('search').fill(`nomatch${t}zzz`);
   await expect(page.getByTestId('request-card')).toHaveCount(0);
-  await expect(page.getByTestId('no-matches')).toHaveText('No matching requests.');
+  await expect(page.getByTestId('no-matches')).toHaveText('No requests match your search');
 });
 
 test('filter and focus survive refresh', async ({ page }) => {
