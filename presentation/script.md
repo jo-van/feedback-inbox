@@ -122,7 +122,7 @@ Well, I promised you'd see what's real. The app isn't responding right now. Keep
 
 ---
 
-## 5:00–8:00 · 3:05pm · Slide 3 · Every process is a factory
+## 6:00–9:00 · 3:06pm · Slide 3 · Every process is a factory
 
 Here's the one idea I want you to walk out with.
 
