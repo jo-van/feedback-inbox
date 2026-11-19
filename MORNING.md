@@ -40,7 +40,7 @@ Every rehearsal ran with **no human action**: request submitted in the app → G
 - **Privacy:** the guard test (a submitted email must never appear on any public page or API) ran and passed on every build.
 - **Security review:** an independent adversarial review found one critical issue (git hooks → root on the VM) and three high ones; all fixed (see `docs/security-review.md`).
 - **Talk materials:** deck revised around your framing: every process is a factory of single-job workers with contracts; any factory can be a worker in a bigger one; real factories aren't a conveyor belt; Hermes in Discord for small teams and solo founders. Checked visually at 1080p. The walk-in QR points at the live app.
-- **Reset done:** production is back on the plain baseline app with only your five seed ideas. The factory is armed for **3:05pm ET**, up to **3 builds, one at a time** (so something is always moving during the talk).
+- **Reset done:** production is back on the plain baseline app with only your five seed ideas. The factory is armed for **3:05pm ET**, up to **5 builds, one at a time** (so something is always moving during the talk).
 
 Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security-review.md`.
 
@@ -66,7 +66,7 @@ Full evidence log: `docs/evidence.md`. Security review and fixes: `docs/security
 | 2:30pm | `~/projects/feedback-inbox/infra/ff.sh status` should show `mode: live`, `armAt: 2026-11-19T20:05:00Z`, `killed: False`, a recent heartbeat. Open the Floor: badge says **LIVE** and **Arms at 3:05 PM**. |
 | 2:35pm | In a terminal: `infra/ff.sh n8n` and log in (keep the tab open). Open the app on your phone. |
 | 2:45pm | Put up the walk-in slide (deck slide 0). People scan and submit. |
-| 3:05pm | The factory picks the most-upvoted eligible request by itself. One build at a time, up to 3. |
+| 3:05pm | The factory picks the most-upvoted eligible request by itself. One build at a time, up to 5. |
 | During | Do not touch anything. If something goes wrong: see below. |
 | 4:45pm | AWS deletes itself automatically. Nothing to do. |
 
