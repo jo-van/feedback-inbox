@@ -34,5 +34,4 @@ C
 ssh-keyscan -t ed25519 github.com > /root/.ssh/known_hosts 2>/dev/null
 git config --global user.name "Feedback Factory"
 git config --global user.email "factory@users.noreply.github.com"
-git config --global --add safe.directory "*"
 echo "PUBKEY $(cat /root/.ssh/ff_deploy.pub)"

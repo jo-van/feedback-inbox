@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ id: string
   const fresh = !voter;
   if (!voter) voter = crypto.randomUUID();
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
-  if (!(await allow('vote:' + ip, 60, 600))) return NextResponse.json({ error: 'Too many votes' }, { status: 429 });
+  if (!(await allow('vote:' + ip, 1000, 600))) return NextResponse.json({ error: 'Too many votes' }, { status: 429 });
   let votes: number | null;
   try {
     votes = await vote(n, voter);

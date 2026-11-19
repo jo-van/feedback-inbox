@@ -28,7 +28,13 @@ export async function listRequests(): Promise<PublicRequest[]> {
     items.push(...((r.Items ?? []) as Record<string, unknown>[]));
     ExclusiveStartKey = r.LastEvaluatedKey as Record<string, unknown> | undefined;
   } while (ExclusiveStartKey);
-  return items.filter((i) => !i.hidden).map(toPublic);
+  const mask = process.env.FF_MASK_UNSCREENED === '1';
+  return items
+    .filter((i) => !i.hidden)
+    .map((i) => (mask && i.stage === 'received' && !i.screened && !i.seeded
+      ? { ...i, title: 'New idea (being screened…)', details: '', doneWhen: 'The Gatekeeper is reading it.' }
+      : i))
+    .map(toPublic);
 }
 
 async function nextId(): Promise<number> {

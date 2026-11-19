@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true }, { status: 201 });
   }
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
-  if (!(await allow('submit:' + ip, 6, 600))) {
+  if (!(await allow('submit:all', 400, 600)) || !(await allow('submit:' + ip, 100, 600))) {
     return NextResponse.json({ error: 'Whoa, lots of ideas! Try again in a few minutes.' }, { status: 429 });
   }
   const v = validateNewRequest(body);
